@@ -16,21 +16,22 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Funcionalidades do SaaS
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+📄 Criação de Orçamentos – Gere orçamentos de forma simples e rápida.
 
-## Learn More
+👤 Gestão de Clientes – Cadastre, edite e mantenha a lista dos seus clientes sempre atualizada.
 
-To learn more about Next.js, take a look at the following resources:
+🔄 Status do Orçamento – Acompanhe o andamento dos orçamentos (enviado, aprovado, recusado, etc).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+📋 Listagem de Orçamentos – Visualize todos os orçamentos gerados em um só lugar.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+📇 Listagem de Clientes – Consulte facilmente todos os clientes cadastrados.
 
-## Deploy on Vercel
+🔔 Lembretes e Notificações – Receba alertas importantes para não perder prazos.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+📑 Duplicar Orçamento – Economize tempo copiando orçamentos anteriores.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+📊 Resumo de Orçamentos – Veja o total de orçamentos por status e valores.
+
+📤 Compartilhar, Enviar ou Baixar – Exporte e envie orçamentos como preferir (PDF, link, etc).
