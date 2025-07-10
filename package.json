@@ -7,16 +7,19 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "**/*.{json,css,scss,md}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
-    "next": "15.3.5",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@next/eslint-plugin-next": "^15.3.5",
     "@heroui/react": "^2.8.0-beta.13",
     "framer-motion": "^12.23.0",
     "next": "15.3.5",
@@ -31,8 +34,8 @@
     "@types/react-dom": "^19",
     "@typescript-eslint/eslint-plugin": "^8.36.0",
     "@typescript-eslint/parser": "^8.36.0",
-    "eslint": "^9.30.1",
-    "eslint-config-next": "^15.3.5",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "15.3.5",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-editorconfig": "^4.0.3",
     "eslint-plugin-import": "^2.32.0",
@@ -40,8 +43,9 @@
     "eslint-plugin-next": "^0.0.0",
     "eslint-plugin-prettier": "^5.5.1",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint": "^9",
-    "eslint-config-next": "15.3.5",
+    "framer-motion": "^12.23.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
