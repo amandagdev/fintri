@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl'
+import { AiOutlineCheck } from 'react-icons/ai'
 
 export default function LandingPrice() {
   const t = useTranslations('landingPrice')
@@ -22,7 +23,8 @@ export default function LandingPrice() {
 
             <ul className="mt-6 space-y-3 text-left text-sm leading-6 text-white">
               {features.map((feature) => (
-                <li key={feature} className="flex gap-x-3">
+                <li key={feature} className="flex items-center gap-x-3">
+                  <AiOutlineCheck color="#fff" />
                   {feature}
                 </li>
               ))}

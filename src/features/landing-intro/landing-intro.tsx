@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
 export default function LandingIntro() {
@@ -11,7 +12,7 @@ export default function LandingIntro() {
       <p className="text-gray-600 text-md">{t('description')}</p>
       <p className="text-gray-600 text-md">{t('descriptionTwo')}</p>
       <button className="btn bg-[#1b6d71] border-none text-white hover:bg-teal-600 font-normal mt-8">
-        {t('register')}
+        <Link href="/register">{t('register')}</Link>
       </button>
     </div>
   )
