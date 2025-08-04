@@ -8,7 +8,39 @@
   "landingIntro": {
     "about": "A forma mais simples de criar ",
     "budgets": "orçamentos.",
-    "description": "Crie, envie e organize seus orçamentos em minutos. Uma solução prática e rápida para autônomos e pequenos negócios que precisam profissionalizar seus atendimentos.",
+    "description": "Crie, envie e organize seus orçamentos em minutos. ",
+    "descriptionTwo": "Uma solução prática e rápida para autônomos e pequenos negócios que precisam profissionalizar seus atendimentos.",
     "register": "Começar"
+  },
+  "landingStarted": {
+    "about": "Tudo o que você precisa, ",
+    "aboutTwo": "em um só lugar",
+    "description": "Do primeiro contato ao aperto de mão final, Fintri centraliza suas operações para que vocé foque no que realmente importa: seu negócio.",
+    "features": [
+      {
+        "title": "Criação Rápida de Orçamentos",
+        "description": "Gere propostas profissionais em minutos, não em horas."
+      },
+      {
+        "title": "Status em Tempo Real",
+        "description": "Saiba na hora se seu orçamento foi enviado e visualizado."
+      },
+      {
+        "title": "Histórico Centralizado",
+        "description": "Acesse todos os orçamentos e clientes com filtros e busca inteligente."
+      },
+      {
+        "title": "Duplique com Um Clique",
+        "description": "Copie orçamentos existentes para agilizar novas propostas."
+      },
+      {
+        "title": "Dashboard Financeiro",
+        "description": "Veja o total de vendas e o desempenho do seu funil em tempo real."
+      },
+      {
+        "title": "Compartilhamento Flexível",
+        "description": "Envie por link seguro, e-mail ou baixe em PDF com sua marca."
+      }
+    ]
   }
 }

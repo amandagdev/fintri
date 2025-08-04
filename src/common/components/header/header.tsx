@@ -24,7 +24,9 @@ export default function Header() {
             </Link>
           </li>
         </ul>
-        <button className="btn-outline text-black font-normal">{t('register')}</button>
+        <button className="btn bg-[#253936] hover:bg-transparent text-white font-normal">
+          {t('register')}
+        </button>
       </div>
     </div>
   )
