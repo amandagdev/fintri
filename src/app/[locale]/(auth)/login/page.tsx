@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
@@ -8,11 +9,13 @@ export default function LoginPage() {
     <div className="w-full max-w-md bg-white">
       <div className="card-body items-center text-center p-8 lg:p-12">
         <h2 className="card-title text-3xl font-bold text-teal-600">
-          <Link href="/">{t('welcome')}</Link>
+          <Link href="/" className="text-xl text-[#1b6d71] font-bold">
+            <Image src="/images/logo.png" alt="Logo" width={150} height={100} />
+          </Link>{' '}
         </h2>
-        <p className="mt-2 text-teal-600">
+        <p className="text-[#1b6d71]">
           {t('newUser')}{' '}
-          <Link href="/register" className="link link-hover text-teal-600">
+          <Link href="/register" className="link link-hover text-[#1b6d71]">
             {t('createAccount')}
           </Link>
         </p>
@@ -31,7 +34,7 @@ export default function LoginPage() {
             <label className="label">
               <span className="label-text text-gray-500">{t('passwordLabel')}.</span>
               <Link href="/forgot-password" passHref>
-                <span className="text-teal-600">{t('forgotPassword')}</span>
+                <span className="text-[#1b6d71]">{t('forgotPassword')}</span>
               </Link>
             </label>
             <input
@@ -42,14 +45,14 @@ export default function LoginPage() {
           </div>
 
           <div className="form-control mt-8">
-            <button className="btn btn-neutral text-lg bg-[#253936]">{t('loginButton')}</button>
+            <button className="btn border-none text-lg bg-[#1b6d71]">{t('loginButton')}</button>
           </div>
         </form>
 
         <div className="divider mt-8 text-gray-500">{t('socialLogin')}</div>
 
         <div className="flex gap-4">
-          <button className="btn bg-teal-600 text-white border-none">
+          <button className="btn bg-[#1b6d71] text-white border-none">
             <svg
               aria-label="Google logo"
               width="16"

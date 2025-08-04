@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
@@ -7,8 +8,8 @@ export default function Header() {
   return (
     <div className="navbar bg-white shadow-sm px-4 sm:px-8 lg:px-20">
       <div className="navbar-start">
-        <Link href="/" className="text-xl text-[#0d363c] font-bold">
-          Fintri
+        <Link href="/" className="text-xl text-[#1b6d71] font-bold">
+          <Image src="/images/logo.png" alt="Logo" width={100} height={100} />
         </Link>
       </div>
 
@@ -29,13 +30,13 @@ export default function Header() {
 
       <div className="navbar-end gap-4">
         <Link href="/login">
-          <button className="btn bg-[#253936] hover:bg-teal-600 text-white font-normal hidden sm:flex">
+          <button className="btn bg-[#1b6d71] border-none hover:bg-teal-600 text-white font-normal hidden sm:flex">
             {t('login')}
           </button>
         </Link>
 
         <Link href="/register">
-          <button className="btn bg-[#253936] hover:bg-teal-600 text-white font-normal hidden sm:flex">
+          <button className="btn bg-[#1b6d71] border-none hover:bg-teal-600 text-white font-normal hidden sm:flex">
             {t('register')}
           </button>
         </Link>
@@ -65,10 +66,10 @@ export default function Header() {
               <Link href="#preco">{t('price')}</Link>
             </li>
             <li className="mt-2">
-              <button className="btn btn-primary w-full">{t('login')}</button>
+              <button className="btn bg-[#1b6d71] w-full">{t('login')}</button>
             </li>
             <li className="mt-2">
-              <button className="btn btn-primary w-full">{t('register')}</button>
+              <button className="btn w-full bg-[#1b6d71]">{t('register')}</button>
             </li>
           </ul>
         </div>
