@@ -42,5 +42,21 @@
         "description": "Share via a secure link, email, or download a PDF with your brand."
       }
     ]
+  },
+  "landingPrice": {
+    "title": "Simple Price, No Surprises",
+    "subtitle": "All features, no hidden fees. Cancel anytime.",
+    "planName": "Fintri Plan",
+    "price": "19",
+    "priceCurrency": "$",
+    "priceSuffix": "/month",
+    "cta": "Try 7 Days Free",
+    "features": [
+      "Unlimited quotes and clients",
+      "Share proposals via link or PDF",
+      "Sent and viewed status tracking",
+      "Complete financial dashboard",
+      "Email support"
+    ]
   }
 }

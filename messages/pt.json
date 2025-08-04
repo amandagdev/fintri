@@ -42,5 +42,21 @@
         "description": "Envie por link seguro, e-mail ou baixe em PDF com sua marca."
       }
     ]
+  },
+  "landingPrice": {
+    "title": "Um Preço Simples, Sem Surpresas",
+    "subtitle": "Todos os recursos, sem taxas escondidas. Cancele quando quiser.",
+    "planName": "Plano Fintri",
+    "price": "39",
+    "priceCurrency": "R$",
+    "priceSuffix": "/mês",
+    "cta": "Experimente 7 Dias Grátis",
+    "features": [
+      "Orçamentos e clientes ilimitados",
+      "Envio de propostas por link ou PDF",
+      "Status de envio e visualização",
+      "Dashboard financeiro completo",
+      "Suporte por e-mail"
+    ]
   }
 }
