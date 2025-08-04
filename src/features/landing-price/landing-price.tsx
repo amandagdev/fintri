@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl'
+import { AiOutlineCheck } from 'react-icons/ai'
 
 export default function LandingPrice() {
   const t = useTranslations('landingPrice')
@@ -10,9 +11,9 @@ export default function LandingPrice() {
         <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">{t('title')}</h2>
         <p className="mt-4 max-w-2xl text-lg text-gray-600">{t('subtitle')}</p>
 
-        <div className="card mt-12 w-full max-w-md bg-teal-600 shadow-xl border border-gray-200">
+        <div className="card mt-12 w-full max-w-md bg-[#1b6d71] shadow-xl border border-gray-200">
           <div className="card-body items-center text-center">
-            <h2 className="card-title">{t('planName')}</h2>
+            <h2 className="card-title text-white">{t('planName')}</h2>
 
             <div className="mt-4 flex items-baseline justify-center gap-x-2">
               <span className="text-2xl font-medium text-white">{t('priceCurrency')}</span>
@@ -22,7 +23,8 @@ export default function LandingPrice() {
 
             <ul className="mt-6 space-y-3 text-left text-sm leading-6 text-white">
               {features.map((feature) => (
-                <li key={feature} className="flex gap-x-3">
+                <li key={feature} className="flex items-center gap-x-3">
+                  <AiOutlineCheck color="#fff" />
                   {feature}
                 </li>
               ))}

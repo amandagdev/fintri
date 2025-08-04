@@ -1,4 +1,3 @@
-// src/common/components/footer/Footer.tsx
 import { useTranslations } from 'next-intl'
 
 export default function Footer() {
@@ -6,7 +5,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="footer footer-center p-10 bg-[#253936] text-neutral-content">
+    <footer className="footer footer-center p-10 bg-[#1b6d71] text-neutral-content">
       <aside>
         <p>
           Copyright © {currentYear} Fintri - {t('copyright')}

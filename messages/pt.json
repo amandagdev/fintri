@@ -45,9 +45,9 @@
   },
   "landingPrice": {
     "title": "Um Preço Simples, Sem Surpresas",
-    "subtitle": "Todos os recursos, sem taxas escondidas. Cancele quando quiser.",
+    "subtitle": "Todos os recursos, sem burocracia. Cancele quando quiser.",
     "planName": "Plano Fintri",
-    "price": "39",
+    "price": "29,00",
     "priceCurrency": "R$",
     "priceSuffix": "/mês",
     "cta": "Experimente 7 Dias Grátis",
@@ -65,7 +65,6 @@
     "email": "contato@fintri.com"
   },
   "loginPage": {
-    "welcome": "FINTRI",
     "newUser": "É novo por aqui?",
     "createAccount": "Crie uma conta",
     "emailLabel": "E-mail",
@@ -74,5 +73,16 @@
     "forgotPassword": "Esqueceu a senha?",
     "loginButton": "Entrar",
     "socialLogin": "Ou entre com"
+  },
+  "registerPage": {
+    "alreadyUser": "Já possui uma conta?",
+    "login": "Entrar",
+    "nameLabel": "Nome",
+    "namePlaceholder": "Seu nome",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "seu@email.com",
+    "passwordLabel": "Senha",
+    "passwordPlaceholder": "Criar uma senha",
+    "registerButton": "Cadastrar"
   }
 }
