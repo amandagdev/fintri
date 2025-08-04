@@ -1,6 +1,14 @@
 {
-    "HomePage": {
-      "title": "Hello!",
-      "about": "Go to the about page"
-    }
+  "HomePage": {
+    "login": "Login",
+    "register": "Register",
+    "howItWorks": "How it works?",
+    "price": "Price"
+  },
+  "landingIntro": {
+    "about": "The simplest way to create ",
+    "budgets": "budgets.",
+    "description": "Create, send and organize your budgets in minutes. A practical and quick solution for freelancers and small businesses that need to professionalize their attendances.",
+    "register": "Get started"
   }
+}

@@ -1,9 +1,9 @@
-'use client'
-
-import { useTranslations } from 'next-intl'
+import LandingIntro from '@/features/landing-intro/landing-intro'
 
 export default function HomePage() {
-  const t = useTranslations()
-
-  return <h1>{t('hello')}</h1>
+  return (
+    <div className="bg-white items-center flex flex-col h-screen">
+      <LandingIntro />
+    </div>
+  )
 }
