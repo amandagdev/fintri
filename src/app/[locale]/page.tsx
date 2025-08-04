@@ -1,3 +1,4 @@
+import Footer from '@/common/components/footer/footer'
 import LandingIntro from '@/features/landing-intro/landing-intro'
 import LandingPrice from '@/features/landing-price/landing-price'
 import LandingStarted from '@/features/landing-started/landing-started'
@@ -8,7 +9,7 @@ export default function HomePage() {
       <LandingIntro />
       <LandingStarted />
       <LandingPrice />
-      <div className="h-[300px] w-full bg-teal-600">landing contact</div>
+      <Footer />
     </div>
   )
 }

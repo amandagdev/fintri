@@ -58,5 +58,10 @@
       "Complete financial dashboard",
       "Email support"
     ]
+  },
+  "footer": {
+    "copyright": "All rights reserved.",
+    "contact": "Contact",
+    "email": "contact@fintri.com"
   }
 }

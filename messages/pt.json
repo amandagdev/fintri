@@ -58,5 +58,10 @@
       "Dashboard financeiro completo",
       "Suporte por e-mail"
     ]
+  },
+  "footer": {
+    "copyright": "Todos os direitos reservados.",
+    "contact": "Contato",
+    "email": "contato@fintri.com"
   }
 }

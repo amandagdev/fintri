@@ -27,7 +27,11 @@ export default function Header() {
         </ul>
       </div>
 
-      <div className="navbar-end">
+      <div className="navbar-end gap-4">
+        <button className="btn bg-[#253936] hover:bg-teal-600 text-white font-normal hidden sm:flex">
+          {t('login')}
+        </button>
+
         <button className="btn bg-[#253936] hover:bg-teal-600 text-white font-normal hidden sm:flex">
           {t('register')}
         </button>
@@ -55,6 +59,9 @@ export default function Header() {
             </li>
             <li>
               <Link href="#preco">{t('price')}</Link>
+            </li>
+            <li className="mt-2">
+              <button className="btn btn-primary w-full">{t('login')}</button>
             </li>
             <li className="mt-2">
               <button className="btn btn-primary w-full">{t('register')}</button>
