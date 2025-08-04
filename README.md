@@ -2,8 +2,6 @@
 
 **Fintri** é uma aplicação web moderna, construída para simplificar a vida de freelancers e pequenas empresas, permitindo a criação, gestão e acompanhamento de orçamentos de forma rápida e eficiente.
 
----
-
 ## Funcionalidades Principais
 
 Este projeto foi desenvolvido com um conjunto de funcionalidades focadas em produtividade e organização:
@@ -17,8 +15,6 @@ Este projeto foi desenvolvido com um conjunto de funcionalidades focadas em prod
 - **Duplicar Orçamento:** Economize tempo copiando orçamentos existentes para criar novos.
 - **Resumo Financeiro:** Tenha uma visão clara do total de orçamentos por status e valores no seu dashboard.
 - **Exportação e Compartilhamento:** Compartilhe orçamentos através de um link seguro, envie por e-mail ou baixe em formato PDF.
-
----
 
 ## Como Rodar o Projeto
 

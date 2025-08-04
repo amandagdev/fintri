@@ -20,10 +20,6 @@ export default function LandingPrice() {
               <span className="text-lg font-medium text-white">{t('priceSuffix')}</span>
             </div>
 
-            <div className="card-actions w-full mt-6">
-              <button className="btn bg-[#253936] w-full text-lg">{t('cta')}</button>
-            </div>
-
             <ul className="mt-6 space-y-3 text-left text-sm leading-6 text-white">
               {features.map((feature) => (
                 <li key={feature} className="flex gap-x-3">
@@ -31,6 +27,12 @@ export default function LandingPrice() {
                 </li>
               ))}
             </ul>
+
+            <div className="card-actions w-full mt-6">
+              <button className="btn bg-white w-full text-lg text-gray-500 border-none">
+                {t('cta')}
+              </button>
+            </div>
           </div>
         </div>
       </div>

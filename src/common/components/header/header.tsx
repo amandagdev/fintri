@@ -28,13 +28,17 @@ export default function Header() {
       </div>
 
       <div className="navbar-end gap-4">
-        <button className="btn bg-[#253936] hover:bg-teal-600 text-white font-normal hidden sm:flex">
-          {t('login')}
-        </button>
+        <Link href="/login">
+          <button className="btn bg-[#253936] hover:bg-teal-600 text-white font-normal hidden sm:flex">
+            {t('login')}
+          </button>
+        </Link>
 
-        <button className="btn bg-[#253936] hover:bg-teal-600 text-white font-normal hidden sm:flex">
-          {t('register')}
-        </button>
+        <Link href="/register">
+          <button className="btn bg-[#253936] hover:bg-teal-600 text-white font-normal hidden sm:flex">
+            {t('register')}
+          </button>
+        </Link>
 
         <div className="dropdown dropdown-end lg:hidden">
           <button tabIndex={0} className="btn btn-ghost">
