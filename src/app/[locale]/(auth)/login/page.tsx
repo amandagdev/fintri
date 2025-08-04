@@ -7,7 +7,9 @@ export default function LoginPage() {
   return (
     <div className="w-full max-w-md bg-white">
       <div className="card-body items-center text-center p-8 lg:p-12">
-        <h2 className="card-title text-3xl font-bold text-teal-600">{t('welcome')}</h2>
+        <h2 className="card-title text-3xl font-bold text-teal-600">
+          <Link href="/">{t('welcome')}</Link>
+        </h2>
         <p className="mt-2 text-teal-600">
           {t('newUser')}{' '}
           <Link href="/register" className="link link-hover text-teal-600">
