@@ -11,7 +11,7 @@ export default function LandingStarted() {
   const featuresData = t.raw('features') as Feature[]
 
   return (
-    <section className="bg-neutral-100 w-full px-8 py-12">
+    <section className="bg-teal-50 w-full px-8 py-12">
       <div className="container mx-auto lg:py-18 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <div className="flex flex-col justify-center">
           <h2 className="text-3xl lg:text-4xl font-bold text-[#2cb5a0]">
