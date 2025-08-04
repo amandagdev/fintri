@@ -1,6 +1,14 @@
 {
   "HomePage": {
-    "title": "Olá!",
-    "about": "Ir para a página sobre"
+    "login": "Login",
+    "register": "Cadastre-se",
+    "howItWorks": "Como Funciona?",
+    "price": "Preço"
+  },
+  "landingIntro": {
+    "about": "A forma mais simples de criar ",
+    "budgets": "orçamentos.",
+    "description": "Crie, envie e organize seus orçamentos em minutos. Uma solução prática e rápida para autônomos e pequenos negócios que precisam profissionalizar seus atendimentos.",
+    "register": "Começar"
   }
 }
