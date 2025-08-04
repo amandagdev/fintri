@@ -8,7 +8,39 @@
   "landingIntro": {
     "about": "The simplest way to create ",
     "budgets": "budgets.",
-    "description": "Create, send and organize your budgets in minutes. A practical and quick solution for freelancers and small businesses that need to professionalize their attendances.",
+    "description": "Create, send and organize your budgets in minutes. ",
+    "descriptionTwo": "A practical and quick solution for freelancers and small businesses that need to professionalize their attendances.",
     "register": "Get started"
+  },
+  "landingStarted": {
+    "about": "Your entire workflow, ",
+    "aboutTwo": "in one place.",
+    "description": "From first contact to final handshake, Fintri streamlines your operations, letting you focus on what's most important: your business.",
+    "features": [
+      {
+        "title": "Fast Quote Creation",
+        "description": "Create professional proposals in minutes, not hours."
+      },
+      {
+        "title": "Real-Time Status",
+        "description": "Know instantly if your quote has been sent and viewed."
+      },
+      {
+        "title": "Centralized History",
+        "description": "Access all quotes and clients with smart filters and search."
+      },
+      {
+        "title": "One-Click Duplicate",
+        "description": "Copy existing quotes to speed up new proposals."
+      },
+      {
+        "title": "Financial Dashboard",
+        "description": "See total sales and your funnel's performance in real time."
+      },
+      {
+        "title": "Flexible Sharing",
+        "description": "Share via a secure link, email, or download a PDF with your brand."
+      }
+    ]
   }
 }
