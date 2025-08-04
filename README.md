@@ -1,6 +1,6 @@
 # Fintri - Gerenciador de Orçamentos
 
-**Fintri** é uma aplicação web moderna, construída para simplificar a vida de freelancers e pequenas empresas, permitindo a criação, gestão e acompanhamento de orçamentos de forma rápida e eficiente.
+[**Fintri**](https://fintri.vercel.app/pt) é uma aplicação web moderna, construída para simplificar a vida de freelancers e pequenas empresas, permitindo a criação, gestão e acompanhamento de orçamentos de forma rápida e eficiente.
 
 ## Funcionalidades Principais
 
