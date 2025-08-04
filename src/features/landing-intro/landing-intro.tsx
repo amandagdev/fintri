@@ -4,7 +4,7 @@ export default function LandingIntro() {
   const t = useTranslations('landingIntro')
 
   return (
-    <div className="container mx-auto lg:py-24 py-10 px-8 text-center">
+    <div className="py-24 px-8 text-center bg-white">
       <h2 className="text-4xl font-bold text-gray-900 mt-2 mb-8">
         {t('about')} <span className="bg-teal-600 p-2 rounded-xl text-white">{t('budgets')}</span>
       </h2>

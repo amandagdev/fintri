@@ -63,5 +63,16 @@
     "copyright": "All rights reserved.",
     "contact": "Contact",
     "email": "contact@fintri.com"
+  },
+  "loginPage": {
+    "welcome": "FINTRI",
+    "newUser": "Are you a new user?",
+    "createAccount": "Create an account",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "your@email.com",
+    "passwordLabel": "Password",
+    "forgotPassword": "Forgot password?",
+    "loginButton": "Log in",
+    "socialLogin": "Or log in with"
   }
 }
