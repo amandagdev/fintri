@@ -1,9 +1,26 @@
+'use client'
+
+import { useActionState, useEffect } from 'react'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
-export default function LoginPage() {
+import { registerUser } from '@/features/auth/actions'
+import { SubmitButton } from '@/features/auth/components/submit-button'
+import { initialState } from '@/features/auth/state'
+
+export default function RegisterPage() {
   const t = useTranslations('registerPage')
+  const [state, formAction] = useActionState(registerUser, initialState)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (state.success) {
+      router.push('/dashboard')
+    }
+  }, [state.success, router])
 
   return (
     <div className="w-full max-w-md bg-white">
@@ -11,7 +28,7 @@ export default function LoginPage() {
         <h2 className="card-title text-3xl font-bold text-teal-600">
           <Link href="/" className="text-xl text-[#1b6d71] font-bold">
             <Image src="/images/logo.png" alt="Logo" width={150} height={50} />
-          </Link>{' '}
+          </Link>
         </h2>
         <p className="text-[#1b6d71]">
           {t('alreadyUser')}{' '}
@@ -20,23 +37,31 @@ export default function LoginPage() {
           </Link>
         </p>
 
-        <form className="mt-8 w-full">
+        <form action={formAction} className="mt-8 w-full">
           <div className="form-control w-full text-start">
             <label className="label text-gray-500">{t('nameLabel')}</label>
             <input
               type="text"
+              name="username"
               placeholder={t('namePlaceholder')}
-              className="input input-bordered w-full bg-white border-gray-300 placeholder-gray-500"
+              className="input input-bordered w-full bg-white border-gray-400 text-gray-800 placeholder-gray-600"
             />
+            {state?.errors?.username && (
+              <p className="text-red-500 text-sm mt-1">{state.errors.username}</p>
+            )}
           </div>
 
           <div className="form-control w-full text-start mt-4">
             <label className="label text-gray-500">{t('emailLabel')}</label>
             <input
-              type="text"
+              type="email"
+              name="email"
               placeholder={t('emailPlaceholder')}
-              className="input input-bordered w-full bg-white border-gray-300 placeholder-gray-500"
+              className="input input-bordered w-full bg-white border-gray-400 text-gray-800 placeholder-gray-600"
             />
+            {state?.errors?.email && (
+              <p className="text-red-500 text-sm mt-1">{state.errors.email}</p>
+            )}
           </div>
 
           <div className="form-control w-full mt-4 text-start">
@@ -45,13 +70,19 @@ export default function LoginPage() {
             </label>
             <input
               type="password"
-              className="input input-bordered w-full bg-white border border-gray-300 placeholder-gray-500"
+              name="password"
+              className="input input-bordered w-full bg-white border-gray-400 text-gray-800 placeholder-gray-600"
               placeholder={t('passwordPlaceholder')}
             />
+            {state?.errors?.password && (
+              <p className="text-red-500 text-sm mt-1">{state.errors.password}</p>
+            )}
           </div>
 
+          {state?.message && <p className="text-red-500 mt-4">{state.message}</p>}
+
           <div className="form-control mt-8">
-            <button className="btn border-none text-lg bg-[#1b6d71]">{t('registerButton')}</button>
+            <SubmitButton />
           </div>
         </form>
       </div>
