@@ -83,6 +83,7 @@
     "emailPlaceholder": "seu@email.com",
     "passwordLabel": "Senha",
     "passwordPlaceholder": "Criar uma senha",
-    "registerButton": "Cadastrar"
+    "registerButton": "Cadastrar",
+    "registering": "Cadastrando..."
   }
 }
