@@ -2,8 +2,8 @@
 
 import { cookies } from 'next/headers'
 
-import { authService } from './services/auth-service'
 import type { RegisterFormData } from './types'
+import { authService } from '../services/auth-service'
 import { registerSchema } from './validation/schema'
 
 export type State = {

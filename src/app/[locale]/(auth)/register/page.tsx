@@ -7,9 +7,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
-import { registerUser } from '@/features/auth/actions'
-import { SubmitButton } from '@/features/auth/components/submit-button'
-import { initialState } from '@/features/auth/state'
+import { registerUser } from '@/features/auth/register/actions'
+import { SubmitButton } from '@/features/auth/register/components/submit-button'
+import { initialState } from '@/features/auth/register/state'
 
 export default function RegisterPage() {
   const t = useTranslations('registerPage')
@@ -27,7 +27,7 @@ export default function RegisterPage() {
       <div className="card-body items-center text-center p-8 lg:p-12">
         <h2 className="card-title text-3xl font-bold text-teal-600">
           <Link href="/" className="text-xl text-[#1b6d71] font-bold">
-            <Image src="/images/logo.png" alt="Logo" width={150} height={50} />
+            <Image src="/images/logo.png" alt="Logo" width={80} height={64} />
           </Link>
         </h2>
         <p className="text-[#1b6d71]">
