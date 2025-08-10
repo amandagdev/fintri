@@ -1,27 +1,31 @@
 import type { AxiosError } from 'axios'
 import axios from 'axios'
 
-import type { RegisterFormData, StrapiAuthResponse, StrapiErrorResponse } from '../types'
-
-const STRAPI_URL = process.env.STRAPI_URL
+import { mapStrapiErrorMessage } from '@/utils/strapi-error-map'
 
 export const authService = {
-  register: async (data: RegisterFormData): Promise<StrapiAuthResponse> => {
+  async login(data: { identifier: string; password: string }) {
     try {
-      const response = await axios.post<StrapiAuthResponse>(
-        `${STRAPI_URL}/api/auth/local/register`,
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/auth/local`, data)
+      return res.data
+    } catch (err) {
+      const error = err as AxiosError<{ error: { message?: string } }>
+      const message = error.response?.data?.error?.message || error.message || 'Erro desconhecido'
+      throw new Error(mapStrapiErrorMessage(message))
+    }
+  },
+
+  async register(data: { username: string; email: string; password: string }) {
+    try {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/auth/local/register`,
         data,
       )
-      return response.data
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const axiosError = error as AxiosError<StrapiErrorResponse>
-        const message =
-          axiosError.response?.data?.error?.message || axiosError.message || 'Erro ao registrar.'
-
-        throw new Error(message)
-      }
-      throw new Error('Erro inesperado, tenta novamente.')
+      return res.data
+    } catch (err) {
+      const error = err as AxiosError<{ error: { message?: string } }>
+      const message = error.response?.data?.error?.message || error.message || 'Erro desconhecido'
+      throw new Error(mapStrapiErrorMessage(message))
     }
   },
 }

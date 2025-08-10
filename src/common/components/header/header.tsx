@@ -9,7 +9,7 @@ export default function Header() {
     <div className="navbar bg-white shadow-sm px-4 sm:px-8 lg:px-20">
       <div className="navbar-start">
         <Link href="/" className="text-xl text-[#1b6d71] font-bold">
-          <Image src="/images/logo.png" alt="Logo" width={100} height={100} />
+          <Image src="/images/logo.png" alt="Logo" width={80} height={50} />
         </Link>
       </div>
 
