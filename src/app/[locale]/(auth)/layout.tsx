@@ -4,13 +4,14 @@ import { getMessages } from 'next-intl/server'
 
 import { routing } from '@/i18n/routing'
 
-export default async function AuthLayout({
-  children,
-  params,
-}: {
+interface AuthLayoutProps {
   children: React.ReactNode
-  params: { locale: string }
-}) {
+  params: {
+    locale: string
+  }
+}
+
+export default async function AuthLayout({ children, params }: AuthLayoutProps) {
   const { locale } = params
 
   if (!hasLocale(routing.locales, locale)) {
