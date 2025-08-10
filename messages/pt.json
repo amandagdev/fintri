@@ -85,5 +85,10 @@
     "passwordPlaceholder": "Criar uma senha",
     "registerButton": "Cadastrar",
     "registering": "Cadastrando..."
+  },
+  "dashboard": {
+    "clients": "Clientes",
+    "budgets": "Orçamentos",
+    "logout": "Sair"
   }
 }
