@@ -6,6 +6,7 @@ import {
   FileText,
   LayoutDashboard,
   LogOut,
+  User,
   UserPlus,
   Users,
 } from 'lucide-react'
@@ -25,10 +26,11 @@ export default function Sidebar() {
     { href: '/dashboard/add-client', label: t('addClient'), icon: UserPlus },
     { href: '/dashboard/my-clients', label: t('myClients'), icon: Users },
     { href: '/dashboard/analytics', label: t('analytics'), icon: BarChart2 },
+    { href: '/account', label: t('account'), icon: User },
   ]
 
   return (
-    <aside className="w-72 bg-white text-gray-500 flex flex-col min-h-screen">
+    <aside className="w-72 bg-white text-gray-500 flex flex-col min-h-screen border-r border-gray-200">
       <div className="p-4 border-b border-white/20 flex flex-col items-center">
         <Link href="/" className="text-xl text-[#1b6d71] font-bold">
           <Image src="/images/logo.png" alt="Logo" width={80} height={50} />

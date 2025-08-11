@@ -29,11 +29,11 @@ export default function ListingHeader() {
 
   return (
     <div className="bg-white flex flex-col gap-4">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
         <h2 className="text-2xl font-bold text-gray-600">Orçamentos</h2>
         <Link
           href="/dashboard/budgets/create"
-          className="btn bg-[#1b6d71] text-white flex items-center gap-2 border-none w-full md:w-auto justify-center"
+          className="btn bg-[#2cb5a0] text-white flex items-center gap-2 border-none w-full md:w-auto justify-center"
         >
           <Plus className="w-4 h-4" />
           Criar Orçamento

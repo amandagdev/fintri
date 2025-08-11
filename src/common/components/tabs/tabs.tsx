@@ -13,17 +13,20 @@ interface TabsProps {
 
 export default function Tabs(props: TabsProps) {
   const { tabs, activeTab, onChange } = props
+
   return (
-    <div className="flex bg-white rounded-sm border border-gray-200 p-1 w-fit">
+    <div className="tabs tabs-boxed bg-gray-50 p-2 rounded-sm">
       {tabs.map((tab) => (
         <button
           key={tab.value}
           onClick={() => onChange(tab.value)}
-          className={`px-4 py-1 rounded-sm font-medium transition text-sm cursor-pointer ${
-            activeTab === tab.value
-              ? 'bg-[#1b6d71] text-white'
-              : 'text-gray-500 hover:text-gray-700'
-          }`}
+          className={`tab flex-1 text-base rounded-sm
+            ${
+              activeTab === tab.value
+                ? 'tab-active !bg-[#2cb5a0] !text-white shadow-md'
+                : '!text-gray-500 font-medium hover:!bg-[#1b6d71]/10'
+            }
+          `}
         >
           {tab.label}
         </button>
