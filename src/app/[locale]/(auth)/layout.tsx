@@ -1,18 +1,19 @@
+import type { ReactNode } from 'react'
+
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 
 import { routing } from '@/i18n/routing'
 
-interface AuthLayoutProps {
-  children: React.ReactNode
-  params: {
-    locale: string
-  }
-}
-
-export default async function AuthLayout({ children, params }: AuthLayoutProps) {
-  const { locale } = params
+export default async function AuthLayout({
+  children,
+  params,
+}: {
+  children: ReactNode
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
 
   if (!hasLocale(routing.locales, locale)) {
     notFound()
