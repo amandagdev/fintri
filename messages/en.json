@@ -86,5 +86,19 @@
     "passwordPlaceholder": "Create a password",
     "registerButton": "Register",
     "registering": "Registering..."
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "sidebar": {
+      "title": "Fintri",
+      "subtitle": "Budget management",
+      "home": "Dashboard",
+      "createBudget": "Create budget",
+      "myBudgets": "My budgets",
+      "addClient": "Add client",
+      "myClients": "My clients",
+      "analytics": "Analytics",
+      "logout": "Logout"
+    }
   }
 }
