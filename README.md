@@ -7,7 +7,7 @@
 
 ## Funcionalidades Principais
 
-Este projeto foi desenvolvido com um conjunto de funcionalidades focadas em produtividade e organização:
+Este projeto **está sendo desenvolvido** com um conjunto de funcionalidades focadas em produtividade e organização:
 
 - **Criação de Orçamentos:** Gere orçamentos detalhados de forma simples e intuitiva.
 - **Gestão de Clientes:** Cadastre, edite e mantenha a lista dos seus clientes sempre atualizada.
