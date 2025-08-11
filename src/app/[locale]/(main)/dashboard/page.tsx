@@ -2,11 +2,14 @@
 
 import { useTranslations } from 'next-intl'
 
+import Sidebar from '@/features/dahsboard/components/sidebar/sidebar'
+
 export default function DashboardPage() {
   const t = useTranslations('dashboard')
   return (
-    <div>
-      <h1>{t('clients')}</h1>
+    <div className="flex ">
+      <Sidebar />
+      <h1>{t('title')}</h1>
     </div>
   )
 }

@@ -15,7 +15,7 @@
   "landingStarted": {
     "about": "Tudo o que você precisa, ",
     "aboutTwo": "em um só lugar",
-    "description": "Do primeiro contato ao aperto de mão final, Fintri centraliza suas operações para que vocé foque no que realmente importa: seu negócio.",
+    "description": "Do primeiro contato ao aperto de mão final, Fintri centraliza suas operações para que você foque no que realmente importa: seu negócio.",
     "features": [
       {
         "title": "Criação Rápida de Orçamentos",
@@ -87,8 +87,17 @@
     "registering": "Cadastrando..."
   },
   "dashboard": {
-    "clients": "Clientes",
-    "budgets": "Orçamentos",
-    "logout": "Sair"
+    "title": "Dashboard",
+    "sidebar": {
+      "title": "Fintri",
+      "subtitle": "Gestão de orçamentos",
+      "home": "Dashboard",
+      "createBudget": "Criar orçamento",
+      "myBudgets": "Meus orçamentos",
+      "addClient": "Adicionar cliente",
+      "myClients": "Meus clientes",
+      "analytics": "Minhas análises",
+      "logout": "Sair"
+    }
   }
 }
