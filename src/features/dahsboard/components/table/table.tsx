@@ -43,7 +43,7 @@ export default function Table({ data }: Props) {
         </thead>
         <tbody>
           {data.map((proposal) => (
-            <tr key={proposal.id} className="hover:bg-gray-50 transition text-gray-500">
+            <tr key={proposal.id} className="hover:bg-gray-50 transition">
               <td className="py-3">{proposal.client}</td>
               <td>{proposal.date}</td>
               <td>
@@ -59,7 +59,7 @@ export default function Table({ data }: Props) {
               <td>
                 <Link
                   href={`/dashboard/budgets/${proposal.id}`}
-                  className="btn btn-sm px-4 whitespace-nowrap text-sm bg-[#1b6d71] text-white border-none hover:bg-[#155d61] transition"
+                  className="btn btn-sm px-4 whitespace-nowrap text-sm bg-[#2cb5a0] text-white border-none hover:bg-[#155d61] transition"
                 >
                   Ver proposta
                 </Link>
@@ -67,7 +67,7 @@ export default function Table({ data }: Props) {
               <td>
                 <button
                   onClick={() => console.log('Compartilhar', proposal.id)}
-                  className="btn btn-sm text-sm bg-[#1b6d71]  text-white gap-2 border-none"
+                  className="btn btn-sm text-sm bg-[#2cb5a0]  text-white gap-2 border-none"
                 >
                   <Share2 size={16} />
                 </button>

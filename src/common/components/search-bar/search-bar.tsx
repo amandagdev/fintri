@@ -11,7 +11,7 @@ interface SearchBarProps {
 export default function SearchBar(props: SearchBarProps) {
   const { placeholder, value, onChange } = props
   return (
-    <label className="input border border-gray-200 flex items-center gap-2 bg-white w-full sm:w-64">
+    <label className="input input-bordered w-full sm:w-64">
       <Search className="w-4 h-4 text-gray-500 " />
       <input
         type="text"

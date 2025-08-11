@@ -98,7 +98,65 @@
       "addClient": "Add client",
       "myClients": "My clients",
       "analytics": "Analytics",
+      "account": "Account",
       "logout": "Logout"
+    }
+  },
+  "account": {
+    "header": {
+      "title": "My account",
+      "subtitle": "Manage your data, subscription, and security."
+    },
+    "tabs": {
+      "personal": "My Details",
+      "company": "Company",
+      "plan": "Plan",
+      "security": "Security"
+    },
+    "personalForm": {
+      "title": "Personal Details",
+      "description": "Basic information for identification on the platform.",
+      "fullNameLabel": "Full Name",
+      "fullNamePlaceholder": "Your name",
+      "emailLabel": "Email",
+      "phoneLabel": "Phone",
+      "phonePlaceholder": "+1 (555) 555-5555",
+      "cpfLabel": "Personal ID (CPF)",
+      "cpfPlaceholder": "000.000.000-00"
+    },
+    "companyForm": {
+      "title": "Company Details",
+      "description": "This information will be used for generating proposals and invoices.",
+      "companyNameLabel": "Company Name",
+      "companyNamePlaceholder": "Your Company Inc.",
+      "cnpjLabel": "Tax ID (CNPJ)",
+      "cnpjPlaceholder": "00.000.000/0001-00",
+      "addressLabel": "Full Address",
+      "addressPlaceholder": "Street, Number, District, City - State, ZIP Code",
+      "companyEmailLabel": "Business Email",
+      "companyEmailPlaceholder": "contact@yourcompany.com",
+      "logoLabel": "Company Logo"
+    },
+    "planSection": {
+      "title": "My Plan",
+      "description": "Manage your subscription and access payment history.",
+      "currentPlanText": "You are on the",
+      "nextBillingText": "Your next charge will be on",
+      "manageButton": "Manage Subscription"
+    },
+    "securitySection": {
+      "changePasswordTitle": "Change Password",
+      "changePasswordDescription": "We recommend using a strong password that you don't use elsewhere.",
+      "currentPasswordLabel": "Current Password",
+      "newPasswordLabel": "New Password",
+      "confirmPasswordLabel": "Confirm New Password",
+      "updatePasswordButton": "Update Password",
+      "deleteAccountTitle": "Delete Account",
+      "deleteAccountDescription": "This action is irreversible. All your data, proposals, and information will be permanently removed from the platform.",
+      "deleteAccountButton": "Delete My Account"
+    },
+    "common": {
+      "saveChanges": "Save Changes"
     }
   }
 }

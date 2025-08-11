@@ -1,16 +1,10 @@
 'use client'
 
-import { Menu } from 'lucide-react'
-import { useTranslations } from 'next-intl'
-
 import Header from '@/features/dahsboard/components/header/header'
-import Sidebar from '@/features/dahsboard/components/sidebar/sidebar'
 import type { Proposal } from '@/features/dahsboard/components/table/table'
 import Table from '@/features/dahsboard/components/table/table'
 
 export default function DashboardPage() {
-  const t = useTranslations('dashboard')
-
   const mockBudgets: Proposal[] = [
     {
       id: '1',
@@ -44,29 +38,12 @@ export default function DashboardPage() {
   ]
 
   return (
-    <div className="drawer lg:drawer-open min-h-screen">
-      <input id="sidebar-drawer" type="checkbox" className="drawer-toggle" />
-
-      <div className="drawer-content flex flex-col">
-        <label htmlFor="sidebar-drawer" className="btn btn-ghost lg:hidden m-4">
-          <Menu className="w-6 h-6" />
-        </label>
-
-        <main className="bg-white p-6 space-y-6 w-full h-screen">
-          <div className="space-y-4">
-            <Header />
-          </div>
-
-          <Table data={mockBudgets} />
-        </main>
+    <main className="bg-white p-6 space-y-6 w-full h-screen">
+      <div className="space-y-4">
+        <Header />
       </div>
 
-      <div className="drawer-side">
-        <label htmlFor="sidebar-drawer" className="drawer-overlay">
-          <span className="sr-only">Fechar menu</span>
-        </label>
-        <Sidebar />
-      </div>
-    </div>
+      <Table data={mockBudgets} />
+    </main>
   )
 }

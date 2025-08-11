@@ -38,12 +38,12 @@ export default function LoginPage() {
 
         <form action={formAction} className="mt-8 w-full">
           <div className="form-control w-full text-start">
-            <label className="label text-gray-500">{t('emailLabel')}</label>
+            <label className="label">{t('emailLabel')}</label>
             <input
               type="email"
               name="email"
               placeholder={t('emailPlaceholder')}
-              className="input input-bordered text-gray-600 w-full bg-white border-gray-300 placeholder-gray-500"
+              className="input input-bordered  w-full"
             />
           </div>
 
@@ -57,7 +57,7 @@ export default function LoginPage() {
             <input
               type="password"
               name="password"
-              className="input input-bordered w-full text-gray-600 bg-white border border-gray-300 placeholder-gray-500"
+              className="input input-bordered w-full"
               placeholder="Senha"
             />
           </div>
@@ -65,7 +65,9 @@ export default function LoginPage() {
           {state?.message && <p className="text-red-500 mt-4">{state.message}</p>}
 
           <div className="form-control mt-8">
-            <button className="btn border-none text-lg bg-[#1b6d71]">{t('loginButton')}</button>
+            <button className="btn border-none text-lg bg-[#1b6d71] text-white">
+              {t('loginButton')}
+            </button>
           </div>
         </form>
       </div>

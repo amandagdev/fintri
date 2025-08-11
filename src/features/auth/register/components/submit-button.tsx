@@ -9,7 +9,7 @@ export function SubmitButton() {
 
   return (
     <button
-      className="btn border-none text-lg bg-[#1b6d71] hover:bg-[#155a5e]"
+      className="btn border-none text-lg bg-[#1b6d71] hover:bg-[#155a5e] text-white"
       type="submit"
       disabled={pending}
     >

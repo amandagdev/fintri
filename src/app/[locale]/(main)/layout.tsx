@@ -1,25 +1,16 @@
+import { Menu } from 'lucide-react'
 import { cookies } from 'next/headers'
-import { notFound, redirect } from 'next/navigation'
-import { NextIntlClientProvider, hasLocale } from 'next-intl'
-import { getMessages } from 'next-intl/server'
+import { redirect } from 'next/navigation'
 
-import { routing } from '@/i18n/routing'
+import Sidebar from '@/common/components/sidebar/sidebar'
 
-export default async function ProtectedLayout({
+export default async function ProtectedMainLayout({
   children,
-  params,
+  params: { locale },
 }: {
   children: React.ReactNode
-  params: Promise<{ locale: string }>
+  params: { locale: string }
 }) {
-  const { locale } = await params
-
-  if (!hasLocale(routing.locales, locale)) {
-    notFound()
-  }
-
-  const messages = await getMessages()
-
   const cookieStore = await cookies()
   const jwt = cookieStore.get('jwt')?.value
 
@@ -28,10 +19,23 @@ export default async function ProtectedLayout({
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <NextIntlClientProvider locale={locale} messages={messages}>
+    <div className="drawer lg:drawer-open min-h-screen bg-slate-50">
+      <input id="sidebar-drawer" type="checkbox" className="drawer-toggle" />
+
+      <div className="drawer-content flex flex-col items-start">
+        <label
+          htmlFor="sidebar-drawer"
+          className="btn btn-ghost lg:hidden absolute top-4 left-4 z-10"
+        >
+          <Menu className="w-6 h-6" />
+        </label>
         {children}
-      </NextIntlClientProvider>
+      </div>
+
+      <div className="drawer-side">
+        <label htmlFor="sidebar-drawer" aria-label="close sidebar" className="drawer-overlay" />
+        <Sidebar />
+      </div>
     </div>
   )
 }

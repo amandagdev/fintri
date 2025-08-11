@@ -97,7 +97,65 @@
       "addClient": "Adicionar cliente",
       "myClients": "Meus clientes",
       "analytics": "Minhas análises",
+      "account": "Minha conta",
       "logout": "Sair"
+    }
+  },
+  "account": {
+    "header": {
+      "title": "Minha conta",
+      "subtitle": "Gerencie seus dados, assinatura e segurança."
+    },
+    "tabs": {
+      "personal": "Meus Dados",
+      "company": "Empresa",
+      "plan": "Plano",
+      "security": "Segurança"
+    },
+    "personalForm": {
+      "title": "Dados Pessoais",
+      "description": "Informações básicas para identificação na plataforma.",
+      "fullNameLabel": "Nome Completo",
+      "fullNamePlaceholder": "Seu nome",
+      "emailLabel": "Email",
+      "phoneLabel": "Telefone",
+      "phonePlaceholder": "(21) 99999-9999",
+      "cpfLabel": "CPF",
+      "cpfPlaceholder": "000.000.000-00"
+    },
+    "companyForm": {
+      "title": "Dados da Empresa",
+      "description": "Estas informações serão usadas na geração de propostas e notas fiscais.",
+      "companyNameLabel": "Razão Social",
+      "companyNamePlaceholder": "Nome da sua empresa LTDA",
+      "cnpjLabel": "CNPJ",
+      "cnpjPlaceholder": "00.000.000/0001-00",
+      "addressLabel": "Endereço Completo",
+      "addressPlaceholder": "Rua, Número, Bairro, Cidade - Estado, CEP",
+      "companyEmailLabel": "Email Comercial",
+      "companyEmailPlaceholder": "contato@suaempresa.com",
+      "logoLabel": "Logo da Empresa"
+    },
+    "planSection": {
+      "title": "Meu Plano",
+      "description": "Gerencie sua assinatura e acesse o histórico de pagamentos.",
+      "currentPlanText": "Você está no plano",
+      "nextBillingText": "Sua próxima cobrança será em",
+      "manageButton": "Gerenciar Assinatura"
+    },
+    "securitySection": {
+      "changePasswordTitle": "Alterar Senha",
+      "changePasswordDescription": "Recomendamos usar uma senha forte que você não usa em outro lugar.",
+      "currentPasswordLabel": "Senha Atual",
+      "newPasswordLabel": "Nova Senha",
+      "confirmPasswordLabel": "Confirmar Nova Senha",
+      "updatePasswordButton": "Atualizar Senha",
+      "deleteAccountTitle": "Deletar Conta",
+      "deleteAccountDescription": "Esta ação é irreversível. Todos os seus dados, propostas e informações serão permanentemente removidos da plataforma.",
+      "deleteAccountButton": "Deletar Minha Conta"
+    },
+    "common": {
+      "saveChanges": "Salvar Alterações"
     }
   }
 }

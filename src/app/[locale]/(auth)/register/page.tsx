@@ -39,12 +39,12 @@ export default function RegisterPage() {
 
         <form action={formAction} className="mt-8 w-full">
           <div className="form-control w-full text-start">
-            <label className="label text-gray-500">{t('nameLabel')}</label>
+            <label className="label">{t('nameLabel')}</label>
             <input
               type="text"
               name="username"
               placeholder={t('namePlaceholder')}
-              className="input input-bordered w-full bg-white border-gray-400 text-gray-800 placeholder-gray-600"
+              className="input input-bordered w-full"
             />
             {state?.errors?.username && (
               <p className="text-red-500 text-sm mt-1">{state.errors.username}</p>
@@ -52,12 +52,12 @@ export default function RegisterPage() {
           </div>
 
           <div className="form-control w-full text-start mt-4">
-            <label className="label text-gray-500">{t('emailLabel')}</label>
+            <label className="label ">{t('emailLabel')}</label>
             <input
               type="email"
               name="email"
               placeholder={t('emailPlaceholder')}
-              className="input input-bordered w-full bg-white border-gray-400 text-gray-800 placeholder-gray-600"
+              className="input input-bordered w-full"
             />
             {state?.errors?.email && (
               <p className="text-red-500 text-sm mt-1">{state.errors.email}</p>
@@ -71,7 +71,7 @@ export default function RegisterPage() {
             <input
               type="password"
               name="password"
-              className="input input-bordered w-full bg-white border-gray-400 text-gray-800 placeholder-gray-600"
+              className="input input-bordered w-full"
               placeholder={t('passwordPlaceholder')}
             />
             {state?.errors?.password && (
