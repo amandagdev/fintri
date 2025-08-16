@@ -47,7 +47,7 @@ export default function RegisterPage() {
               className="input input-bordered w-full"
             />
             {state?.errors?.username && (
-              <p className="text-red-500 text-sm mt-1">{state.errors.username}</p>
+              <p className="text-red-500 text-sm mt-1">{t(state.errors.username)}</p>
             )}
           </div>
 
@@ -60,7 +60,7 @@ export default function RegisterPage() {
               className="input input-bordered w-full"
             />
             {state?.errors?.email && (
-              <p className="text-red-500 text-sm mt-1">{state.errors.email}</p>
+              <p className="text-red-500 text-sm mt-1">{t(state.errors.email)}</p>
             )}
           </div>
 
@@ -75,11 +75,11 @@ export default function RegisterPage() {
               placeholder={t('passwordPlaceholder')}
             />
             {state?.errors?.password && (
-              <p className="text-red-500 text-sm mt-1">{state.errors.password}</p>
+              <p className="text-red-500 text-sm mt-1">{t(state.errors.password)}</p>
             )}
           </div>
 
-          {state?.message && <p className="text-red-500 mt-4">{state.message}</p>}
+          {state?.message && <p className="text-red-500 mt-4">{t(state.message as never)}</p>}
 
           <div className="form-control mt-8">
             <SubmitButton />

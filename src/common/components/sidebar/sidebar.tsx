@@ -23,8 +23,8 @@ export default function Sidebar() {
     { href: '/dashboard', label: t('home'), icon: LayoutDashboard },
     { href: '/dashboard/create-budget', label: t('createBudget'), icon: FilePlus },
     { href: '/dashboard/my-budgets', label: t('myBudgets'), icon: FileText },
-    { href: '/dashboard/add-client', label: t('addClient'), icon: UserPlus },
-    { href: '/dashboard/my-clients', label: t('myClients'), icon: Users },
+    { href: '/clients/add', label: t('addClient'), icon: UserPlus },
+    { href: '/clients', label: t('myClients'), icon: Users },
     { href: '/dashboard/analytics', label: t('analytics'), icon: BarChart2 },
     { href: '/account', label: t('account'), icon: User },
   ]

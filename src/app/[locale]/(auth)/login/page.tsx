@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { useFormStatus } from 'react-dom'
 
 import { loginUser } from '@/features/auth/login/actions'
 import { initialLoginState } from '@/features/auth/login/state'
@@ -14,6 +15,7 @@ export default function LoginPage() {
   const t = useTranslations('loginPage')
   const router = useRouter()
   const [state, formAction] = useActionState(loginUser, initialLoginState)
+  const { pending } = useFormStatus()
 
   useEffect(() => {
     if (state.success) {
@@ -62,10 +64,10 @@ export default function LoginPage() {
             />
           </div>
 
-          {state?.message && <p className="text-red-500 mt-4">{state.message}</p>}
+          {state?.message && <p className="text-red-500 mt-4">{t(state.message as never)}</p>}
 
           <div className="form-control mt-8">
-            <button className="btn border-none text-lg bg-[#1b6d71] text-white">
+            <button className="btn border-none text-lg bg-[#1b6d71] text-white" disabled={pending}>
               {t('loginButton')}
             </button>
           </div>

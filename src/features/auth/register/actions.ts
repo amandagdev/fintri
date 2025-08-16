@@ -20,6 +20,7 @@ export async function registerUser(prevState: State, formData: FormData): Promis
   }
 
   const parsed = registerSchema.safeParse(data)
+
   if (!parsed.success) {
     const fieldErrors: State['errors'] = {}
     parsed.error.issues.forEach((issue) => {
@@ -52,6 +53,7 @@ export async function registerUser(prevState: State, formData: FormData): Promis
 
     return { errors: {}, success: true }
   } catch (error) {
-    return { errors: {}, message: error instanceof Error ? error.message : 'Erro desconhecido.' }
+    const errorMessage = error instanceof Error ? error.message : 'errors.registerError'
+    return { errors: {}, message: errorMessage }
   }
 }

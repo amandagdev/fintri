@@ -1,11 +1,30 @@
-export function mapStrapiErrorMessage(message?: string) {
-  const messages: Record<string, string> = {
-    'Invalid identifier or password': 'E-mail ou senha inválidos.',
-    'Email or Username are already taken': 'Este e-mail já está em uso.',
-    'password must be at least 6 characters': 'A senha deve ter pelo menos 6 caracteres.',
-    'Please provide your password.': 'A senha é obrigatória.',
-    'Please provide your username or your email.': 'E-mail ou nome de usuário são obrigatórios.',
+export function mapLoginErrorToKey(message?: string): string {
+  if (!message) return 'errors.loginError'
+
+  const errorKeyMap: Record<string, string> = {
+    'Invalid identifier or password': 'errors.invalidCredentials',
   }
 
-  return message && messages[message] ? messages[message] : 'Ocorreu um erro, tente novamente.'
+  return errorKeyMap[message] || 'errors.default'
+}
+
+export function mapRegisterErrorToKey(message?: string): string {
+  if (!message) return 'errors.default'
+
+  const errorKeyMap: Record<string, string> = {
+    'Email or Username are already taken': 'errors.emailOrUsernameTaken',
+    'password must be at least 6 characters': 'errors.passwordTooShort',
+  }
+
+  return errorKeyMap[message] || 'errors.default'
+}
+
+export function mapClientErrorToKey(message?: string): string {
+  if (!message) return 'errors.default'
+
+  const errorKeyMap: Record<string, string> = {
+    'This attribute must be unique': 'errors.emailTaken',
+  }
+
+  return errorKeyMap[message] || 'errors.default'
 }

@@ -72,7 +72,12 @@
     "passwordLabel": "Senha",
     "forgotPassword": "Esqueceu a senha?",
     "loginButton": "Entrar",
-    "socialLogin": "Ou entre com"
+    "socialLogin": "Ou entre com",
+    "errors": {
+      "invalidCredentials": "E-mail ou senha inválidos.",
+      "fillAllFields": "Por favor, preencha todos os campos.",
+      "default": "Ocorreu um erro inesperado, por favor, tente novamente."
+    }
   },
   "registerPage": {
     "alreadyUser": "Já possui uma conta?",
@@ -84,7 +89,14 @@
     "passwordLabel": "Senha",
     "passwordPlaceholder": "Criar uma senha",
     "registerButton": "Cadastrar",
-    "registering": "Cadastrando..."
+    "registering": "Cadastrando...",
+    "errors": {
+      "default": "Ocorreu um erro inesperado, por favor, tente novamente.",
+      "usernameTooShort": "O nome de usuário deve ter pelo menos 3 caracteres.",
+      "passwordTooShort": "A senha deve ter pelo menos 6 caracteres.",
+      "invalidEmail": "O e-mail fornecido não é válido.",
+      "emailOrUsernameTaken": "Este e-mail ou nome de usuário já está em uso."
+    }
   },
   "dashboard": {
     "title": "Dashboard",
@@ -156,6 +168,45 @@
     },
     "common": {
       "saveChanges": "Salvar Alterações"
+    }
+  },
+  "clients": {
+    "listTitle": "Meus Clientes",
+    "listDescription": "Visualize e gerencie todos os seus clientes.",
+    "addNewButton": "Adicionar Novo Cliente",
+    "addPageTitle": "Adicionar Novo Cliente",
+    "addPageDescription": "Preencha os dados abaixo para cadastrar um novo cliente.",
+    "tableHeaderName": "Nome",
+    "tableHeaderEmail": "Email",
+    "tableHeaderPhone": "Telefone",
+    "tableHeaderActions": "Ações",
+    "emptyStateTitle": "Nenhum cliente cadastrado",
+    "emptyStateDescription": "Comece adicionando seu primeiro cliente para criar orçamentos.",
+    "editButton": "Editar cliente",
+    "deleteButton": "Deletar cliente",
+    "form": {
+      "fullNameLabel": "Nome Completo do Cliente",
+      "fullNamePlaceholder": "Ex: João da Silva",
+      "emailLabel": "Email Principal",
+      "emailPlaceholder": "cliente@email.com",
+      "phoneLabel": "Telefone (Opcional)",
+      "phonePlaceholder": "(21) 99999-9999",
+      "taxIdLabel": "CPF ou CNPJ (Opcional)",
+      "taxIdPlaceholder": "000.000.000-00",
+      "addressLabel": "Endereço (Opcional)",
+      "addressPlaceholder": "Rua, Número, Bairro...",
+      "saveButton": "Salvar Cliente",
+      "cancelButton": "Cancelar"
+    },
+    "successMessage": "Cliente adicionado com sucesso!",
+    "deleteSuccessMessage": "Cliente excluído com sucesso!",
+    "errors": {
+      "default": "Ocorreu um erro, por favor, tente novamente.",
+      "unauthenticated": "Usuário não autenticado. Faça o login novamente.",
+      "emailTaken": "Este e-mail já está cadastrado para outro cliente.",
+      "fullNameTooShort": "O nome completo deve ter pelo menos 3 caracteres.",
+      "invalidEmail": "O formato do e-mail é inválido.",
+      "deleteFailed": "Não foi possível deletar o cliente."
     }
   }
 }
