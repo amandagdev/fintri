@@ -176,6 +176,8 @@
     "addNewButton": "Adicionar Novo Cliente",
     "addPageTitle": "Adicionar Novo Cliente",
     "addPageDescription": "Preencha os dados abaixo para cadastrar um novo cliente.",
+    "editPageTitle": "Editar Cliente",
+    "editPageDescription": "Você está editando os dados de {clientName}.",
     "tableHeaderName": "Nome",
     "tableHeaderEmail": "Email",
     "tableHeaderPhone": "Telefone",
@@ -184,6 +186,7 @@
     "emptyStateDescription": "Comece adicionando seu primeiro cliente para criar orçamentos.",
     "editButton": "Editar cliente",
     "deleteButton": "Deletar cliente",
+    "updateSuccessMessage": "Cliente atualizado com sucesso!",
     "form": {
       "fullNameLabel": "Nome Completo do Cliente",
       "fullNamePlaceholder": "Ex: João da Silva",
@@ -196,7 +199,8 @@
       "addressLabel": "Endereço (Opcional)",
       "addressPlaceholder": "Rua, Número, Bairro...",
       "saveButton": "Salvar Cliente",
-      "cancelButton": "Cancelar"
+      "cancelButton": "Cancelar",
+      "updateButton": "Salvar Alterações"
     },
     "successMessage": "Cliente adicionado com sucesso!",
     "deleteSuccessMessage": "Cliente excluído com sucesso!",

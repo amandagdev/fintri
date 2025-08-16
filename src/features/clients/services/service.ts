@@ -61,6 +61,48 @@ export async function getClients(): Promise<Client[]> {
   }
 }
 
+export async function getClientByDocumentId(documentId: string): Promise<Client | null> {
+  const cookieStore = await cookies()
+  const jwt = cookieStore.get('jwt')?.value
+  if (!jwt) throw new Error('errors.unauthenticated')
+
+  try {
+    const response = await axiosInstance.get(
+      `/api/clients?filters[documentId][$eq]=${documentId}&populate=*`,
+      {
+        headers: { Authorization: `Bearer ${jwt}` },
+      },
+    )
+
+    if (response.data.data.length === 0) {
+      return null
+    }
+
+    const clientData = response.data.data[0]
+    return { ...clientData }
+  } catch (error) {
+    console.error('Erro ao buscar cliente por documentId:', error)
+    throw new Error('errors.clientFetchFailed')
+  }
+}
+
+export async function updateClient(id: string, payload: CreateClientPayload) {
+  const cookieStore = await cookies()
+  const jwt = cookieStore.get('jwt')?.value
+  if (!jwt) throw new Error('errors.unauthenticated')
+
+  try {
+    const response = await axiosInstance.put(`/api/clients/${id}`, payload, {
+      headers: { Authorization: `Bearer ${jwt}` },
+    })
+    return response.data
+  } catch (err) {
+    const error = err as AxiosError<{ error: { message?: string } }>
+    const strapiMessage = error.response?.data?.error?.message
+    throw new Error(mapClientErrorToKey(strapiMessage))
+  }
+}
+
 export async function deleteClient(documentId: string) {
   const cookieStore = await cookies()
   const jwt = cookieStore.get('jwt')?.value

@@ -4,6 +4,7 @@ export type ClientFormData = {
   phone?: string
   cpf_or_cnpj?: string
   address?: string
+  documentId: string
 }
 
 export type Client = {

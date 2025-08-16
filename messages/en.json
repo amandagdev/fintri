@@ -177,6 +177,8 @@
     "addNewButton": "Add New Client",
     "addPageTitle": "Add New Client",
     "addPageDescription": "Fill in the details below to register a new client.",
+    "editPageTitle": "Edit Client",
+    "editPageDescription": "You are editing the details for {clientName}.",
     "tableHeaderName": "Name",
     "tableHeaderEmail": "Email",
     "tableHeaderPhone": "Phone",
@@ -185,6 +187,7 @@
     "emptyStateDescription": "Start by adding your first client to create quotes.",
     "editButton": "Edit client",
     "deleteButton": "Delete client",
+    "updateSuccessMessage": "Client updated successfully!",
     "form": {
       "fullNameLabel": "Client's Full Name",
       "fullNamePlaceholder": "E.g.: John Doe",
@@ -197,7 +200,8 @@
       "addressLabel": "Address (Optional)",
       "addressPlaceholder": "Street, Number, City...",
       "saveButton": "Save Client",
-      "cancelButton": "Cancel"
+      "cancelButton": "Cancel",
+      "updateButton": "Save Changes"
     },
     "successMessage": "Client added successfully!",
     "deleteSuccessMessage": "Client deleted successfully!",

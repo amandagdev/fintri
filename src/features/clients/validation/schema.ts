@@ -6,4 +6,5 @@ export const clientSchema = z.object({
   phone: z.string().optional(),
   cpf_or_cnpj: z.string().optional(),
   address: z.string().optional(),
+  documentId: z.string().optional(),
 })

@@ -5,7 +5,7 @@ import { useActionState } from 'react'
 import { useTranslations } from 'next-intl'
 
 import { addClientAction } from '@/features/clients/actions'
-import { AddClientForm } from '@/features/clients/components/add-client-form/add-client-form'
+import { ClientForm } from '@/features/clients/components/client-form/client-form'
 import { initialState } from '@/features/clients/state'
 
 export default function AddClientPage() {
@@ -19,7 +19,7 @@ export default function AddClientPage() {
         <p className="text-gray-500 mt-1">{t('addPageDescription')}</p>
       </header>
 
-      <AddClientForm action={formAction} state={state} />
+      <ClientForm action={formAction} state={state} />
     </main>
   )
 }
