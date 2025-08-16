@@ -13,7 +13,7 @@ export async function loginUser(prevState: LoginState, formData: FormData): Prom
   }
 
   if (!data.identifier || !data.password) {
-    return { errors: {}, message: 'Preencha todos os campos.' }
+    return { errors: {}, message: 'errors.invalidCredentials' }
   }
 
   try {
@@ -35,6 +35,7 @@ export async function loginUser(prevState: LoginState, formData: FormData): Prom
 
     return { errors: {}, message: '', success: true }
   } catch (error) {
-    return { errors: {}, message: error instanceof Error ? error.message : 'Erro no login.' }
+    const errorMessage = error instanceof Error ? error.message : 'errors.default'
+    return { errors: {}, message: errorMessage }
   }
 }

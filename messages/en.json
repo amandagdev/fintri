@@ -73,7 +73,12 @@
     "passwordLabel": "Password",
     "forgotPassword": "Forgot password?",
     "loginButton": "Log in",
-    "socialLogin": "Or log in with"
+    "socialLogin": "Or log in with",
+    "errors": {
+      "default": "An unexpected error occurred. Please try again.",
+      "invalidCredentials": "Invalid email or password.",
+      "fillAllFields": "Please fill in all fields."
+    }
   },
   "registerPage": {
     "alreadyUser": "Already have an account?",
@@ -85,7 +90,14 @@
     "passwordLabel": "Password",
     "passwordPlaceholder": "Create a password",
     "registerButton": "Register",
-    "registering": "Registering..."
+    "registering": "Registering...",
+    "errors": {
+      "default": "An unexpected error occurred. Please try again.",
+      "usernameTooShort": "Username must be at least 3 characters.",
+      "passwordTooShort": "Password must be at least 6 characters.",
+      "invalidEmail": "The provided email is not valid.",
+      "emailOrUsernameTaken": "This email or username is already in use."
+    }
   },
   "dashboard": {
     "title": "Dashboard",
@@ -157,6 +169,49 @@
     },
     "common": {
       "saveChanges": "Save Changes"
+    }
+  },
+  "clients": {
+    "listTitle": "My Clients",
+    "listDescription": "View and manage all your clients.",
+    "addNewButton": "Add New Client",
+    "addPageTitle": "Add New Client",
+    "addPageDescription": "Fill in the details below to register a new client.",
+    "editPageTitle": "Edit Client",
+    "editPageDescription": "You are editing the details for {clientName}.",
+    "tableHeaderName": "Name",
+    "tableHeaderEmail": "Email",
+    "tableHeaderPhone": "Phone",
+    "tableHeaderActions": "Actions",
+    "emptyStateTitle": "No clients registered",
+    "emptyStateDescription": "Start by adding your first client to create quotes.",
+    "editButton": "Edit client",
+    "deleteButton": "Delete client",
+    "updateSuccessMessage": "Client updated successfully!",
+    "form": {
+      "fullNameLabel": "Client's Full Name",
+      "fullNamePlaceholder": "E.g.: John Doe",
+      "emailLabel": "Main Email",
+      "emailPlaceholder": "client@email.com",
+      "phoneLabel": "Phone (Optional)",
+      "phonePlaceholder": "(555) 555-5555",
+      "taxIdLabel": "Tax ID (Optional)",
+      "taxIdPlaceholder": "Your client's tax ID",
+      "addressLabel": "Address (Optional)",
+      "addressPlaceholder": "Street, Number, City...",
+      "saveButton": "Save Client",
+      "cancelButton": "Cancel",
+      "updateButton": "Save Changes"
+    },
+    "successMessage": "Client added successfully!",
+    "deleteSuccessMessage": "Client deleted successfully!",
+    "errors": {
+      "default": "An error occurred, please try again.",
+      "unauthenticated": "User not authenticated. Please log in again.",
+      "emailTaken": "This email is already registered for another client.",
+      "fullNameTooShort": "Full name must be at least 3 characters.",
+      "invalidEmail": "The email format is invalid.",
+      "deleteFailed": "Could not delete the client."
     }
   }
 }
