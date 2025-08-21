@@ -1,29 +1,9 @@
 import { render, screen } from '@testing-library/react'
 
-import { initialState } from '@/features/auth/register/state'
-
-import RegisterPage from './page'
-
-jest.mock('next/navigation', () => ({
-  useRouter: jest.fn(() => ({
-    push: jest.fn(),
-    replace: jest.fn(),
-    prefetch: jest.fn(),
-    route: '/',
-    pathname: '/',
-    query: {},
-    asPath: '/',
-  })),
-}))
+import LoginPage from './page'
 
 jest.mock('next-intl', () => ({
   useTranslations: () => (key: string) => key,
-}))
-
-jest.mock('react-dom', () => ({
-  ...jest.requireActual('react-dom'),
-  useFormState: jest.fn(() => [initialState, jest.fn()]),
-  useFormStatus: jest.fn(() => ({ pending: false })),
 }))
 
 jest.mock('next/link', () => {
@@ -32,24 +12,44 @@ jest.mock('next/link', () => {
   }
 })
 
-describe('RegisterPage', () => {
+describe('LoginPage', () => {
   beforeEach(() => {
-    render(<RegisterPage />)
+    render(<LoginPage />)
   })
 
-  it('renders name, email and password fields with their labels', () => {
-    expect(screen.getByText(/nameLabel/)).toBeInTheDocument()
-    expect(screen.getByPlaceholderText(/namePlaceholder/)).toBeInTheDocument()
+  it('deve renderizar o título de boas-vindas', () => {
+    const heading = screen.getByRole('heading', { name: /welcome/i })
+    expect(heading).toBeInTheDocument()
+  })
 
+  it('deve renderizar o link para criar conta com o href correto', () => {
+    const createAccountLink = screen.getByRole('link', { name: /createAccount/i })
+    expect(createAccountLink).toBeInTheDocument()
+    expect(createAccountLink).toHaveAttribute('href', '/register')
+  })
+
+  it('deve renderizar os campos de e-mail e senha com seus labels', () => {
     expect(screen.getByText(/emailLabel/)).toBeInTheDocument()
     expect(screen.getByPlaceholderText(/emailPlaceholder/)).toBeInTheDocument()
 
     expect(screen.getByText(/passwordLabel/)).toBeInTheDocument()
-    expect(screen.getByPlaceholderText(/passwordPlaceholder/)).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('Senha')).toBeInTheDocument()
   })
 
-  it('renders main register button', () => {
-    const registerButton = screen.getByRole('button', { name: /registerButton/i })
-    expect(registerButton).toBeInTheDocument()
+  it('deve renderizar o link de "esqueceu a senha" com o href correto', () => {
+    const forgotPasswordLink = screen.getByRole('link', { name: /forgotPassword/i })
+    expect(forgotPasswordLink).toBeInTheDocument()
+    expect(forgotPasswordLink).toHaveAttribute('href', '/forgot-password')
+  })
+
+  it('deve renderizar o botão principal de login', () => {
+    const loginButton = screen.getByRole('button', { name: /loginButton/i })
+    expect(loginButton).toBeInTheDocument()
+  })
+
+  it('deve renderizar a seção de login social', () => {
+    expect(screen.getByText(/socialLogin/i)).toBeInTheDocument()
+    const googleButton = screen.getByRole('button', { name: /Login com Google/i })
+    expect(googleButton).toBeInTheDocument()
   })
 })

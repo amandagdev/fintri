@@ -104,8 +104,8 @@
       "title": "Fintri",
       "subtitle": "Gestão de orçamentos",
       "home": "Dashboard",
-      "createQuote": "Criar orçamento",
-      "myQuotes": "Meus orçamentos",
+      "createBudget": "Criar orçamento",
+      "myBudgets": "Meus orçamentos",
       "addClient": "Adicionar cliente",
       "myClients": "Meus clientes",
       "analytics": "Minhas análises",
@@ -200,8 +200,7 @@
       "addressPlaceholder": "Rua, Número, Bairro...",
       "saveButton": "Salvar Cliente",
       "cancelButton": "Cancelar",
-      "updateButton": "Salvar Alterações",
-      "loading": "Carregando..."
+      "updateButton": "Salvar Alterações"
     },
     "successMessage": "Cliente adicionado com sucesso!",
     "deleteSuccessMessage": "Cliente excluído com sucesso!",
@@ -212,63 +211,6 @@
       "fullNameTooShort": "O nome completo deve ter pelo menos 3 caracteres.",
       "invalidEmail": "O formato do e-mail é inválido.",
       "deleteFailed": "Não foi possível deletar o cliente."
-    }
-  },
-  "quote": {
-    "listTitle": "Meus Orçamentos",
-    "listDescription": "Visualize e gerencie todos os seus orçamentos.",
-    "addNewButton": "Adicionar Novo Orçamento",
-    "addQuote": "Adicionar Orçamento",
-    "addQuoteDescription": "Preencha os dados abaixo para criar um novo orçamento.",
-    "editQuote": "Editar Orçamento",
-    "editQuoteDescription": "Você está editando os dados do orçamento \"{quoteName}\".",
-    "title": "Título",
-    "titlePlaceholder": "Ex: Orçamento para Projeto X",
-    "description": "Descrição",
-    "descriptionPlaceholder": "Detalhes do serviço ou produto",
-    "status_quote": "Status do Orçamento",
-    "selectStatus": "Selecionar Status",
-    "status": {
-      "pending": "Pendente",
-      "sent": "Enviado",
-      "approved": "Aprovado",
-      "rejected": "Rejeitado"
-    },
-    "quote_send_date": "Data de Envio",
-    "quote_validate_date": "Data de Validade",
-    "observations": "Observações",
-    "observationsPlaceholder": "Adicione informações relevantes para o cliente",
-    "client": "Cliente",
-    "selectClient": "Selecionar Cliente",
-    "total_value": "Valor Total",
-    "submit": "Enviar",
-    "delete": "Excluir",
-    "actions": "Ações",
-    "editButton": "Editar orçamento",
-    "deleteButton": "Deletar orçamento",
-    "updateSuccessMessage": "Orçamento atualizado com sucesso!",
-    "successMessage": "Orçamento adicionado com sucesso!",
-    "deleteSuccessMessage": "Orçamento excluído com sucesso!",
-    "noQuotesFound": "Nenhum orçamento encontrado.",
-    "emptyStateTitle": "Nenhum orçamento cadastrado",
-    "emptyStateDescription": "Comece adicionando seu primeiro orçamento para gerenciar suas propostas.",
-    "form": {
-      "titleRequired": "O título é obrigatório.",
-      "totalValueRequired": "O valor total é obrigatório.",
-      "saveButton": "Salvar Orçamento",
-      "updateButton": "Salvar Alterações"
-    },
-    "errors": {
-      "unauthenticated": "Usuário não autenticado.",
-      "fetchFailed": "Falha ao buscar orçamentos.",
-      "addFailed": "Falha ao adicionar orçamento.",
-      "updateFailed": "Falha ao atualizar orçamento.",
-      "deleteFailed": "Falha ao excluir orçamento.",
-      "titleAlreadyTaken": "Já existe um orçamento com este título.",
-      "copyLink": "Copiar Link",
-      "downloadPdf": "Baixar PDF",
-      "sendEmail": "Enviar por E-mail",
-      "linkCopied": "Link copiado para a área de transferência!"
     }
   }
 }

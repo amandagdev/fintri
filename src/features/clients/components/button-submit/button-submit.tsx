@@ -14,13 +14,7 @@ export function SubmitButton({ formId, buttonTextKey }: { formId: string; button
       className="btn bg-[#1b6d71] hover:bg-[#2cb5a0] text-white"
       disabled={pending}
     >
-      {pending ? (
-        <span className="loading loading-spinner" role="status">
-          {t('form.loading')}
-        </span>
-      ) : (
-        t(buttonTextKey as never)
-      )}
+      {pending ? <span className="loading loading-spinner"></span> : t(buttonTextKey as never)}
     </button>
   )
 }

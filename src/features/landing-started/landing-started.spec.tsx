@@ -31,17 +31,17 @@ describe('LandingStarted', () => {
     render(<LandingStarted />)
   })
 
-  it('renders main title correctly', () => {
+  it('deve renderizar o título principal corretamente', () => {
     const heading = screen.getByRole('heading', { name: /about aboutTwo/i })
     expect(heading).toBeInTheDocument()
   })
 
-  it('renders description', () => {
+  it('deve renderizar a descrição', () => {
     const description = screen.getByText('description')
     expect(description).toBeInTheDocument()
   })
 
-  it('renders features list from t.raw mock', () => {
+  it('deve renderizar a lista de funcionalidades a partir do mock de t.raw', () => {
     mockFeatures.forEach((feature) => {
       expect(screen.getByText(feature.title)).toBeInTheDocument()
       expect(screen.getByText(feature.description)).toBeInTheDocument()
