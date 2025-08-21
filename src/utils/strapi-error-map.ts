@@ -29,7 +29,7 @@ export function mapClientErrorToKey(message?: string): string {
   return errorKeyMap[message] || 'errors.default'
 }
 
-export function mapBudgetErrorToKey(message?: string): string {
+export function mapQuoteErrorToKey(message?: string): string {
   if (!message) return 'errors.default'
 
   const errorKeyMap: Record<string, string> = {
