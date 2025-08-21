@@ -31,7 +31,11 @@ export function DeleteButton({ clientId }: { clientId: string }) {
       className="btn btn-ghost btn-sm btn-square text-error"
       aria-label={t('deleteButton')}
     >
-      {isPending ? <span className="loading loading-xs"></span> : <Trash2 className="w-4 h-4" />}
+      {isPending ? (
+        <span className="loading loading-xs" role="status"></span>
+      ) : (
+        <Trash2 className="w-4 h-4" />
+      )}
     </button>
   )
 }

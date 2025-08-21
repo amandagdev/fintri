@@ -105,8 +105,8 @@
       "title": "Fintri",
       "subtitle": "Budget management",
       "home": "Dashboard",
-      "createBudget": "Create budget",
-      "myBudgets": "My budgets",
+      "createQuote": "Create quote",
+      "myQuotes": "My quotes",
       "addClient": "Add client",
       "myClients": "My clients",
       "analytics": "Analytics",
@@ -201,7 +201,8 @@
       "addressPlaceholder": "Street, Number, City...",
       "saveButton": "Save Client",
       "cancelButton": "Cancel",
-      "updateButton": "Save Changes"
+      "updateButton": "Save Changes",
+      "loading": "Loading..."
     },
     "successMessage": "Client added successfully!",
     "deleteSuccessMessage": "Client deleted successfully!",
@@ -212,6 +213,63 @@
       "fullNameTooShort": "Full name must be at least 3 characters.",
       "invalidEmail": "The email format is invalid.",
       "deleteFailed": "Could not delete the client."
+    }
+  },
+  "quote": {
+    "listTitle": "My Quotes",
+    "listDescription": "View and manage all your quotes.",
+    "addNewButton": "Add New Quote",
+    "addQuote": "Add Quote",
+    "addQuoteDescription": "Fill in the details below to create a new quote.",
+    "editQuote": "Edit Quote",
+    "editQuoteDescription": "You are editing the details for {quoteName}.",
+    "title": "Title",
+    "titlePlaceholder": "Ex: Quote for Project X",
+    "description": "Description",
+    "descriptionPlaceholder": "Details of the service or product",
+    "status_quote": "Quote Status",
+    "selectStatus": "Select Status",
+    "status": {
+      "pending": "Pending",
+      "sent": "Sent",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "quote_send_date": "Send Date",
+    "quote_validate_date": "Validate Date",
+    "observations": "Observations",
+    "observationsPlaceholder": "Add relevant information for the client",
+    "client": "Client",
+    "selectClient": "Select Client",
+    "total_value": "Total Value",
+    "submit": "Submit",
+    "delete": "Delete",
+    "actions": "Actions",
+    "editButton": "Edit quote",
+    "deleteButton": "Delete quote",
+    "updateSuccessMessage": "Quote updated successfully!",
+    "successMessage": "Quote added successfully!",
+    "deleteSuccessMessage": "Quote deleted successfully!",
+    "noQuotesFound": "No quotes found.",
+    "emptyStateTitle": "No quotes registered",
+    "emptyStateDescription": "Start by adding your first quote to manage your proposals.",
+    "form": {
+      "titleRequired": "Title is required.",
+      "totalValueRequired": "Total value is required.",
+      "saveButton": "Save Quote",
+      "updateButton": "Save Changes"
+    },
+    "errors": {
+      "unauthenticated": "User not authenticated.",
+      "fetchFailed": "Failed to fetch quotes.",
+      "addFailed": "Failed to add quote.",
+      "updateFailed": "Failed to update quote.",
+      "deleteFailed": "Failed to delete quote.",
+      "titleAlreadyTaken": "A quote with this title already exists.",
+      "copyLink": "Copy Link",
+      "downloadPdf": "Download PDF",
+      "sendEmail": "Send by Email",
+      "linkCopied": "Link copied to clipboard!"
     }
   }
 }
