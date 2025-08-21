@@ -25,6 +25,9 @@ export function ClientList({ clients }: ClientListProps) {
     if (searchParams.get('success') === 'true') {
       toast.success(t('successMessage'))
       router.replace(pathname, { scroll: false })
+    } else if (searchParams.get('updated') === 'true') {
+      toast.success(t('updateSuccessMessage'))
+      router.replace(pathname, { scroll: false })
     }
   }, [searchParams, t, router, pathname])
 
