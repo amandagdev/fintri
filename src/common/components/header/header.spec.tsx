@@ -7,45 +7,36 @@ jest.mock('next-intl', () => ({
 }))
 
 jest.mock('next/link', () => {
-  return ({ children, href }: { children: React.ReactNode; href: string }) => {
+  return ({ children, href }) => {
     return <a href={href}>{children}</a>
   }
 })
 
 describe('Header', () => {
-  it('renders logo with link to home page', () => {
+  it('deve renderizar o logo com o link para a página inicial', () => {
     render(<Header />)
-    const logoLink = screen.getByRole('link', { name: /logo/i })
+    const logoLink = screen.getByRole('link', { name: /fintri/i })
     expect(logoLink).toBeInTheDocument()
     expect(logoLink).toHaveAttribute('href', '/')
   })
 
-  const getVisibleElement = (role: string, name: string | RegExp) => {
-    const elements = screen.getAllByRole(role, { name })
-    const visibleElements = elements.filter((element) => {
-      const computedStyle = window.getComputedStyle(element)
-      return computedStyle.display !== 'none'
-    })
-    return visibleElements[0]
-  }
-
-  it('renders "Como Funciona" link for desktop', () => {
+  it('deve renderizar o link "Como Funciona"', () => {
     render(<Header />)
-    const howItWorksLink = getVisibleElement('link', 'howItWorks')
+    const howItWorksLink = screen.getByRole('link', { name: /howItWorks/i })
     expect(howItWorksLink).toBeInTheDocument()
     expect(howItWorksLink).toHaveAttribute('href', '#como-funciona')
   })
 
-  it('renders "Preço" link for desktop', () => {
+  it('deve renderizar o link "Preço"', () => {
     render(<Header />)
-    const priceLink = getVisibleElement('link', 'price')
+    const priceLink = screen.getByRole('link', { name: /price/i })
     expect(priceLink).toBeInTheDocument()
     expect(priceLink).toHaveAttribute('href', '#preco')
   })
 
-  it('renders "Cadastre-se" button for desktop', () => {
+  it('deve renderizar o botão de "Cadastre-se"', () => {
     render(<Header />)
-    const registerButton = getVisibleElement('button', 'register')
+    const registerButton = screen.getByRole('button', { name: /register/i })
     expect(registerButton).toBeInTheDocument()
   })
 })

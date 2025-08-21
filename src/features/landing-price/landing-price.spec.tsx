@@ -22,7 +22,7 @@ describe('LandingPrice', () => {
     render(<LandingPrice />)
   })
 
-  it('renders section title and subtitle', () => {
+  it('deve renderizar o título e o subtítulo da seção', () => {
     const heading = screen.getByRole('heading', { name: /title/i })
     const subtitle = screen.getByText(/subtitle/i)
 
@@ -30,19 +30,19 @@ describe('LandingPrice', () => {
     expect(subtitle).toBeInTheDocument()
   })
 
-  it('renders price details correctly', () => {
+  it('deve renderizar os detalhes do preço corretamente', () => {
     expect(screen.getByText('planName')).toBeInTheDocument()
     expect(screen.getByText('priceCurrency')).toBeInTheDocument()
     expect(screen.getByText('price')).toBeInTheDocument()
     expect(screen.getByText('priceSuffix')).toBeInTheDocument()
   })
 
-  it('renders button with correct text', () => {
+  it('deve renderizar o botão com o texto correto', () => {
     const ctaButton = screen.getByRole('button', { name: /cta/i })
     expect(ctaButton).toBeInTheDocument()
   })
 
-  it('renders features list obtained via t.raw', () => {
+  it('deve renderizar a lista de funcionalidades obtida via t.raw', () => {
     mockFeatures.forEach((feature) => {
       const featureItem = screen.getByText(feature)
       expect(featureItem).toBeInTheDocument()

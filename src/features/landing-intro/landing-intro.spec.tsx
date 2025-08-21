@@ -11,19 +11,20 @@ describe('LandingIntro', () => {
     render(<LandingIntro />)
   })
 
-  it('renders main title correctly', () => {
+  it('deve renderizar o título principal corretamente', () => {
     const heading = screen.getByRole('heading', { name: /about budgets/i })
     expect(heading).toBeInTheDocument()
   })
 
-  it('renders description', () => {
+  it('deve renderizar a descrição', () => {
     const description = screen.getByText('description')
     expect(description).toBeInTheDocument()
     expect(description.tagName).toBe('P')
   })
 
-  it('renders "Cadastre-se" button', () => {
+  it('deve renderizar o botão de "Cadastre-se"', () => {
     const registerButton = screen.getByRole('button', { name: /register/i })
     expect(registerButton).toBeInTheDocument()
+    expect(registerButton).toHaveClass('btn-outline text-black font-normal mt-8')
   })
 })
