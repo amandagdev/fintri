@@ -165,10 +165,11 @@
       "deleteAccountTitle": "Deletar Conta",
       "deleteAccountDescription": "Esta ação é irreversível. Todos os seus dados, propostas e informações serão permanentemente removidos da plataforma.",
       "deleteAccountButton": "Deletar Minha Conta"
-    },
-    "common": {
-      "saveChanges": "Salvar Alterações"
     }
+  },
+  "common": {
+    "saveChanges": "Salvar Alterações",
+    "loading": "Carregando..."
   },
   "clients": {
     "listTitle": "Meus Clientes",

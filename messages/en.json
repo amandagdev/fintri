@@ -168,7 +168,8 @@
       "deleteAccountButton": "Delete My Account"
     },
     "common": {
-      "saveChanges": "Save Changes"
+      "saveChanges": "Save Changes",
+      "loading": "Loading..."
     }
   },
   "clients": {
