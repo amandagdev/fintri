@@ -1,3 +1,5 @@
+'use server'
+
 import type { AxiosError } from 'axios'
 import { cookies } from 'next/headers'
 
@@ -24,6 +26,8 @@ export async function createClient(payload: CreateClientPayload) {
     throw new Error('errors.unauthenticated')
   }
 
+  console.log(payload)
+
   try {
     const response = await axiosInstance.post('/api/clients', payload, {
       headers: {
@@ -48,12 +52,15 @@ export async function getClients(): Promise<Client[]> {
   if (!jwt) return []
 
   try {
-    const response = await axiosInstance.get('/api/clients?sort=name:asc&populate=*', {
+    const response = await axiosInstance.get('/api/clients', {
       headers: {
         Authorization: `Bearer ${jwt}`,
         'Cache-Control': 'no-store',
       },
     })
+
+    console.log(response.data.data)
+
     return response.data.data
   } catch (error) {
     console.error('Erro ao buscar clientes:', error)
@@ -74,22 +81,19 @@ export async function getClientByDocumentId(documentId: string): Promise<Client 
       },
     )
 
-    if (response.data.data.length === 0) {
-      return null
-    }
-
-    const clientData = response.data.data[0]
-    return { ...clientData }
+    return response.data.data[0]
   } catch (error) {
     console.error('Erro ao buscar cliente por documentId:', error)
     throw new Error('errors.clientFetchFailed')
   }
 }
 
-export async function updateClient(id: string, payload: CreateClientPayload) {
+export async function updateClient(id: number, payload: CreateClientPayload) {
   const cookieStore = await cookies()
   const jwt = cookieStore.get('jwt')?.value
   if (!jwt) throw new Error('errors.unauthenticated')
+
+  console.log('Payload enviado para Strapi:', JSON.stringify(payload, null, 2))
 
   try {
     const response = await axiosInstance.put(`/api/clients/${id}`, payload, {

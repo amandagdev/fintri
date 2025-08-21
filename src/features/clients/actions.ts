@@ -45,7 +45,7 @@ export async function addClientAction(prevState: State, formData: FormData): Pro
 }
 
 export async function updateClientAction(
-  clientId: string,
+  clientId: number,
   prevState: State,
   formData: FormData,
 ): Promise<State> {

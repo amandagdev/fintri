@@ -8,7 +8,7 @@ import type { Client } from '../../types'
 import { ClientForm } from '../client-form/client-form'
 
 export function EditClientForm({ client }: { client: Client }) {
-  const updateActionWithId = updateClientAction.bind(null, client.documentId)
+  const updateActionWithId = updateClientAction.bind(null, client.id)
 
   const [state, formAction] = useActionState(updateActionWithId, initialState)
 
