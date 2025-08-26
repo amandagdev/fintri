@@ -22,7 +22,16 @@ jest.mock('next/link', () => {
 })
 
 jest.mock('next-intl/server', () => ({
-  getTranslations: jest.fn(() => Promise.resolve((key: string) => key)),
+  getTranslations: jest.fn(() =>
+    Promise.resolve((key: string) => {
+      const translations: Record<string, string> = {
+        listTitle: 'My Clients',
+        listDescription: 'View and manage all your clients.',
+        addNewButton: 'Add New Client',
+      }
+      return translations[key] || key
+    }),
+  ),
 }))
 
 jest.mock('@/features/clients/components/client-list/client-list', () => ({
@@ -54,12 +63,13 @@ describe('ClientsPage', () => {
 
     ;(getClients as jest.Mock).mockResolvedValue(mockClients)
 
-    render(<ClientsPage />)
+    const page = await ClientsPage()
+    render(page)
 
     await waitFor(() => {
-      expect(screen.getByText('clients.title')).toBeInTheDocument()
-      expect(screen.getByText('clients.description')).toBeInTheDocument()
-      expect(screen.getByRole('link', { name: /addNewClient/i })).toBeInTheDocument()
+      expect(screen.getByText('My Clients')).toBeInTheDocument()
+      expect(screen.getByText('View and manage all your clients.')).toBeInTheDocument()
+      expect(screen.getByRole('link', { name: /Add New Client/i })).toBeInTheDocument()
     })
   })
 
@@ -70,7 +80,8 @@ describe('ClientsPage', () => {
 
     ;(getClients as jest.Mock).mockResolvedValue(mockClients)
 
-    render(<ClientsPage />)
+    const page = await ClientsPage()
+    render(page)
 
     await waitFor(() => {
       expect(screen.getByTestId('mock-client-list')).toBeInTheDocument()
@@ -82,7 +93,8 @@ describe('ClientsPage', () => {
   it('should render ClientList component with empty state when no clients', async () => {
     ;(getClients as jest.Mock).mockResolvedValue([])
 
-    render(<ClientsPage />)
+    const page = await ClientsPage()
+    render(page)
 
     await waitFor(() => {
       expect(screen.getByTestId('mock-client-list')).toBeInTheDocument()
