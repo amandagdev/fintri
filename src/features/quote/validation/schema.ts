@@ -15,6 +15,7 @@ export const QuoteSchema = z.object({
     })
     .optional(),
   total_value: z.number().min(0, 'quote.form.totalValueRequired'),
+  discount: z.number().min(0, 'quote.form.discountInvalid').optional(),
   notification: z
     .object({
       id: z.string(),

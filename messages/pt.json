@@ -242,13 +242,14 @@
     "client": "Cliente",
     "selectClient": "Selecionar Cliente",
     "total_value": "Valor Total",
+    "discount": "Desconto",
     "submit": "Enviar",
     "delete": "Excluir",
     "actions": "Ações",
     "editButton": "Editar orçamento",
     "deleteButton": "Deletar orçamento",
-    "updateSuccessMessage": "Orçamento atualizado com sucesso!",
     "successMessage": "Orçamento adicionado com sucesso!",
+    "updateSuccessMessage": "Orçamento atualizado com sucesso!",
     "deleteSuccessMessage": "Orçamento excluído com sucesso!",
     "noQuotesFound": "Nenhum orçamento encontrado.",
     "emptyStateTitle": "Nenhum orçamento cadastrado",
@@ -256,10 +257,12 @@
     "form": {
       "titleRequired": "O título é obrigatório.",
       "totalValueRequired": "O valor total é obrigatório.",
+      "discountInvalid": "O desconto deve ser um valor válido maior ou igual a zero.",
       "saveButton": "Salvar Orçamento",
       "updateButton": "Salvar Alterações"
     },
     "errors": {
+      "default": "Ocorreu um erro inesperado, por favor, tente novamente.",
       "unauthenticated": "Usuário não autenticado.",
       "fetchFailed": "Falha ao buscar orçamentos.",
       "addFailed": "Falha ao adicionar orçamento.",

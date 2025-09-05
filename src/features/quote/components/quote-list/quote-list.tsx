@@ -49,6 +49,7 @@ export function QuoteList({ quotes }: QuoteListProps) {
                 <th>{t('status_quote')}</th>
                 <th>{t('client')}</th>
                 <th>{t('total_value')}</th>
+                <th>{t('discount')}</th>
                 <th>{t('quote_send_date')}</th>
                 <th>{t('quote_validate_date')}</th>
                 <th className="text-right">{t('actions')}</th>
@@ -61,6 +62,7 @@ export function QuoteList({ quotes }: QuoteListProps) {
                   <td>{t(`status.${quote.status_quote}`)}</td>
                   <td>{quote.client?.name || '-'}</td>
                   <td>{quote.total_value}</td>
+                  <td>{quote.discount || '-'}</td>
                   <td>{quote.quote_send_date}</td>
                   <td>{quote.quote_validate_date}</td>
                   <td className="text-right">
@@ -82,7 +84,7 @@ export function QuoteList({ quotes }: QuoteListProps) {
           </table>
         </div>
       ) : (
-        <div className="p-12 text-center border-2 border-dashed rounded-lg">
+        <div className="p-12 text-center rounded-lg">
           <h3 className="text-xl font-semibold">{t('emptyStateTitle')}</h3>
           <p className="mt-2 text-gray-500">{t('emptyStateDescription')}</p>
         </div>

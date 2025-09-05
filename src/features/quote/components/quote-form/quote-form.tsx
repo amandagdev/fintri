@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useActionState, useEffect, useState } from 'react'
 
+import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useFormState, useFormStatus } from 'react-dom'
+import { useFormStatus } from 'react-dom'
 
 import Wrapper from '@/features/account/utils/wrapper'
 import { getClients } from '@/features/clients/services/service'
@@ -22,12 +23,12 @@ interface QuoteFormProps {
 
 export function QuoteForm({ action, data }: QuoteFormProps) {
   const t = useTranslations('quote')
-  const [state, formAction] = useFormState(action, initialState)
+  const router = useRouter()
+  const [state, formAction] = useActionState(action, initialState)
   const { pending } = useFormStatus()
 
   const [clients, setClients] = useState<Client[]>([])
   const [selectedClient, setSelectedClient] = useState<string | undefined>(data?.client?.id)
-  const [selectedStatus, setSelectedStatus] = useState<string | undefined>(data?.status_quote)
 
   useEffect(() => {
     const fetchClients = async () => {
@@ -41,17 +42,19 @@ export function QuoteForm({ action, data }: QuoteFormProps) {
     if (data?.client?.id) {
       setSelectedClient(data.client.id)
     }
-    if (data?.status_quote) {
-      setSelectedStatus(data.status_quote)
+  }, [data?.client?.id])
+
+  useEffect(() => {
+    if (state.message?.includes('successfully')) {
+      const timer = setTimeout(() => {
+        router.push('/quote')
+      }, 1000)
+      return () => clearTimeout(timer)
     }
-  }, [data?.client?.id, data?.status_quote])
+  }, [state.message, router])
 
   const handleClientChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedClient(e.target.value)
-  }
-
-  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedStatus(e.target.value)
   }
 
   const buttonTextKey = data ? 'form.updateButton' : 'form.saveButton'
@@ -96,28 +99,6 @@ export function QuoteForm({ action, data }: QuoteFormProps) {
             />
             {state.errors?.title && (
               <p className="text-red-500 text-sm mt-1">{state.errors.title}</p>
-            )}
-          </div>
-
-          <div className="form-control">
-            <label className="label" htmlFor="status_quote">
-              <span className="label-text">{t('status_quote')}</span>
-            </label>
-            <select
-              id="status_quote"
-              name="status_quote"
-              value={selectedStatus || ''}
-              onChange={handleStatusChange}
-              className="select select-bordered w-full"
-            >
-              <option value="">{t('selectStatus')}</option>
-              <option value="pending">{t('status.pending')}</option>
-              <option value="sent">{t('status.sent')}</option>
-              <option value="approved">{t('status.approved')}</option>
-              <option value="rejected">{t('status.rejected')}</option>
-            </select>
-            {state.errors?.status_quote && (
-              <p className="text-red-500 text-sm mt-1">{state.errors.status_quote}</p>
             )}
           </div>
 
@@ -190,6 +171,23 @@ export function QuoteForm({ action, data }: QuoteFormProps) {
             />
             {state.errors?.total_value && (
               <p className="text-red-500 text-sm mt-1">{state.errors.total_value}</p>
+            )}
+          </div>
+
+          <div className="form-control">
+            <label className="label" htmlFor="discount">
+              <span className="label-text">{t('discount')}</span>
+            </label>
+            <input
+              id="discount"
+              name="discount"
+              type="number"
+              step="0.01"
+              className="input input-bordered w-full"
+              defaultValue={data?.discount}
+            />
+            {state.errors?.discount && (
+              <p className="text-red-500 text-sm mt-1">{state.errors.discount}</p>
             )}
           </div>
         </div>

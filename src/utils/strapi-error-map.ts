@@ -33,8 +33,7 @@ export function mapQuoteErrorToKey(message?: string): string {
   if (!message) return 'errors.default'
 
   const errorKeyMap: Record<string, string> = {
-    'This attribute must be unique': 'budget.errors.nameAlreadyTaken',
-    // Add other common Strapi error mappings here
+    'This attribute must be unique': 'errors.nameAlreadyTaken',
   }
 
   return errorKeyMap[message] || 'errors.default'

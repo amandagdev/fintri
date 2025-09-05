@@ -49,7 +49,11 @@ export async function createClient(payload: CreateClientPayload) {
 export async function getClients(): Promise<Client[]> {
   const cookieStore = await cookies()
   const jwt = cookieStore.get('jwt')?.value
-  if (!jwt) return []
+
+  if (!jwt) {
+    console.warn('No JWT token found for getClients request')
+    return []
+  }
 
   try {
     const response = await axiosInstance.get('/api/clients', {
@@ -59,9 +63,7 @@ export async function getClients(): Promise<Client[]> {
       },
     })
 
-    console.log(response.data.data)
-
-    return response.data.data
+    return response.data.data || []
   } catch (error) {
     console.error('Erro ao buscar clientes:', error)
     return []

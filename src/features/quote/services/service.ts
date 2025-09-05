@@ -21,6 +21,7 @@ interface CreateQuotePayload {
       name: string
     }
     total_value: number
+    discount?: number
     notification?: {
       id: string
     }
@@ -78,6 +79,8 @@ export async function addQuote(payload: CreateQuotePayload) {
   } catch (err) {
     const error = err as AxiosError<{ error: { message?: string } }>
     const strapiMessage = error.response?.data?.error?.message
+
+    console.log(strapiMessage)
     throw new Error(mapQuoteErrorToKey(strapiMessage))
   }
 }

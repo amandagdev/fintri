@@ -18,5 +18,6 @@ export type FieldErrors = {
   observations?: string[]
   client?: string[]
   total_value?: string[]
+  discount?: string[]
   notification?: string[]
 }

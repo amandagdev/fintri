@@ -14,6 +14,8 @@ export type State = {
 }
 
 export async function addClientAction(prevState: State, formData: FormData): Promise<State> {
+  console.log('addClientAction called with formData:', Object.fromEntries(formData.entries()))
+
   const data = {
     name: formData.get('name'),
     email: formData.get('email'),
@@ -22,9 +24,12 @@ export async function addClientAction(prevState: State, formData: FormData): Pro
     address: formData.get('address'),
   }
 
+  console.log('Parsed data:', data)
+
   const parsed = clientSchema.safeParse(data)
 
   if (!parsed.success) {
+    console.log('Validation failed:', parsed.error.issues)
     const fieldErrors: State['errors'] = {}
     parsed.error.issues.forEach((issue) => {
       const field = issue.path[0] as keyof ClientFormData
@@ -34,14 +39,18 @@ export async function addClientAction(prevState: State, formData: FormData): Pro
   }
 
   try {
+    console.log('Creating client with data:', parsed.data)
     await createClient({ data: parsed.data })
+    console.log('Client created successfully')
   } catch (error) {
+    console.error('Error creating client:', error)
     const errorMessage = error instanceof Error ? error.message : 'errors.default'
     return { message: errorMessage }
   }
 
+  console.log('Client created successfully, returning success state')
   revalidatePath('/clients')
-  redirect('/clients?success=true')
+  return { success: true, message: 'success' }
 }
 
 export async function updateClientAction(

@@ -17,6 +17,8 @@ interface AddClientFormProps {
 export function ClientForm({ action, state, initialData }: AddClientFormProps) {
   const t = useTranslations('clients')
 
+  console.log('ClientForm state:', state)
+
   const buttonTextKey = initialData ? 'form.updateButton' : 'form.saveButton'
   const button = <SubmitButton formId="client-form" buttonTextKey={buttonTextKey} />
 
