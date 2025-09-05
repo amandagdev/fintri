@@ -1,5 +1,6 @@
 import { Copy, Download, Mail } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { toast } from 'sonner'
 
 interface QuoteActionsProps {
   readonly quoteId: string
@@ -9,30 +10,36 @@ export function QuoteActions({ quoteId }: QuoteActionsProps) {
   const t = useTranslations('quote')
 
   const handleCopyLink = async () => {
-    const link = `${window.location.origin}/quotes/share/${quoteId}`
-    await navigator.clipboard.writeText(link)
-    alert(t('linkCopied'))
+    try {
+      const link = `${window.location.origin}/quotes/share/${quoteId}`
+      await navigator.clipboard.writeText(link)
+      toast.success(t('linkCopied'))
+    } catch {
+      toast.error(t('copyError'))
+    }
   }
 
   const handleDownloadPdf = () => {
-    console.log(`Download PDF for quote: ${quoteId}`)
+    // TODO: Implementar geração de PDF
+    toast.info(t('pdfInDevelopment'))
   }
 
   const handleSendEmail = () => {
-    console.log(`Send email for quote: ${quoteId}`)
+    // TODO: Implementar envio de e-mail
+    toast.info(t('emailInDevelopment'))
   }
 
   return (
     <div className="flex gap-2">
-      <button className="btn btn-sm btn-outline" onClick={handleCopyLink}>
+      <button className="btn btn-sm bg-[#1b6d71] text-white" onClick={handleCopyLink}>
         <Copy className="h-4 w-4" />
         {t('copyLink')}
       </button>
-      <button className="btn btn-sm btn-outline" onClick={handleDownloadPdf}>
+      <button className="btn btn-sm bg-[#1b6d71] text-white" onClick={handleDownloadPdf}>
         <Download className="h-4 w-4" />
         {t('downloadPdf')}
       </button>
-      <button className="btn btn-sm btn-outline" onClick={handleSendEmail}>
+      <button className="btn btn-sm bg-[#1b6d71] text-white" onClick={handleSendEmail}>
         <Mail className="h-4 w-4" />
         {t('sendEmail')}
       </button>

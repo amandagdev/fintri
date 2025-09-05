@@ -13,7 +13,8 @@ interface CreateClientPayload {
     name: string
     email: string
     phone?: string
-    taxId?: string
+    cpf_or_cnpj?: string
+    enterprise?: string
     address?: string
   }
 }
@@ -26,7 +27,8 @@ export async function createClient(payload: CreateClientPayload) {
     throw new Error('errors.unauthenticated')
   }
 
-  console.log(payload)
+  console.log('Payload sendo enviado:', JSON.stringify(payload, null, 2))
+  console.log('JWT token:', jwt ? 'Presente' : 'Ausente')
 
   try {
     const response = await axiosInstance.post('/api/clients', payload, {
@@ -35,13 +37,27 @@ export async function createClient(payload: CreateClientPayload) {
       },
     })
 
+    console.log('Resposta da API:', response.data)
+
     return response.data
   } catch (err) {
     const error = err as AxiosError<{ error: { message?: string } }>
     const strapiMessage = error.response?.data?.error?.message
 
-    const errorKey = mapClientErrorToKey(strapiMessage)
+    console.error('Erro detalhado ao criar cliente:', {
+      status: error.response?.status,
+      statusText: error.response?.statusText,
+      data: error.response?.data,
+      message: error.message,
+      strapiMessage,
+    })
 
+    // Se for erro 401, redirecionar para login
+    if (error.response?.status === 401) {
+      throw new Error('errors.unauthenticated')
+    }
+
+    const errorKey = mapClientErrorToKey(strapiMessage)
     throw new Error(errorKey)
   }
 }

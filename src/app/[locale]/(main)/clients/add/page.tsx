@@ -14,8 +14,6 @@ export default function AddClientPage() {
   const router = useRouter()
   const [state, formAction] = useActionState(addClientAction, initialState)
 
-  console.log('AddClientPage state:', state)
-
   useEffect(() => {
     if (state.success) {
       router.push('/clients?success=true')

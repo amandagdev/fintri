@@ -30,6 +30,12 @@ export function QuoteForm({ action, data }: QuoteFormProps) {
   const [clients, setClients] = useState<Client[]>([])
   const [selectedClient, setSelectedClient] = useState<string | undefined>(data?.client?.id)
 
+  // Função para obter a data atual no formato YYYY-MM-DD
+  const getCurrentDate = () => {
+    const today = new Date()
+    return today.toISOString().split('T')[0]
+  }
+
   useEffect(() => {
     const fetchClients = async () => {
       const fetchedClients = await getClients()
@@ -111,7 +117,7 @@ export function QuoteForm({ action, data }: QuoteFormProps) {
               name="quote_send_date"
               type="date"
               className="input input-bordered w-full"
-              defaultValue={data?.quote_send_date}
+              defaultValue={data?.quote_send_date || getCurrentDate()}
             />
             {state.errors?.quote_send_date && (
               <p className="text-red-500 text-sm mt-1">{state.errors.quote_send_date}</p>
@@ -166,6 +172,7 @@ export function QuoteForm({ action, data }: QuoteFormProps) {
               name="total_value"
               type="number"
               step="0.01"
+              placeholder="0,00"
               className="input input-bordered w-full"
               defaultValue={data?.total_value}
             />
@@ -183,6 +190,7 @@ export function QuoteForm({ action, data }: QuoteFormProps) {
               name="discount"
               type="number"
               step="0.01"
+              placeholder="0,00"
               className="input input-bordered w-full"
               defaultValue={data?.discount}
             />

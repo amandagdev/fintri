@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
 
 import type { Quote } from '@/features/quote/state'
+import { formatCurrency, formatDate } from '@/lib/utils'
 
 import { DeleteQuoteButton } from '../button-delete/button-delete'
 import { QuoteActions } from '../quote-actions/quote-actions'
@@ -38,6 +39,8 @@ export function QuoteList({ quotes }: QuoteListProps) {
     }
   }, [searchParams, t, router, pathname])
 
+  console.log(quotes)
+
   return (
     <>
       {quotes.length > 0 ? (
@@ -59,12 +62,12 @@ export function QuoteList({ quotes }: QuoteListProps) {
               {quotes.map((quote: Quote) => (
                 <tr key={quote.id} className="hover">
                   <td>{quote.title}</td>
-                  <td>{t(`status.${quote.status_quote}`)}</td>
+                  <td>pendente</td>
                   <td>{quote.client?.name || '-'}</td>
-                  <td>{quote.total_value}</td>
-                  <td>{quote.discount || '-'}</td>
-                  <td>{quote.quote_send_date}</td>
-                  <td>{quote.quote_validate_date}</td>
+                  <td>{formatCurrency(quote.total_value)}</td>
+                  <td>{formatCurrency(quote.discount)}</td>
+                  <td>{formatDate(quote.quote_send_date)}</td>
+                  <td>{formatDate(quote.quote_validate_date)}</td>
                   <td className="text-right">
                     <div className="flex items-center justify-end gap-2">
                       <Link
@@ -74,7 +77,7 @@ export function QuoteList({ quotes }: QuoteListProps) {
                       >
                         <Edit className="w-4 h-4" />
                       </Link>
-                      <DeleteQuoteButton id={quote.id!} />
+                      <DeleteQuoteButton documentId={quote.documentId!} />
                       <QuoteActions quoteId={quote.id!} />
                     </div>
                   </td>

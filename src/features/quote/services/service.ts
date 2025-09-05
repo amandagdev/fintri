@@ -31,15 +31,20 @@ interface CreateQuotePayload {
 export async function getQuotes(): Promise<Quote[]> {
   const cookieStore = await cookies()
   const jwt = cookieStore.get('jwt')?.value
-  if (!jwt) return []
+
+  const headers: Record<string, string> = {
+    'Cache-Control': 'no-store',
+  }
+
+  if (jwt) {
+    headers.Authorization = `Bearer ${jwt}`
+  }
 
   try {
-    const response = await axiosInstance.get('/api/quotes', {
-      headers: {
-        Authorization: `Bearer ${jwt}`,
-        'Cache-Control': 'no-store',
-      },
+    const response = await axiosInstance.get('/api/quotes?populate=*', {
+      headers,
     })
+
     return response.data.data
   } catch (error) {
     console.error('Erro ao buscar orçamentos:', error)
@@ -69,8 +74,17 @@ export async function addQuote(payload: CreateQuotePayload) {
   const cookieStore = await cookies()
   const jwt = cookieStore.get('jwt')?.value
   if (!jwt) throw new Error('errors.unauthenticated')
+
+  const strapiPayload = {
+    data: {
+      ...payload.data,
+      client: payload.data.client?.id ? payload.data.client.id : undefined,
+      notification: payload.data.notification?.id ? payload.data.notification.id : undefined,
+    },
+  }
+
   try {
-    const response = await axiosInstance.post('/api/quotes', payload, {
+    const response = await axiosInstance.post('/api/quotes', strapiPayload, {
       headers: {
         Authorization: `Bearer ${jwt}`,
       },
@@ -80,7 +94,7 @@ export async function addQuote(payload: CreateQuotePayload) {
     const error = err as AxiosError<{ error: { message?: string } }>
     const strapiMessage = error.response?.data?.error?.message
 
-    console.log(strapiMessage)
+    console.log('Erro do Strapi:', strapiMessage)
     throw new Error(mapQuoteErrorToKey(strapiMessage))
   }
 }
@@ -90,8 +104,16 @@ export async function updateQuote(id: string, payload: CreateQuotePayload) {
   const jwt = cookieStore.get('jwt')?.value
   if (!jwt) throw new Error('errors.unauthenticated')
 
+  const strapiPayload = {
+    data: {
+      ...payload.data,
+      client: payload.data.client?.id ? payload.data.client.id : undefined,
+      notification: payload.data.notification?.id ? payload.data.notification.id : undefined,
+    },
+  }
+
   try {
-    const response = await axiosInstance.put(`/api/quotes/${id}`, payload, {
+    const response = await axiosInstance.put(`/api/quotes/${id}`, strapiPayload, {
       headers: {
         Authorization: `Bearer ${jwt}`,
       },
@@ -104,21 +126,28 @@ export async function updateQuote(id: string, payload: CreateQuotePayload) {
   }
 }
 
-export async function deleteQuote(id: string) {
+export async function deleteQuote(documentId: string) {
   const cookieStore = await cookies()
   const jwt = cookieStore.get('jwt')?.value
 
-  if (!jwt) throw new Error('errors.unauthenticated')
+  console.log('Tentando excluir orçamento com documentId:', documentId)
+
+  const headers: Record<string, string> = {}
+
+  if (jwt) {
+    headers.Authorization = `Bearer ${jwt}`
+  }
 
   try {
-    await axiosInstance.delete(`/api/quotes/${id}`, {
-      headers: {
-        Authorization: `Bearer ${jwt}`,
-      },
+    const response = await axiosInstance.delete(`/api/quotes/${documentId}`, {
+      headers,
     })
+    console.log('Resposta da exclusão:', response.status)
+    return response.data
   } catch (err) {
     const error = err as AxiosError<{ error: { message?: string } }>
     const strapiMessage = error.response?.data?.error?.message
+    console.error('Erro ao excluir orçamento:', error.response?.status, strapiMessage)
     throw new Error(mapQuoteErrorToKey(strapiMessage))
   }
 }

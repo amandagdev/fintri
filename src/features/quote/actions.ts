@@ -1,6 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 import { addQuote, deleteQuote, updateQuote } from '@/features/quote/services/service'
 import type { FieldErrors } from '@/features/quote/state'
@@ -83,11 +84,11 @@ export async function updateQuoteAction(prevState: State, formData: FormData) {
   }
 }
 
-export async function deleteQuoteAction(id: string) {
+export async function deleteQuoteAction(documentId: string) {
   try {
-    await deleteQuote(id)
+    await deleteQuote(documentId)
     revalidatePath('/quotes')
-    return { message: 'Quote deleted successfully!' }
+    redirect('/quotes?deleted=true')
   } catch (error: unknown) {
     return { message: (error as Error).message }
   }

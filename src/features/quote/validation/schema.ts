@@ -2,6 +2,7 @@ import { z } from 'zod'
 
 export const QuoteSchema = z.object({
   id: z.string().optional(),
+  documentId: z.string().optional(),
   title: z.string().min(1, 'quote.form.titleRequired'),
   description: z.string().optional(),
   status_quote: z.string().optional(),
