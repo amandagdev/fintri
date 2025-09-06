@@ -71,7 +71,7 @@ export function QuoteList({ quotes }: QuoteListProps) {
                   <td className="text-right">
                     <div className="flex items-center justify-end gap-2">
                       <Link
-                        href={`/quotes/edit/${quote.id}`}
+                        href={`/quote/edit/${quote.documentId}`}
                         className="btn btn-ghost btn-sm btn-square"
                         aria-label={t('editButton')}
                       >

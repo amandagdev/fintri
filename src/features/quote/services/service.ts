@@ -52,20 +52,27 @@ export async function getQuotes(): Promise<Quote[]> {
   }
 }
 
-export async function getQuoteById(id: string): Promise<Quote | null> {
+export async function getQuoteByDocumentId(documentId: string): Promise<Quote | null> {
   const cookieStore = await cookies()
   const jwt = cookieStore.get('jwt')?.value
-  if (!jwt) throw new Error('errors.unauthenticated')
+
+  const headers: Record<string, string> = {}
+
+  if (jwt) {
+    headers.Authorization = `Bearer ${jwt}`
+  }
 
   try {
-    const response = await axiosInstance.get(`/api/quotes/${id}?populate=*`, {
-      headers: {
-        Authorization: `Bearer ${jwt}`,
+    const response = await axiosInstance.get(
+      `/api/quotes?filters[documentId][$eq]=${documentId}&populate=*`,
+      {
+        headers,
       },
-    })
-    return response.data.data
+    )
+
+    return response.data.data[0]
   } catch (error) {
-    console.error('Erro ao buscar orçamento por ID:', error)
+    console.error('Erro ao buscar orçamento por documentId:', error)
     throw new Error('errors.quoteFetchFailed')
   }
 }
@@ -94,15 +101,26 @@ export async function addQuote(payload: CreateQuotePayload) {
     const error = err as AxiosError<{ error: { message?: string } }>
     const strapiMessage = error.response?.data?.error?.message
 
-    console.log('Erro do Strapi:', strapiMessage)
+    console.error('Erro detalhado ao atualizar orçamento:', {
+      status: error.response?.status,
+      statusText: error.response?.statusText,
+      data: error.response?.data,
+      message: error.message,
+      strapiMessage,
+    })
     throw new Error(mapQuoteErrorToKey(strapiMessage))
   }
 }
 
-export async function updateQuote(id: string, payload: CreateQuotePayload) {
+export async function updateQuote(documentId: string, payload: CreateQuotePayload) {
   const cookieStore = await cookies()
   const jwt = cookieStore.get('jwt')?.value
-  if (!jwt) throw new Error('errors.unauthenticated')
+
+  const headers: Record<string, string> = {}
+
+  if (jwt) {
+    headers.Authorization = `Bearer ${jwt}`
+  }
 
   const strapiPayload = {
     data: {
@@ -113,10 +131,8 @@ export async function updateQuote(id: string, payload: CreateQuotePayload) {
   }
 
   try {
-    const response = await axiosInstance.put(`/api/quotes/${id}`, strapiPayload, {
-      headers: {
-        Authorization: `Bearer ${jwt}`,
-      },
+    const response = await axiosInstance.put(`/api/quotes/${documentId}`, strapiPayload, {
+      headers,
     })
     return response.data.data
   } catch (err) {

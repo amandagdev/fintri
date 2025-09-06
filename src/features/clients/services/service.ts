@@ -106,21 +106,35 @@ export async function getClientByDocumentId(documentId: string): Promise<Client 
   }
 }
 
-export async function updateClient(id: number, payload: CreateClientPayload) {
+export async function updateClient(documentId: string, payload: CreateClientPayload) {
   const cookieStore = await cookies()
   const jwt = cookieStore.get('jwt')?.value
-  if (!jwt) throw new Error('errors.unauthenticated')
+
+  const headers: Record<string, string> = {}
+
+  if (jwt) {
+    headers.Authorization = `Bearer ${jwt}`
+  }
 
   console.log('Payload enviado para Strapi:', JSON.stringify(payload, null, 2))
 
   try {
-    const response = await axiosInstance.put(`/api/clients/${id}`, payload, {
-      headers: { Authorization: `Bearer ${jwt}` },
+    const response = await axiosInstance.put(`/api/clients/${documentId}`, payload, {
+      headers,
     })
     return response.data
   } catch (err) {
     const error = err as AxiosError<{ error: { message?: string } }>
     const strapiMessage = error.response?.data?.error?.message
+
+    console.error('Erro detalhado ao atualizar cliente:', {
+      status: error.response?.status,
+      statusText: error.response?.statusText,
+      data: error.response?.data,
+      message: error.message,
+      strapiMessage,
+    })
+
     throw new Error(mapClientErrorToKey(strapiMessage))
   }
 }

@@ -3,19 +3,19 @@ import { getTranslations } from 'next-intl/server'
 
 import { updateQuoteAction } from '@/features/quote/actions'
 import { QuoteForm } from '@/features/quote/components/quote-form/quote-form'
-import { getQuoteById } from '@/features/quote/services/service'
+import { getQuoteByDocumentId } from '@/features/quote/services/service'
 
-interface EditQuotePageProps {
-  params: {
-    id: string
-  }
-}
+export default async function EditQuotePage({
+  params,
+}: {
+  params: Promise<{ documentId: string }>
+}) {
+  const { documentId } = await params
 
-export default async function EditQuotePage({ params }: EditQuotePageProps) {
   const t = await getTranslations('quote')
-  const quote = await getQuoteById(params.id)
+  const quote = await getQuoteByDocumentId(documentId)
 
-  if (!quote) {
+  if (!quote || !quote.documentId) {
     notFound()
   }
 
@@ -27,7 +27,7 @@ export default async function EditQuotePage({ params }: EditQuotePageProps) {
           {t('editQuoteDescription', { quoteName: quote.title })}
         </p>
       </header>
-      <QuoteForm action={updateQuoteAction} data={quote} />
+      <QuoteForm action={updateQuoteAction.bind(null, quote.documentId)} data={quote} />
     </main>
   )
 }

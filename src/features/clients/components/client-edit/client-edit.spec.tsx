@@ -17,8 +17,8 @@ jest.mock('react', () => ({
 
 jest.mock('../client-form/client-form', () => ({
   ClientForm: ({
-    action,
-    state,
+    action: _action,
+    state: _state,
     initialData,
   }: {
     action: () => void

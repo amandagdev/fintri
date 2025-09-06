@@ -28,12 +28,23 @@ export function QuoteForm({ action, data }: QuoteFormProps) {
   const { pending } = useFormStatus()
 
   const [clients, setClients] = useState<Client[]>([])
-  const [selectedClient, setSelectedClient] = useState<string | undefined>(data?.client?.id)
+  const [selectedClient, setSelectedClient] = useState<string | undefined>(
+    data?.client?.id ? String(data.client.id) : undefined,
+  )
 
-  // Função para obter a data atual no formato YYYY-MM-DD
   const getCurrentDate = () => {
     const today = new Date()
     return today.toISOString().split('T')[0]
+  }
+
+  const formatDateForInput = (dateString?: string) => {
+    if (!dateString) return ''
+    try {
+      const date = new Date(dateString)
+      return date.toISOString().split('T')[0]
+    } catch {
+      return ''
+    }
   }
 
   useEffect(() => {
@@ -46,16 +57,13 @@ export function QuoteForm({ action, data }: QuoteFormProps) {
 
   useEffect(() => {
     if (data?.client?.id) {
-      setSelectedClient(data.client.id)
+      setSelectedClient(String(data.client.id))
     }
   }, [data?.client?.id])
 
   useEffect(() => {
     if (state.message?.includes('successfully')) {
-      const timer = setTimeout(() => {
-        router.push('/quote')
-      }, 1000)
-      return () => clearTimeout(timer)
+      router.push('/quote')
     }
   }, [state.message, router])
 
@@ -117,7 +125,7 @@ export function QuoteForm({ action, data }: QuoteFormProps) {
               name="quote_send_date"
               type="date"
               className="input input-bordered w-full"
-              defaultValue={data?.quote_send_date || getCurrentDate()}
+              defaultValue={formatDateForInput(data?.quote_send_date) || getCurrentDate()}
             />
             {state.errors?.quote_send_date && (
               <p className="text-red-500 text-sm mt-1">{state.errors.quote_send_date}</p>
@@ -133,7 +141,7 @@ export function QuoteForm({ action, data }: QuoteFormProps) {
               name="quote_validate_date"
               type="date"
               className="input input-bordered w-full"
-              defaultValue={data?.quote_validate_date}
+              defaultValue={formatDateForInput(data?.quote_validate_date)}
             />
             {state.errors?.quote_validate_date && (
               <p className="text-red-500 text-sm mt-1">{state.errors.quote_validate_date}</p>

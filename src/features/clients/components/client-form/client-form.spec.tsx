@@ -21,10 +21,10 @@ jest.mock('react-dom', () => ({
 }))
 
 jest.mock('../../actions', () => ({
-  addClientAction: jest.fn((prevState: unknown, formData: FormData) =>
+  addClientAction: jest.fn((_prevState: unknown, _formData: FormData) =>
     Promise.resolve({ success: true }),
   ),
-  updateClientAction: jest.fn((clientId: number, prevState: unknown, formData: FormData) =>
+  updateClientAction: jest.fn((_clientId: number, _prevState: unknown, _formData: FormData) =>
     Promise.resolve({ success: true }),
   ),
 }))
@@ -92,7 +92,7 @@ describe('ClientForm', () => {
     mockFormData.append('cpf_or_cnpj', '555.666.777-88')
     mockFormData.append('address', '456 Oak Ave')
     ;(clientActions.addClientAction as jest.Mock).mockImplementation(
-      async (prevState, formData) => {
+      async (_prevState, _formData) => {
         return { success: true, message: 'Client added successfully!' }
       },
     )
@@ -122,7 +122,7 @@ describe('ClientForm', () => {
 
     ;(useActionState as jest.Mock).mockReturnValue([errorState, clientActions.addClientAction])
     ;(clientActions.addClientAction as jest.Mock).mockImplementation(
-      async (prevState, formData) => {
+      async (_prevState, _formData) => {
         return errorState
       },
     )
@@ -143,7 +143,7 @@ describe('ClientForm', () => {
 
     ;(useActionState as jest.Mock).mockReturnValue([errorState, clientActions.addClientAction])
     ;(clientActions.addClientAction as jest.Mock).mockImplementation(
-      async (prevState, formData) => {
+      async (_prevState, _formData) => {
         return errorState
       },
     )
@@ -177,7 +177,7 @@ describe('ClientForm', () => {
     mockUpdateFormData.append('cpf_or_cnpj', initialData.cpf_or_cnpj)
     mockUpdateFormData.append('address', initialData.address)
     ;(clientActions.updateClientAction as jest.Mock).mockImplementation(
-      async (clientId, prevState, formData) => {
+      async (_clientId, _prevState, _formData) => {
         return { success: true, message: 'Client updated successfully!' }
       },
     )

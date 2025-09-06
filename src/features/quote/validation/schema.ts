@@ -11,7 +11,7 @@ export const QuoteSchema = z.object({
   observations: z.string().optional(),
   client: z
     .object({
-      id: z.string(),
+      id: z.union([z.string(), z.number()]).transform((val) => String(val)),
       name: z.string(),
     })
     .optional(),

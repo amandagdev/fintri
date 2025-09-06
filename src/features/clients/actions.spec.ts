@@ -106,21 +106,21 @@ describe('Client Actions', () => {
         phone: '21987654321',
         cpf_or_cnpj: '987.654.321-00',
         address: 'Avenida Paulista, 1000 - São Paulo, SP',
-        documentId: 'client-123',
       })
 
       ;(updateClient as jest.Mock).mockResolvedValue(undefined)
 
-      await expect(updateClientAction(123, {} as State, formData)).rejects.toThrow('REDIRECT')
+      await expect(updateClientAction('client-123', {} as State, formData)).rejects.toThrow(
+        'REDIRECT',
+      )
 
-      expect(updateClient).toHaveBeenCalledWith(123, {
+      expect(updateClient).toHaveBeenCalledWith('client-123', {
         data: {
           name: 'Maria Santos',
           email: 'maria.santos@exemplo.com',
           phone: '21987654321',
           cpf_or_cnpj: '987.654.321-00',
           address: 'Avenida Paulista, 1000 - São Paulo, SP',
-          documentId: 'client-123',
         },
       })
       expect(revalidatePath).toHaveBeenCalledWith('/clients')
@@ -135,10 +135,9 @@ describe('Client Actions', () => {
         phone: '21987654321',
         cpf_or_cnpj: '987.654.321-00',
         address: 'Avenida Paulista, 1000 - São Paulo, SP',
-        documentId: 'client-123',
       })
 
-      const result = await updateClientAction(123, {} as State, formData)
+      const result = await updateClientAction('client-123', {} as State, formData)
 
       expect(result.errors).toBeDefined()
       expect(updateClient).not.toHaveBeenCalled()
@@ -153,13 +152,12 @@ describe('Client Actions', () => {
         phone: '21987654321',
         cpf_or_cnpj: '987.654.321-00',
         address: 'Avenida Paulista, 1000 - São Paulo, SP',
-        documentId: 'client-123',
       })
 
       const errorMessage = 'Cliente não encontrado'
       ;(updateClient as jest.Mock).mockRejectedValue(new Error(errorMessage))
 
-      const result = await updateClientAction(123, {} as State, formData)
+      const result = await updateClientAction('client-123', {} as State, formData)
 
       expect(result.message).toBe(errorMessage)
       expect(updateClient).toHaveBeenCalled()

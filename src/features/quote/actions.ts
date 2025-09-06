@@ -47,9 +47,11 @@ export async function addQuoteAction(prevState: State, formData: FormData) {
   }
 }
 
-export async function updateQuoteAction(prevState: State, formData: FormData) {
-  const id = formData.get('id') as string
-
+export async function updateQuoteAction(
+  quoteDocumentId: string,
+  prevState: State,
+  formData: FormData,
+) {
   const clientJson = formData.get('client') as string
   const client = clientJson ? JSON.parse(clientJson) : undefined
 
@@ -57,7 +59,6 @@ export async function updateQuoteAction(prevState: State, formData: FormData) {
   const notification = notificationJson ? JSON.parse(notificationJson) : undefined
 
   const parsed = QuoteSchema.safeParse({
-    id: id,
     title: formData.get('title'),
     description: formData.get('description'),
     quote_send_date: formData.get('quote_send_date'),
@@ -75,11 +76,17 @@ export async function updateQuoteAction(prevState: State, formData: FormData) {
   }
 
   try {
-    await updateQuote(id, { data: parsed.data })
+    console.log('Payload sendo enviado para updateQuote:', {
+      documentId: quoteDocumentId,
+      data: parsed.data,
+    })
+
+    await updateQuote(quoteDocumentId, { data: parsed.data })
     revalidatePath('/quotes')
-    revalidatePath(`/quotes/edit/${id}`)
+    revalidatePath(`/quotes/edit/${quoteDocumentId}`)
     return { message: 'Quote updated successfully!' }
   } catch (error: unknown) {
+    console.error('Erro na updateQuoteAction:', error)
     return { message: (error as Error).message }
   }
 }
