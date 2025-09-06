@@ -6,11 +6,12 @@ import Sidebar from '@/common/components/sidebar/sidebar'
 
 export default async function ProtectedMainLayout({
   children,
-  params: { locale },
+  params,
 }: {
   children: React.ReactNode
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }) {
+  const { locale } = await params
   const cookieStore = await cookies()
   const jwt = cookieStore.get('jwt')?.value
 

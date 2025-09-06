@@ -21,8 +21,8 @@ export default function Sidebar() {
 
   const menuItems = [
     { href: '/dashboard', label: t('home'), icon: LayoutDashboard },
-    { href: '/dashboard/create-budget', label: t('createBudget'), icon: FilePlus },
-    { href: '/dashboard/my-budgets', label: t('myBudgets'), icon: FileText },
+    { href: '/quote/add', label: t('createQuote'), icon: FilePlus },
+    { href: '/quote', label: t('myQuotes'), icon: FileText },
     { href: '/clients/add', label: t('addClient'), icon: UserPlus },
     { href: '/clients', label: t('myClients'), icon: Users },
     { href: '/dashboard/analytics', label: t('analytics'), icon: BarChart2 },

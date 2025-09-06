@@ -20,22 +20,33 @@ export function mapRegisterErrorToKey(message?: string): string {
 }
 
 export function mapClientErrorToKey(message?: string): string {
-  if (!message) return 'errors.default'
+  if (!message) return 'errors.clientUpdateFailed'
 
   const errorKeyMap: Record<string, string> = {
     'This attribute must be unique': 'errors.emailTaken',
+    'Not Found': 'errors.clientNotFound',
+    'Invalid key id': 'errors.invalidKeyId',
+    Forbidden: 'errors.unauthorized',
+    Unauthorized: 'errors.unauthorized',
+    ValidationError: 'errors.validationError',
+    'Bad Request': 'errors.badRequest',
   }
 
-  return errorKeyMap[message] || 'errors.default'
+  return errorKeyMap[message] || `errors.clientUpdateFailed: ${message}`
 }
 
-export function mapBudgetErrorToKey(message?: string): string {
-  if (!message) return 'errors.default'
+export function mapQuoteErrorToKey(message?: string): string {
+  if (!message) return 'errors.quoteUpdateFailed'
 
   const errorKeyMap: Record<string, string> = {
-    'This attribute must be unique': 'budget.errors.nameAlreadyTaken',
-    // Add other common Strapi error mappings here
+    'This attribute must be unique': 'errors.nameAlreadyTaken',
+    'Not Found': 'errors.quoteNotFound',
+    'Invalid key id': 'errors.invalidKeyId',
+    Forbidden: 'errors.unauthorized',
+    Unauthorized: 'errors.unauthorized',
+    ValidationError: 'errors.validationError',
+    'Bad Request': 'errors.badRequest',
   }
 
-  return errorKeyMap[message] || 'errors.default'
+  return errorKeyMap[message] || `errors.quoteUpdateFailed: ${message}`
 }

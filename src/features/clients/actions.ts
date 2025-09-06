@@ -14,6 +14,8 @@ export type State = {
 }
 
 export async function addClientAction(prevState: State, formData: FormData): Promise<State> {
+  console.log('addClientAction called with formData:', Object.fromEntries(formData.entries()))
+
   const data = {
     name: formData.get('name'),
     email: formData.get('email'),
@@ -36,16 +38,18 @@ export async function addClientAction(prevState: State, formData: FormData): Pro
   try {
     await createClient({ data: parsed.data })
   } catch (error) {
+    console.error('Error creating client:', error)
     const errorMessage = error instanceof Error ? error.message : 'errors.default'
     return { message: errorMessage }
   }
 
+  console.log('Client created successfully, returning success state')
   revalidatePath('/clients')
-  redirect('/clients?success=true')
+  return { success: true, message: 'success' }
 }
 
 export async function updateClientAction(
-  clientId: number,
+  clientDocumentId: string,
   prevState: State,
   formData: FormData,
 ): Promise<State> {
@@ -55,7 +59,6 @@ export async function updateClientAction(
     phone: formData.get('phone'),
     cpf_or_cnpj: formData.get('cpf_or_cnpj'),
     address: formData.get('address'),
-    documentId: formData.get('documentId'),
   }
 
   const parsed = clientSchema.safeParse(data)
@@ -70,16 +73,20 @@ export async function updateClientAction(
   }
 
   try {
-    await updateClient(clientId, { data: parsed.data })
+    console.log('Payload sendo enviado para updateClient:', {
+      documentId: clientDocumentId,
+      data: parsed.data,
+    })
+
+    await updateClient(clientDocumentId, { data: parsed.data })
   } catch (error) {
+    console.error('Erro na updateClientAction:', error)
     const errorMessage = error instanceof Error ? error.message : 'errors.default'
     return { message: errorMessage }
   }
 
   revalidatePath('/clients')
-  if (parsed.data.documentId) {
-    revalidatePath(`/clients/edit/${parsed.data.documentId}`)
-  }
+  revalidatePath(`/clients/edit/${clientDocumentId}`)
 
   redirect('/clients?updated=true')
 }

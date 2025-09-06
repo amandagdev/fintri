@@ -3,6 +3,8 @@
 import { Share2 } from 'lucide-react'
 import Link from 'next/link'
 
+import { formatCurrency, formatDate } from '@/lib/utils'
+
 export interface Proposal {
   id: string
   client: string
@@ -45,7 +47,7 @@ export default function Table({ data }: Props) {
           {data.map((proposal) => (
             <tr key={proposal.id} className="hover:bg-gray-50 transition">
               <td className="py-3">{proposal.client}</td>
-              <td>{proposal.date}</td>
+              <td>{formatDate(proposal.date)}</td>
               <td>
                 <span
                   className={`px-3 py-1 rounded-sm text-xs font-medium ${getStatusClass(
@@ -55,7 +57,7 @@ export default function Table({ data }: Props) {
                   {proposal.status}
                 </span>
               </td>
-              <td>{proposal.value}</td>
+              <td>{formatCurrency(proposal.value)}</td>
               <td>
                 <Link
                   href={`/dashboard/budgets/${proposal.id}`}
