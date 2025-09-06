@@ -4,7 +4,7 @@ import type { QuoteSchema } from './validation/schema'
 
 export type Quote = z.infer<typeof QuoteSchema>
 
-export const initialState: { message: string; errors: FieldErrors } = {
+export const initialState: { message?: string; errors?: FieldErrors } = {
   message: '',
   errors: {},
 }

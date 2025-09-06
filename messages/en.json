@@ -77,6 +77,7 @@
     "errors": {
       "default": "An unexpected error occurred. Please try again.",
       "invalidCredentials": "Invalid email or password.",
+      "loginError": "Login error.",
       "fillAllFields": "Please fill in all fields."
     }
   },
@@ -99,20 +100,17 @@
       "emailOrUsernameTaken": "This email or username is already in use."
     }
   },
-  "dashboard": {
-    "title": "Dashboard",
-    "sidebar": {
-      "title": "Fintri",
-      "subtitle": "Budget management",
-      "home": "Dashboard",
-      "createQuote": "Create quote",
-      "myQuotes": "My quotes",
-      "addClient": "Add client",
-      "myClients": "My clients",
-      "analytics": "Analytics",
-      "account": "Account",
-      "logout": "Logout"
-    }
+  "sidebar": {
+    "title": "Fintri",
+    "subtitle": "Budget management",
+    "home": "Dashboard",
+    "createQuote": "Create quote",
+    "myQuotes": "My quotes",
+    "addClient": "Add client",
+    "myClients": "My clients",
+    "analytics": "Analytics",
+    "account": "Account",
+    "logout": "Logout"
   },
   "account": {
     "header": {
@@ -213,7 +211,13 @@
       "emailTaken": "This email is already registered for another client.",
       "fullNameTooShort": "Full name must be at least 3 characters.",
       "invalidEmail": "The email format is invalid.",
-      "deleteFailed": "Could not delete the client."
+      "deleteFailed": "Could not delete the client.",
+      "clientUpdateFailed": "Error updating client",
+      "clientNotFound": "Client not found",
+      "clientCreatedSuccessfully": "Client created successfully!",
+      "clientDeletedSuccessfully": "Client deleted successfully!",
+      "clientUpdatedSuccessfully": "Client updated successfully!",
+      "failedToProcessClientData": "Failed to process client data."
     }
   },
   "quote": {
@@ -243,11 +247,21 @@
     "client": "Client",
     "selectClient": "Select Client",
     "total_value": "Total Value",
+    "discount": "Discount",
     "submit": "Submit",
     "delete": "Delete",
     "actions": "Actions",
     "editButton": "Edit quote",
+    "editQuote": "Edit Quote",
+    "editQuoteDescription": "Edit the details for {quoteName}.",
     "deleteButton": "Delete quote",
+    "copyLink": "Copy Link",
+    "downloadPdf": "Download PDF",
+    "sendEmail": "Email",
+    "linkCopied": "Link copied to clipboard!",
+    "pdfInDevelopment": "PDF functionality in development",
+    "emailInDevelopment": "Email functionality in development",
+    "copyError": "Error copying link",
     "updateSuccessMessage": "Quote updated successfully!",
     "successMessage": "Quote added successfully!",
     "deleteSuccessMessage": "Quote deleted successfully!",
@@ -257,20 +271,65 @@
     "form": {
       "titleRequired": "Title is required.",
       "totalValueRequired": "Total value is required.",
+      "discountInvalid": "Discount must be a valid value greater than or equal to zero.",
       "saveButton": "Save Quote",
       "updateButton": "Save Changes"
     },
     "errors": {
+      "default": "An unexpected error occurred, please try again.",
       "unauthenticated": "User not authenticated.",
       "fetchFailed": "Failed to fetch quotes.",
       "addFailed": "Failed to add quote.",
       "updateFailed": "Failed to update quote.",
       "deleteFailed": "Failed to delete quote.",
       "titleAlreadyTaken": "A quote with this title already exists.",
+      "nameAlreadyTaken": "A quote with this name already exists.",
+      "quoteUpdateFailed": "Error updating quote",
+      "quoteNotFound": "Quote not found",
+      "invalidKeyId": "Invalid ID field - should not be sent in update",
+      "unauthorized": "Unauthorized",
+      "validationError": "Validation error",
+      "badRequest": "Invalid request",
+      "invalidDateFormat": "Invalid date format. Please use the correct format.",
+      "quoteCreatedSuccessfully": "Quote created successfully!",
+      "quoteUpdatedSuccessfully": "Quote updated successfully!",
+      "quoteDeletedSuccessfully": "Quote deleted successfully!",
+      "failedToProcessQuoteData": "Failed to process quote data.",
       "copyLink": "Copy Link",
       "downloadPdf": "Download PDF",
       "sendEmail": "Send by Email",
       "linkCopied": "Link copied to clipboard!"
-    }
+    },
+    "confirmDeleteTitle": "Confirm Deletion",
+    "confirmDeleteMessage": "Are you sure you want to delete this quote? This action cannot be undone.",
+    "confirmDelete": "Delete",
+    "cancel": "Cancel"
+  },
+  "dashboard": {
+    "title": "Quotes",
+    "pageTitle": "Dashboard",
+    "createQuote": "Create Quote",
+    "tabs": {
+      "submitted": "Submitted",
+      "active": "Active",
+      "archived": "Archived"
+    },
+    "filters": {
+      "all": "All statuses",
+      "approved": "Approved",
+      "pending": "Pending",
+      "rejected": "Rejected"
+    },
+    "table": {
+      "title": "Title",
+      "client": "Client",
+      "date": "Date",
+      "status": "Status",
+      "value": "Value",
+      "viewProposal": "View proposal",
+      "share": "Share"
+    },
+    "searchPlaceholder": "Search...",
+    "filterLabel": "Filter"
   }
 }

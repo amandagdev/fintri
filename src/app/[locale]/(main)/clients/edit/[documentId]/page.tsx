@@ -4,11 +4,11 @@ import { getTranslations } from 'next-intl/server'
 import { EditClientForm } from '@/features/clients/components/client-edit/client-edit'
 import { getClientByDocumentId } from '@/features/clients/services/service'
 
-export default async function EditClientPage({
-  params,
-}: {
+interface EditClientPageProps {
   params: Promise<{ documentId: string }>
-}) {
+}
+
+export default async function EditClientPage({ params }: EditClientPageProps) {
   const { documentId } = await params
 
   const t = await getTranslations('clients')

@@ -55,7 +55,6 @@ export function QuoteList({ quotes }: QuoteListProps) {
                 <th>{t('discount')}</th>
                 <th>{t('quote_send_date')}</th>
                 <th>{t('quote_validate_date')}</th>
-                <th className="text-right">{t('actions')}</th>
               </tr>
             </thead>
             <tbody>

@@ -75,6 +75,7 @@
     "socialLogin": "Ou entre com",
     "errors": {
       "invalidCredentials": "E-mail ou senha inválidos.",
+      "loginError": "Erro ao fazer login.",
       "fillAllFields": "Por favor, preencha todos os campos.",
       "default": "Ocorreu um erro inesperado, por favor, tente novamente."
     }
@@ -98,20 +99,17 @@
       "emailOrUsernameTaken": "Este e-mail ou nome de usuário já está em uso."
     }
   },
-  "dashboard": {
-    "title": "Dashboard",
-    "sidebar": {
-      "title": "Fintri",
-      "subtitle": "Gestão de orçamentos",
-      "home": "Dashboard",
-      "createQuote": "Criar orçamento",
-      "myQuotes": "Meus orçamentos",
-      "addClient": "Adicionar cliente",
-      "myClients": "Meus clientes",
-      "analytics": "Minhas análises",
-      "account": "Minha conta",
-      "logout": "Sair"
-    }
+  "sidebar": {
+    "title": "Fintri",
+    "subtitle": "Gestão de orçamentos",
+    "home": "Dashboard",
+    "createQuote": "Criar orçamento",
+    "myQuotes": "Meus orçamentos",
+    "addClient": "Adicionar cliente",
+    "myClients": "Meus clientes",
+    "analytics": "Minhas análises",
+    "account": "Minha conta",
+    "logout": "Sair"
   },
   "account": {
     "header": {
@@ -214,7 +212,11 @@
       "emailTaken": "Este e-mail já está cadastrado para outro cliente.",
       "fullNameTooShort": "O nome completo deve ter pelo menos 3 caracteres.",
       "invalidEmail": "O formato do e-mail é inválido.",
-      "deleteFailed": "Não foi possível deletar o cliente."
+      "deleteFailed": "Não foi possível deletar o cliente.",
+      "clientCreatedSuccessfully": "Cliente criado com sucesso!",
+      "clientDeletedSuccessfully": "Cliente excluído com sucesso!",
+      "clientUpdatedSuccessfully": "Cliente atualizado com sucesso!",
+      "failedToProcessClientData": "Falha ao processar dados do cliente."
     }
   },
   "quote": {
@@ -249,12 +251,10 @@
     "delete": "Excluir",
     "actions": "Ações",
     "editButton": "Editar orçamento",
-    "editQuote": "Editar Orçamento",
-    "editQuoteDescription": "Edite as informações do orçamento: {quoteName}",
     "deleteButton": "Deletar orçamento",
     "copyLink": "Copiar Link",
     "downloadPdf": "Baixar PDF",
-    "sendEmail": "Enviar E-mail",
+    "sendEmail": "E-mail",
     "linkCopied": "Link copiado para a área de transferência!",
     "pdfInDevelopment": "Funcionalidade de PDF em desenvolvimento",
     "emailInDevelopment": "Funcionalidade de e-mail em desenvolvimento",
@@ -269,6 +269,7 @@
     "unauthorized": "Não autorizado",
     "validationError": "Erro de validação",
     "badRequest": "Requisição inválida",
+    "invalidDateFormat": "Formato de data inválido. Use o formato correto.",
     "confirmDeleteTitle": "Confirmar Exclusão",
     "confirmDeleteMessage": "Tem certeza que deseja excluir este orçamento? Esta ação não pode ser desfeita.",
     "confirmDelete": "Excluir",
@@ -291,10 +292,42 @@
       "updateFailed": "Falha ao atualizar orçamento.",
       "deleteFailed": "Falha ao excluir orçamento.",
       "titleAlreadyTaken": "Já existe um orçamento com este título.",
+      "nameAlreadyTaken": "Já existe um orçamento com este nome.",
       "copyLink": "Copiar Link",
       "downloadPdf": "Baixar PDF",
       "sendEmail": "Enviar por E-mail",
-      "linkCopied": "Link copiado para a área de transferência!"
+      "linkCopied": "Link copiado para a área de transferência!",
+      "quoteCreatedSuccessfully": "Orçamento criado com sucesso!",
+      "quoteUpdatedSuccessfully": "Orçamento atualizado com sucesso!",
+      "quoteDeletedSuccessfully": "Orçamento excluído com sucesso!",
+      "failedToProcessQuoteData": "Falha ao processar dados do orçamento."
     }
+  },
+  "dashboard": {
+    "title": "Orçamentos",
+    "pageTitle": "Dashboard",
+    "createQuote": "Criar Orçamento",
+    "tabs": {
+      "submitted": "Enviado",
+      "active": "Ativo",
+      "archived": "Arquivado"
+    },
+    "filters": {
+      "all": "Todos os status",
+      "approved": "Aprovado",
+      "pending": "Pendente",
+      "rejected": "Recusado"
+    },
+    "table": {
+      "title": "Título",
+      "client": "Cliente",
+      "date": "Data",
+      "status": "Status",
+      "value": "Valor",
+      "viewProposal": "Ver proposta",
+      "share": "Compartilhar"
+    },
+    "searchPlaceholder": "Buscar...",
+    "filterLabel": "Filtrar"
   }
 }

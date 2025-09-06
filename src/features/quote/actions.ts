@@ -12,36 +12,52 @@ export interface State {
   message?: string
 }
 
-export async function addQuoteAction(prevState: State, formData: FormData) {
+function parseQuoteFormData(formData: FormData) {
   const clientJson = formData.get('client') as string
   const client = clientJson ? JSON.parse(clientJson) : undefined
-
-  console.log(formData)
 
   const notificationJson = formData.get('notification') as string
   const notification = notificationJson ? JSON.parse(notificationJson) : undefined
 
-  const parsed = QuoteSchema.safeParse({
+  const totalValueStr = formData.get('total_value') as string
+  const discountStr = formData.get('discount') as string
+
+  return {
     title: formData.get('title'),
     description: formData.get('description'),
     quote_send_date: formData.get('quote_send_date'),
     quote_validate_date: formData.get('quote_validate_date'),
     observations: formData.get('observations'),
     client: client,
-    total_value: parseFloat(formData.get('total_value') as string),
-    discount: formData.get('discount') ? parseFloat(formData.get('discount') as string) : undefined,
+    total_value: totalValueStr ? parseFloat(totalValueStr) : 0,
+    discount: discountStr ? parseFloat(discountStr) : undefined,
     notification: notification,
-  })
-
-  if (!parsed.success) {
-    const errors = parsed.error.flatten().fieldErrors
-    return { errors, message: 'Failed to add quote.' }
   }
+}
+
+function handleQuoteValidation(parsed: { success: boolean; error?: unknown; data?: unknown }) {
+  if (!parsed.success) {
+    const errors = (parsed.error as { flatten: () => { fieldErrors: FieldErrors } }).flatten()
+      .fieldErrors
+    return { errors, message: 'errors.failedToProcessQuoteData' }
+  }
+  return null
+}
+
+export async function addQuoteAction(prevState: State, formData: FormData) {
+  const formDataParsed = parseQuoteFormData(formData)
+  const parsed = QuoteSchema.safeParse(formDataParsed)
+
+  const validationError = handleQuoteValidation(parsed)
+  if (validationError) return validationError
 
   try {
+    if (!parsed.data) {
+      return { message: 'errors.failedToProcessQuoteData' }
+    }
     await addQuote({ data: parsed.data })
     revalidatePath('/quotes')
-    return { message: 'Quote created successfully!' }
+    return { message: 'errors.quoteCreatedSuccessfully' }
   } catch (error: unknown) {
     return { message: (error as Error).message }
   }
@@ -52,41 +68,20 @@ export async function updateQuoteAction(
   prevState: State,
   formData: FormData,
 ) {
-  const clientJson = formData.get('client') as string
-  const client = clientJson ? JSON.parse(clientJson) : undefined
+  const formDataParsed = parseQuoteFormData(formData)
+  const parsed = QuoteSchema.safeParse(formDataParsed)
 
-  const notificationJson = formData.get('notification') as string
-  const notification = notificationJson ? JSON.parse(notificationJson) : undefined
-
-  const parsed = QuoteSchema.safeParse({
-    title: formData.get('title'),
-    description: formData.get('description'),
-    quote_send_date: formData.get('quote_send_date'),
-    quote_validate_date: formData.get('quote_validate_date'),
-    observations: formData.get('observations'),
-    client: client,
-    total_value: parseFloat(formData.get('total_value') as string),
-    discount: formData.get('discount') ? parseFloat(formData.get('discount') as string) : undefined,
-    notification: notification,
-  })
-
-  if (!parsed.success) {
-    const errors = parsed.error.flatten().fieldErrors
-    return { errors, message: 'Failed to update quote.' }
-  }
+  const validationError = handleQuoteValidation(parsed)
+  if (validationError) return validationError
 
   try {
-    console.log('Payload sendo enviado para updateQuote:', {
-      documentId: quoteDocumentId,
-      data: parsed.data,
-    })
-
+    if (!parsed.data) {
+      return { message: 'errors.failedToProcessQuoteData' }
+    }
     await updateQuote(quoteDocumentId, { data: parsed.data })
     revalidatePath('/quotes')
-    revalidatePath(`/quotes/edit/${quoteDocumentId}`)
-    return { message: 'Quote updated successfully!' }
+    return { message: 'errors.quoteUpdatedSuccessfully' }
   } catch (error: unknown) {
-    console.error('Erro na updateQuoteAction:', error)
     return { message: (error as Error).message }
   }
 }
@@ -97,6 +92,6 @@ export async function deleteQuoteAction(documentId: string) {
     revalidatePath('/quotes')
     redirect('/quotes?deleted=true')
   } catch (error: unknown) {
-    return { message: (error as Error).message }
+    throw error
   }
 }
