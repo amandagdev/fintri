@@ -100,9 +100,6 @@
       "emailOrUsernameTaken": "This email or username is already in use."
     }
   },
-  "dashboard": {
-    "title": "Dashboard"
-  },
   "sidebar": {
     "title": "Fintri",
     "subtitle": "Budget management",
@@ -216,7 +213,11 @@
       "invalidEmail": "The email format is invalid.",
       "deleteFailed": "Could not delete the client.",
       "clientUpdateFailed": "Error updating client",
-      "clientNotFound": "Client not found"
+      "clientNotFound": "Client not found",
+      "clientCreatedSuccessfully": "Client created successfully!",
+      "clientDeletedSuccessfully": "Client deleted successfully!",
+      "clientUpdatedSuccessfully": "Client updated successfully!",
+      "failedToProcessClientData": "Failed to process client data."
     }
   },
   "quote": {
@@ -256,7 +257,7 @@
     "deleteButton": "Delete quote",
     "copyLink": "Copy Link",
     "downloadPdf": "Download PDF",
-    "sendEmail": "Send Email",
+    "sendEmail": "Email",
     "linkCopied": "Link copied to clipboard!",
     "pdfInDevelopment": "PDF functionality in development",
     "emailInDevelopment": "Email functionality in development",
@@ -289,6 +290,11 @@
       "unauthorized": "Unauthorized",
       "validationError": "Validation error",
       "badRequest": "Invalid request",
+      "invalidDateFormat": "Invalid date format. Please use the correct format.",
+      "quoteCreatedSuccessfully": "Quote created successfully!",
+      "quoteUpdatedSuccessfully": "Quote updated successfully!",
+      "quoteDeletedSuccessfully": "Quote deleted successfully!",
+      "failedToProcessQuoteData": "Failed to process quote data.",
       "copyLink": "Copy Link",
       "downloadPdf": "Download PDF",
       "sendEmail": "Send by Email",
@@ -301,6 +307,7 @@
   },
   "dashboard": {
     "title": "Quotes",
+    "pageTitle": "Dashboard",
     "createQuote": "Create Quote",
     "tabs": {
       "submitted": "Submitted",
@@ -314,6 +321,7 @@
       "rejected": "Rejected"
     },
     "table": {
+      "title": "Title",
       "client": "Client",
       "date": "Date",
       "status": "Status",

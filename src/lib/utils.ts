@@ -80,3 +80,18 @@ export function formatNumber(
     maximumFractionDigits: decimals,
   }).format(numericValue)
 }
+
+export function getCurrentDate(): string {
+  const today = new Date()
+  return today.toISOString().split('T')[0]
+}
+
+export function formatDateForInput(dateString?: string): string {
+  if (!dateString) return ''
+  try {
+    const date = new Date(dateString)
+    return date.toISOString().split('T')[0]
+  } catch {
+    return ''
+  }
+}

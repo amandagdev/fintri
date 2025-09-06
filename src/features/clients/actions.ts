@@ -13,39 +13,50 @@ export type State = {
   success?: boolean
 }
 
-export async function addClientAction(prevState: State, formData: FormData): Promise<State> {
-  console.log('addClientAction called with formData:', Object.fromEntries(formData.entries()))
-
-  const data = {
+// Helper function to parse form data consistently
+function parseClientFormData(formData: FormData) {
+  return {
     name: formData.get('name'),
     email: formData.get('email'),
     phone: formData.get('phone'),
     cpf_or_cnpj: formData.get('cpf_or_cnpj'),
     address: formData.get('address'),
   }
+}
 
-  const parsed = clientSchema.safeParse(data)
-
+// Helper function to handle common validation and error response
+function handleClientValidation(parsed: { success: boolean; error?: unknown; data?: unknown }) {
   if (!parsed.success) {
     const fieldErrors: State['errors'] = {}
-    parsed.error.issues.forEach((issue) => {
-      const field = issue.path[0] as keyof ClientFormData
-      fieldErrors[field] = issue.message
-    })
+    ;(parsed.error as { issues: Array<{ path: string[]; message: string }> }).issues.forEach(
+      (issue) => {
+        const field = issue.path[0] as keyof ClientFormData
+        fieldErrors[field] = issue.message
+      },
+    )
     return { errors: fieldErrors }
   }
+  return null
+}
+
+export async function addClientAction(prevState: State, formData: FormData): Promise<State> {
+  const formDataParsed = parseClientFormData(formData)
+  const parsed = clientSchema.safeParse(formDataParsed)
+
+  const validationError = handleClientValidation(parsed)
+  if (validationError) return validationError
 
   try {
+    if (!parsed.data) {
+      return { message: 'errors.failedToProcessClientData' }
+    }
     await createClient({ data: parsed.data })
+    revalidatePath('/clients')
+    return { success: true, message: 'errors.clientCreatedSuccessfully' }
   } catch (error) {
-    console.error('Error creating client:', error)
     const errorMessage = error instanceof Error ? error.message : 'errors.default'
     return { message: errorMessage }
   }
-
-  console.log('Client created successfully, returning success state')
-  revalidatePath('/clients')
-  return { success: true, message: 'success' }
 }
 
 export async function updateClientAction(
@@ -53,42 +64,23 @@ export async function updateClientAction(
   prevState: State,
   formData: FormData,
 ): Promise<State> {
-  const data = {
-    name: formData.get('name'),
-    email: formData.get('email'),
-    phone: formData.get('phone'),
-    cpf_or_cnpj: formData.get('cpf_or_cnpj'),
-    address: formData.get('address'),
-  }
+  const formDataParsed = parseClientFormData(formData)
+  const parsed = clientSchema.safeParse(formDataParsed)
 
-  const parsed = clientSchema.safeParse(data)
-
-  if (!parsed.success) {
-    const fieldErrors: State['errors'] = {}
-    parsed.error.issues.forEach((issue) => {
-      const field = issue.path[0] as keyof ClientFormData
-      fieldErrors[field] = issue.message
-    })
-    return { errors: fieldErrors }
-  }
+  const validationError = handleClientValidation(parsed)
+  if (validationError) return validationError
 
   try {
-    console.log('Payload sendo enviado para updateClient:', {
-      documentId: clientDocumentId,
-      data: parsed.data,
-    })
-
+    if (!parsed.data) {
+      return { message: 'errors.failedToProcessClientData' }
+    }
     await updateClient(clientDocumentId, { data: parsed.data })
+    revalidatePath('/clients')
+    redirect('/clients?updated=true')
   } catch (error) {
-    console.error('Erro na updateClientAction:', error)
     const errorMessage = error instanceof Error ? error.message : 'errors.default'
     return { message: errorMessage }
   }
-
-  revalidatePath('/clients')
-  revalidatePath(`/clients/edit/${clientDocumentId}`)
-
-  redirect('/clients?updated=true')
 }
 
 export async function deleteClientAction(documentId: string) {
@@ -96,11 +88,10 @@ export async function deleteClientAction(documentId: string) {
 
   try {
     await deleteClient(documentId)
+    revalidatePath('/clients')
+    return { success: true, message: 'errors.clientDeletedSuccessfully' }
   } catch (error) {
     const message = error instanceof Error ? error.message : 'errors.deleteFailed'
     return { success: false, message }
   }
-
-  revalidatePath('/clients')
-  return { success: true, message: 'deleteSuccessMessage' }
 }

@@ -42,6 +42,7 @@ export function mapQuoteErrorToKey(message?: string): string {
     'This attribute must be unique': 'errors.nameAlreadyTaken',
     'Not Found': 'errors.quoteNotFound',
     'Invalid key id': 'errors.invalidKeyId',
+    'Invalid format, expected a timestamp or an ISO date': 'errors.invalidDateFormat',
     Forbidden: 'errors.unauthorized',
     Unauthorized: 'errors.unauthorized',
     ValidationError: 'errors.validationError',

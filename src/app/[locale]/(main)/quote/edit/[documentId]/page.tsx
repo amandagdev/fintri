@@ -5,11 +5,11 @@ import { updateQuoteAction } from '@/features/quote/actions'
 import { QuoteForm } from '@/features/quote/components/quote-form/quote-form'
 import { getQuoteByDocumentId } from '@/features/quote/services/service'
 
-export default async function EditQuotePage({
-  params,
-}: {
+interface EditQuotePageProps {
   params: Promise<{ documentId: string }>
-}) {
+}
+
+export default async function EditQuotePage({ params }: EditQuotePageProps) {
   const { documentId } = await params
 
   const t = await getTranslations('quote')
@@ -27,6 +27,7 @@ export default async function EditQuotePage({
           {t('editQuoteDescription', { quoteName: quote.title })}
         </p>
       </header>
+
       <QuoteForm action={updateQuoteAction.bind(null, quote.documentId)} data={quote} />
     </main>
   )

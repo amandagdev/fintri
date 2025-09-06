@@ -9,6 +9,7 @@ import { useFormStatus } from 'react-dom'
 import Wrapper from '@/features/account/utils/wrapper'
 import { getClients } from '@/features/clients/services/service'
 import type { Client } from '@/features/clients/types'
+import { formatDateForInput, getCurrentDate } from '@/lib/utils'
 
 import { initialState, type FieldErrors, type Quote } from '../../state'
 import { SubmitButton } from '../quote-submit-button/quote-submit-button'
@@ -18,34 +19,20 @@ interface QuoteFormProps {
     prevState: { errors?: FieldErrors; message?: string },
     formData: FormData,
   ) => Promise<{ errors?: FieldErrors; message?: string }>
+  readonly state?: { errors?: FieldErrors; message?: string }
   readonly data?: Quote
 }
 
-export function QuoteForm({ action, data }: QuoteFormProps) {
+export function QuoteForm({ action, state: propState, data }: QuoteFormProps) {
   const t = useTranslations('quote')
   const router = useRouter()
-  const [state, formAction] = useActionState(action, initialState)
+  const [state, formAction] = useActionState(action, propState || initialState)
   const { pending } = useFormStatus()
 
   const [clients, setClients] = useState<Client[]>([])
   const [selectedClient, setSelectedClient] = useState<string | undefined>(
     data?.client?.id ? String(data.client.id) : undefined,
   )
-
-  const getCurrentDate = () => {
-    const today = new Date()
-    return today.toISOString().split('T')[0]
-  }
-
-  const formatDateForInput = (dateString?: string) => {
-    if (!dateString) return ''
-    try {
-      const date = new Date(dateString)
-      return date.toISOString().split('T')[0]
-    } catch {
-      return ''
-    }
-  }
 
   useEffect(() => {
     const fetchClients = async () => {
