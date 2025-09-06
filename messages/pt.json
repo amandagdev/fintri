@@ -163,6 +163,27 @@
       "deleteAccountTitle": "Deletar Conta",
       "deleteAccountDescription": "Esta ação é irreversível. Todos os seus dados, propostas e informações serão permanentemente removidos da plataforma.",
       "deleteAccountButton": "Deletar Minha Conta"
+    },
+    "common": {
+      "saveChanges": "Salvar Alterações",
+      "loading": "Carregando..."
+    },
+    "success": {
+      "personalDataUpdated": "Dados pessoais atualizados com sucesso!",
+      "companyDataUpdated": "Dados da empresa atualizados com sucesso!",
+      "passwordUpdated": "Senha atualizada com sucesso!"
+    },
+    "errors": {
+      "default": "Ocorreu um erro, por favor, tente novamente.",
+      "validationFailed": "Dados inválidos, verifique os campos destacados.",
+      "fullNameTooShort": "O nome completo deve ter pelo menos 3 caracteres.",
+      "invalidEmail": "O formato do e-mail é inválido.",
+      "passwordTooShort": "A senha deve ter pelo menos 6 caracteres.",
+      "currentPasswordRequired": "A senha atual é obrigatória.",
+      "passwordConfirmationRequired": "A confirmação da senha é obrigatória.",
+      "passwordsDoNotMatch": "As senhas não coincidem.",
+      "unauthenticated": "Usuário não autenticado. Faça o login novamente.",
+      "notFound": "Recurso não encontrado."
     }
   },
   "common": {
@@ -231,7 +252,7 @@
     "titlePlaceholder": "Ex: Orçamento para Projeto X",
     "description": "Descrição",
     "descriptionPlaceholder": "Detalhes do serviço ou produto",
-    "status_quote": "Status do Orçamento",
+    "status_quote": "Status",
     "selectStatus": "Selecionar Status",
     "status": {
       "pending": "Pendente",
@@ -245,7 +266,7 @@
     "observationsPlaceholder": "Adicione informações relevantes para o cliente",
     "client": "Cliente",
     "selectClient": "Selecionar Cliente",
-    "total_value": "Valor Total",
+    "total_value": "Valor",
     "discount": "Desconto",
     "submit": "Enviar",
     "delete": "Excluir",
