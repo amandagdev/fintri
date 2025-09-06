@@ -52,10 +52,14 @@ export function handleApiError(
   const axiosError = error as AxiosError<{ error: { message?: string } }>
 
   if (axiosError.response?.status === 401) {
-    throw new Error(`${errorNamespace}.unauthenticated`)
+    throw new Error('errors.unauthenticated')
   }
 
-  throw new Error(`${errorNamespace}.default`)
+  if (axiosError.response?.status === 404) {
+    throw new Error('errors.notFound')
+  }
+
+  throw new Error('errors.default')
 }
 
 export function formatDateForStrapi(dateString?: string): string | undefined {

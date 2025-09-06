@@ -109,7 +109,7 @@
     "addClient": "Add client",
     "myClients": "My clients",
     "analytics": "Analytics",
-    "account": "Account",
+    "account": "My account",
     "logout": "Logout"
   },
   "account": {
@@ -168,6 +168,23 @@
     "common": {
       "saveChanges": "Save Changes",
       "loading": "Loading..."
+    },
+    "success": {
+      "personalDataUpdated": "Personal data updated successfully!",
+      "companyDataUpdated": "Company data updated successfully!",
+      "passwordUpdated": "Password updated successfully!"
+    },
+    "errors": {
+      "default": "An error occurred, please try again.",
+      "validationFailed": "Invalid data, please check the highlighted fields.",
+      "fullNameTooShort": "Full name must be at least 3 characters long.",
+      "invalidEmail": "Invalid email format.",
+      "passwordTooShort": "Password must be at least 6 characters long.",
+      "currentPasswordRequired": "Current password is required.",
+      "passwordConfirmationRequired": "Password confirmation is required.",
+      "passwordsDoNotMatch": "Passwords do not match.",
+      "unauthenticated": "User not authenticated. Please log in again.",
+      "notFound": "Resource not found."
     }
   },
   "clients": {
