@@ -2,6 +2,7 @@
 
 import { Share2 } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 import { formatCurrency, formatDate } from '@/lib/utils'
 
@@ -18,6 +19,8 @@ interface Props {
 }
 
 export default function Table({ data }: Props) {
+  const t = useTranslations('dashboard')
+
   const getStatusClass = (status: Proposal['status']) => {
     switch (status) {
       case 'aprovado':
@@ -31,15 +34,28 @@ export default function Table({ data }: Props) {
     }
   }
 
+  const getStatusLabel = (status: Proposal['status']) => {
+    switch (status) {
+      case 'aprovado':
+        return t('filters.approved')
+      case 'pendente':
+        return t('filters.pending')
+      case 'recusado':
+        return t('filters.rejected')
+      default:
+        return status
+    }
+  }
+
   return (
     <div className="overflow-x-auto">
       <table className="table w-full">
         <thead>
           <tr className="text-[#1b6d71] text-sm font-medium border-b border-gray-200">
-            <th className="bg-white">Cliente</th>
-            <th className="bg-white">Data</th>
-            <th className="bg-white">Status</th>
-            <th className="bg-white">Valor</th>
+            <th className="bg-white">{t('table.client')}</th>
+            <th className="bg-white">{t('table.date')}</th>
+            <th className="bg-white">{t('table.status')}</th>
+            <th className="bg-white">{t('table.value')}</th>
             <th className="bg-white" colSpan={2}></th>
           </tr>
         </thead>
@@ -54,7 +70,7 @@ export default function Table({ data }: Props) {
                     proposal.status,
                   )}`}
                 >
-                  {proposal.status}
+                  {getStatusLabel(proposal.status)}
                 </span>
               </td>
               <td>{formatCurrency(proposal.value)}</td>
@@ -63,13 +79,14 @@ export default function Table({ data }: Props) {
                   href={`/dashboard/budgets/${proposal.id}`}
                   className="btn btn-sm px-4 whitespace-nowrap text-sm bg-[#2cb5a0] text-white border-none hover:bg-[#155d61] transition"
                 >
-                  Ver proposta
+                  {t('table.viewProposal')}
                 </Link>
               </td>
               <td>
                 <button
                   onClick={() => console.log('Compartilhar', proposal.id)}
                   className="btn btn-sm text-sm bg-[#2cb5a0]  text-white gap-2 border-none"
+                  title={t('table.share')}
                 >
                   <Share2 size={16} />
                 </button>

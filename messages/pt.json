@@ -75,6 +75,7 @@
     "socialLogin": "Ou entre com",
     "errors": {
       "invalidCredentials": "E-mail ou senha inválidos.",
+      "loginError": "Erro ao fazer login.",
       "fillAllFields": "Por favor, preencha todos os campos.",
       "default": "Ocorreu um erro inesperado, por favor, tente novamente."
     }
@@ -99,19 +100,19 @@
     }
   },
   "dashboard": {
-    "title": "Dashboard",
-    "sidebar": {
-      "title": "Fintri",
-      "subtitle": "Gestão de orçamentos",
-      "home": "Dashboard",
-      "createQuote": "Criar orçamento",
-      "myQuotes": "Meus orçamentos",
-      "addClient": "Adicionar cliente",
-      "myClients": "Meus clientes",
-      "analytics": "Minhas análises",
-      "account": "Minha conta",
-      "logout": "Sair"
-    }
+    "title": "Dashboard"
+  },
+  "sidebar": {
+    "title": "Fintri",
+    "subtitle": "Gestão de orçamentos",
+    "home": "Dashboard",
+    "createQuote": "Criar orçamento",
+    "myQuotes": "Meus orçamentos",
+    "addClient": "Adicionar cliente",
+    "myClients": "Meus clientes",
+    "analytics": "Minhas análises",
+    "account": "Minha conta",
+    "logout": "Sair"
   },
   "account": {
     "header": {
@@ -291,10 +292,36 @@
       "updateFailed": "Falha ao atualizar orçamento.",
       "deleteFailed": "Falha ao excluir orçamento.",
       "titleAlreadyTaken": "Já existe um orçamento com este título.",
+      "nameAlreadyTaken": "Já existe um orçamento com este nome.",
       "copyLink": "Copiar Link",
       "downloadPdf": "Baixar PDF",
       "sendEmail": "Enviar por E-mail",
       "linkCopied": "Link copiado para a área de transferência!"
     }
+  },
+  "dashboard": {
+    "title": "Orçamentos",
+    "createQuote": "Criar Orçamento",
+    "tabs": {
+      "submitted": "Enviado",
+      "active": "Ativo",
+      "archived": "Arquivado"
+    },
+    "filters": {
+      "all": "Todos os status",
+      "approved": "Aprovado",
+      "pending": "Pendente",
+      "rejected": "Recusado"
+    },
+    "table": {
+      "client": "Cliente",
+      "date": "Data",
+      "status": "Status",
+      "value": "Valor",
+      "viewProposal": "Ver proposta",
+      "share": "Compartilhar"
+    },
+    "searchPlaceholder": "Buscar...",
+    "filterLabel": "Filtrar"
   }
 }

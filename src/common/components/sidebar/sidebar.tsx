@@ -16,7 +16,7 @@ import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
 export default function Sidebar() {
-  const t = useTranslations('dashboard.sidebar')
+  const t = useTranslations('sidebar')
   const pathname = usePathname()
 
   const menuItems = [
