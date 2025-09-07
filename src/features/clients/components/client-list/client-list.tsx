@@ -82,8 +82,7 @@ export function ClientList({ clients }: ClientListProps) {
               <h3 className="text-2xl font-bold">{t('emptyStateTitle')}</h3>
               <p className="py-6 text-base-content/70">{t('emptyStateDescription')}</p>
               <button
-                className="btn text-white"
-                style={{ backgroundColor: '#2cb5a1', borderColor: '#2cb5a1' }}
+                className="btn btn-primary text-white"
                 onClick={() => router.push(`/${locale}/clients/add`)}
               >
                 {t('addNewButton')}

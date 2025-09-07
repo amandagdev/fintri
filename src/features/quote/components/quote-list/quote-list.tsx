@@ -77,7 +77,9 @@ export function QuoteList({ quotes }: QuoteListProps) {
                     <span className="font-medium">{quote.client?.name || '-'}</span>
                   </td>
                   <td className="text-center">
-                    <div className="badge badge-warning badge-sm">pendente</div>
+                    <span className="px-3 py-1 rounded-sm text-xs font-medium bg-yellow-50 text-yellow-700 border border-yellow-200">
+                      pendente
+                    </span>
                   </td>
                   <td className="text-right">
                     <span className="font-semibold">{formatCurrency(quote.total_value)}</span>
@@ -118,8 +120,7 @@ export function QuoteList({ quotes }: QuoteListProps) {
                       </div>
                       <div className="divider divider-horizontal"></div>
                       <button
-                        className="btn btn-sm btn-square"
-                        style={{ backgroundColor: '#2cb5a1', borderColor: '#2cb5a1' }}
+                        className="btn btn-sm btn-square btn-primary"
                         onClick={(e) => {
                           e.stopPropagation()
                           const link = `${window.location.origin}/template/${quote.documentId}`
@@ -131,8 +132,7 @@ export function QuoteList({ quotes }: QuoteListProps) {
                         <Copy className="w-4 h-4 text-white" />
                       </button>
                       <button
-                        className="btn btn-sm btn-square"
-                        style={{ backgroundColor: '#2cb5a1', borderColor: '#2cb5a1' }}
+                        className="btn btn-sm btn-square btn-primary"
                         onClick={(e) => {
                           e.stopPropagation()
                           toast.info('Funcionalidade em desenvolvimento')
@@ -165,8 +165,7 @@ export function QuoteList({ quotes }: QuoteListProps) {
               <h3 className="text-2xl font-bold">{t('emptyStateTitle')}</h3>
               <p className="py-6 text-base-content/70">{t('emptyStateDescription')}</p>
               <button
-                className="btn text-white"
-                style={{ backgroundColor: '#2cb5a1', borderColor: '#2cb5a1' }}
+                className="btn btn-primary text-white"
                 onClick={() => router.push(`/${locale}/quote/add`)}
               >
                 {t('addNewButton')}
