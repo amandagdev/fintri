@@ -4,7 +4,6 @@
 
 <img width="3008" height="4094" alt="screencapture-fintri-vercel-app-pt-2025-08-11-01_48_12" src="https://github.com/user-attachments/assets/563f2994-8395-4245-b8b8-ced29cf0fb8f" />
 
-
 ## Funcionalidades Principais
 
 Este projeto **está sendo desenvolvido** com um conjunto de funcionalidades focadas em produtividade e organização:

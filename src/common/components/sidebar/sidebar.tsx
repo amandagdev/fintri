@@ -25,9 +25,10 @@ export default function Sidebar() {
     { href: '/quote', label: t('myQuotes'), icon: FileText },
     { href: '/clients/add', label: t('addClient'), icon: UserPlus },
     { href: '/clients', label: t('myClients'), icon: Users },
-    { href: '/dashboard/analytics', label: t('analytics'), icon: BarChart2 },
     { href: '/account', label: t('account'), icon: User },
   ]
+
+  const disabledItems = [{ label: t('analytics'), icon: BarChart2 }]
 
   return (
     <aside className="w-72 bg-white text-gray-500 flex flex-col min-h-screen border-r border-gray-200">
@@ -53,6 +54,17 @@ export default function Sidebar() {
                 <Icon size={18} />
                 {item.label}
               </Link>
+            </li>
+          )
+        })}
+        {disabledItems.map((item, index) => {
+          const Icon = item.icon
+          return (
+            <li key={`disabled-${index}`}>
+              <div className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-300 cursor-not-allowed">
+                <Icon size={18} />
+                {item.label}
+              </div>
             </li>
           )
         })}
