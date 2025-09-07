@@ -48,13 +48,13 @@ export async function addClientAction(prevState: State, formData: FormData): Pro
 
   try {
     if (!parsed.data) {
-      return { message: 'errors.failedToProcessClientData' }
+      return { message: 'failedToProcessClientData' }
     }
     await createClient({ data: parsed.data })
     revalidatePath('/clients')
-    return { success: true, message: 'errors.clientCreatedSuccessfully' }
+    return { success: true, message: 'clientCreatedSuccessfully' }
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'errors.default'
+    const errorMessage = error instanceof Error ? error.message : 'default'
     return { message: errorMessage }
   }
 }
@@ -72,26 +72,26 @@ export async function updateClientAction(
 
   try {
     if (!parsed.data) {
-      return { message: 'errors.failedToProcessClientData' }
+      return { message: 'failedToProcessClientData' }
     }
     await updateClient(clientDocumentId, { data: parsed.data })
     revalidatePath('/clients')
     redirect('/clients?updated=true')
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'errors.default'
+    const errorMessage = error instanceof Error ? error.message : 'default'
     return { message: errorMessage }
   }
 }
 
 export async function deleteClientAction(documentId: string) {
-  if (!documentId) return { success: false, message: 'errors.missingId' }
+  if (!documentId) return { success: false, message: 'missingId' }
 
   try {
     await deleteClient(documentId)
     revalidatePath('/clients')
-    return { success: true, message: 'errors.clientDeletedSuccessfully' }
+    return { success: true, message: 'clientDeletedSuccessfully' }
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'errors.deleteFailed'
+    const message = error instanceof Error ? error.message : 'deleteFailed'
     return { success: false, message }
   }
 }

@@ -335,7 +335,6 @@
       "deleteFailed": "Failed to delete quote.",
       "titleAlreadyTaken": "A quote with this title already exists.",
       "nameAlreadyTaken": "A quote with this name already exists.",
-      "quoteUpdateFailed": "Error updating quote",
       "quoteNotFound": "Quote not found",
       "invalidKeyId": "Invalid ID field - should not be sent in update",
       "unauthorized": "Unauthorized",

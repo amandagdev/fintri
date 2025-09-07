@@ -43,7 +43,7 @@ function handleQuoteValidation(parsed: { success: boolean; error?: unknown; data
   if (!parsed.success) {
     const errors = (parsed.error as { flatten: () => { fieldErrors: FieldErrors } }).flatten()
       .fieldErrors
-    return { errors, message: 'errors.validationError' }
+    return { errors, message: 'validationError' }
   }
   return null
 }
@@ -57,14 +57,14 @@ export async function addQuoteAction(prevState: State, formData: FormData) {
 
   try {
     if (!parsed.data) {
-      return { message: 'errors.validationError' }
+      return { message: 'validationError' }
     }
     await addQuote({ data: { ...parsed.data, title: parsed.data.title || 'Orçamento' } })
     revalidatePath('/quotes')
-    return { message: 'errors.quoteCreatedSuccessfully' }
+    return { message: 'quoteCreatedSuccessfully' }
   } catch (error: unknown) {
     console.error('Erro ao criar orçamento:', error)
-    return { message: 'errors.unexpectedError' }
+    return { message: 'unexpectedError' }
   }
 }
 
@@ -81,16 +81,16 @@ export async function updateQuoteAction(
 
   try {
     if (!parsed.data) {
-      return { message: 'errors.validationError' }
+      return { message: 'validationError' }
     }
     await updateQuote(quoteDocumentId, {
       data: { ...parsed.data, title: parsed.data.title || 'Orçamento' },
     })
     revalidatePath('/quotes')
-    return { message: 'errors.quoteUpdatedSuccessfully' }
+    return { message: 'quoteUpdatedSuccessfully' }
   } catch (error: unknown) {
     console.error('Erro ao atualizar orçamento:', error)
-    return { message: 'errors.unexpectedError' }
+    return { message: 'unexpectedError' }
   }
 }
 
@@ -98,9 +98,9 @@ export async function deleteQuoteAction(documentId: string) {
   try {
     await deleteQuote(documentId)
     revalidatePath('/quote')
-    return { message: 'errors.quoteDeletedSuccessfully' }
+    return { message: 'quoteDeletedSuccessfully' }
   } catch (error: unknown) {
     console.error('Erro ao excluir orçamento:', error)
-    return { message: 'errors.unexpectedError' }
+    return { message: 'unexpectedError' }
   }
 }
