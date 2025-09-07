@@ -3,7 +3,6 @@
 import { useEffect } from 'react'
 
 import { Edit } from 'lucide-react'
-import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
@@ -23,6 +22,9 @@ export function QuoteList({ quotes }: QuoteListProps) {
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
+
+  // Extrair o locale do pathname
+  const locale = pathname.split('/')[1] || 'pt'
 
   useEffect(() => {
     if (searchParams.get('success') === 'true') {
@@ -69,13 +71,13 @@ export function QuoteList({ quotes }: QuoteListProps) {
                   <td>{formatDate(quote.quote_validate_date)}</td>
                   <td className="text-right">
                     <div className="flex items-center justify-end gap-2">
-                      <Link
-                        href={`/quote/edit/${quote.documentId}`}
+                      <button
+                        onClick={() => router.push(`/${locale}/quote/edit/${quote.documentId}`)}
                         className="btn btn-ghost btn-sm btn-square"
                         aria-label={t('editButton')}
                       >
                         <Edit className="w-4 h-4" />
-                      </Link>
+                      </button>
                       <DeleteQuoteButton documentId={quote.documentId!} />
                       <QuoteActions quoteId={quote.id!} />
                     </div>

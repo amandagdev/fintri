@@ -27,6 +27,13 @@ interface CreateQuotePayload {
     notification?: {
       id: string
     }
+    quote_type?: 'simple' | 'detailed'
+    items?: Array<{
+      item_type: 'service' | 'product'
+      item_name: string
+      quantity: number
+      unit_price: number
+    }>
   }
 }
 
@@ -67,11 +74,23 @@ export async function addQuote(payload: CreateQuotePayload) {
     const jwt = await getJWTToken()
     const strapiPayload = {
       data: {
-        ...payload.data,
-        client: payload.data.client?.id ? payload.data.client.id : undefined,
-        notification: payload.data.notification?.id ? payload.data.notification.id : undefined,
+        title: payload.data.title,
+        description: payload.data.description,
+        status_quote: payload.data.status_quote,
         quote_send_date: formatDateForStrapi(payload.data.quote_send_date),
         quote_validate_date: formatDateForStrapi(payload.data.quote_validate_date),
+        observations: payload.data.observations,
+        client: payload.data.client?.id ? payload.data.client.id : undefined,
+        total_value: payload.data.total_value,
+        discount: payload.data.discount,
+        notification: payload.data.notification?.id ? payload.data.notification.id : undefined,
+        QuoteItem:
+          payload.data.items?.map((item) => ({
+            item_type: item.item_type,
+            item_name: item.item_name,
+            quantity: item.quantity,
+            unit_price: item.unit_price,
+          })) || [],
       },
     }
 
@@ -89,11 +108,23 @@ export async function updateQuote(documentId: string, payload: CreateQuotePayloa
     const jwt = await getJWTToken()
     const strapiPayload = {
       data: {
-        ...payload.data,
-        client: payload.data.client?.id ? payload.data.client.id : undefined,
-        notification: payload.data.notification?.id ? payload.data.notification.id : undefined,
+        title: payload.data.title,
+        description: payload.data.description,
+        status_quote: payload.data.status_quote,
         quote_send_date: formatDateForStrapi(payload.data.quote_send_date),
         quote_validate_date: formatDateForStrapi(payload.data.quote_validate_date),
+        observations: payload.data.observations,
+        client: payload.data.client?.id ? payload.data.client.id : undefined,
+        total_value: payload.data.total_value,
+        discount: payload.data.discount,
+        notification: payload.data.notification?.id ? payload.data.notification.id : undefined,
+        QuoteItem:
+          payload.data.items?.map((item) => ({
+            item_type: item.item_type,
+            item_name: item.item_name,
+            quantity: item.quantity,
+            unit_price: item.unit_price,
+          })) || [],
       },
     }
 

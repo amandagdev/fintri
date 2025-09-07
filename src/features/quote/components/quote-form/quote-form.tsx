@@ -2,17 +2,18 @@
 
 import { useActionState, useEffect, useState } from 'react'
 
-import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useFormStatus } from 'react-dom'
+import { toast } from 'sonner'
 
 import Wrapper from '@/features/account/utils/wrapper'
-import { getClients } from '@/features/clients/services/service'
-import type { Client } from '@/features/clients/types'
 import { formatDateForInput, getCurrentDate } from '@/lib/utils'
 
-import { initialState, type FieldErrors, type Quote } from '../../state'
+import { useQuoteForm } from '../../hooks/use-quote-form'
+import { initialState, type FieldErrors, type Quote, type QuoteItem } from '../../state'
+import { QuoteItems } from '../quote-items/quote-items'
 import { SubmitButton } from '../quote-submit-button/quote-submit-button'
+import { QuoteTypeSelector } from '../quote-type-selector/quote-type-selector'
 
 interface QuoteFormProps {
   readonly action: (
@@ -25,37 +26,59 @@ interface QuoteFormProps {
 
 export function QuoteForm({ action, state: propState, data }: QuoteFormProps) {
   const t = useTranslations('quote')
-  const router = useRouter()
   const [state, formAction] = useActionState(action, propState || initialState)
   const { pending } = useFormStatus()
 
-  const [clients, setClients] = useState<Client[]>([])
-  const [selectedClient, setSelectedClient] = useState<string | undefined>(
-    data?.client?.id ? String(data.client.id) : undefined,
-  )
+  const { clients, selectedClient, quoteType, setQuoteType, handleClientChange, handleSuccess } =
+    useQuoteForm({ data })
+
+  const [items, setItems] = useState<QuoteItem[]>(data?.items || [])
 
   useEffect(() => {
-    const fetchClients = async () => {
-      const fetchedClients = await getClients()
-      setClients(fetchedClients)
+    if (
+      state.message?.includes('quoteCreatedSuccessfully') ||
+      state.message?.includes('quoteUpdatedSuccessfully')
+    ) {
+      const messageKey = state.message.replace('quote.', '').replace('errors.', '')
+      toast.success(t(messageKey))
+      handleSuccess()
+    } else if (
+      state.message?.includes('Error') ||
+      state.message?.includes('error') ||
+      state.message?.includes('validationError') ||
+      state.message?.includes('unexpectedError')
+    ) {
+      const messageKey = state.message.replace('quote.', '').replace('errors.', '')
+      toast.error(t(messageKey))
     }
-    fetchClients()
-  }, [])
+  }, [state.message, handleSuccess, t])
 
+  // Calcular total automaticamente quando itens mudarem
   useEffect(() => {
-    if (data?.client?.id) {
-      setSelectedClient(String(data.client.id))
-    }
-  }, [data?.client?.id])
+    if (quoteType === 'detailed') {
+      const subtotal = items.reduce((sum, item) => sum + item.total, 0)
+      const discountInput = document.getElementById('discount') as HTMLInputElement
+      const discount = discountInput ? parseFloat(discountInput.value) || 0 : 0
+      const total = subtotal - discount
 
-  useEffect(() => {
-    if (state.message?.includes('successfully')) {
-      router.push('/quote')
+      const totalInput = document.getElementById('total_value') as HTMLInputElement
+      if (totalInput) {
+        totalInput.value = total.toString()
+      }
     }
-  }, [state.message, router])
+  }, [items, quoteType])
 
-  const handleClientChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedClient(e.target.value)
+  const handleDiscountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (quoteType === 'detailed') {
+      const subtotal = items.reduce((sum, item) => sum + item.total, 0)
+      const discount = parseFloat(e.target.value) || 0
+      const total = subtotal - discount
+
+      const totalInput = document.getElementById('total_value') as HTMLInputElement
+      if (totalInput) {
+        totalInput.value = total.toString()
+      }
+    }
   }
 
   const buttonTextKey = data ? 'form.updateButton' : 'form.saveButton'
@@ -84,6 +107,13 @@ export function QuoteForm({ action, state: propState, data }: QuoteFormProps) {
           name="notification"
           value={data?.notification?.id ? JSON.stringify({ id: data.notification.id }) : ''}
         />
+        <input type="hidden" name="quote_type" value={quoteType} />
+        <input type="hidden" name="items" value={JSON.stringify(items)} />
+
+        {/* Seletor de tipo de orçamento */}
+        <div className="mb-6">
+          <QuoteTypeSelector value={quoteType} onChange={setQuoteType} />
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="form-control">
@@ -95,8 +125,9 @@ export function QuoteForm({ action, state: propState, data }: QuoteFormProps) {
               name="title"
               type="text"
               placeholder={t('titlePlaceholder')}
-              className="input input-bordered w-full"
+              className={`input input-bordered w-full ${quoteType === 'detailed' ? 'bg-gray-100 cursor-not-allowed' : ''}`}
               defaultValue={data?.title}
+              readOnly={quoteType === 'detailed'}
             />
             {state.errors?.title && (
               <p className="text-red-500 text-sm mt-1">{state.errors.title}</p>
@@ -157,7 +188,16 @@ export function QuoteForm({ action, state: propState, data }: QuoteFormProps) {
               <p className="text-red-500 text-sm mt-1">{state.errors.client}</p>
             )}
           </div>
+        </div>
 
+        {/* Componente de itens para orçamento detalhado */}
+        {quoteType === 'detailed' && (
+          <div className="mb-6">
+            <QuoteItems items={items} onChange={setItems} />
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="form-control">
             <label className="label" htmlFor="total_value">
               <span className="label-text">{t('total_value')}</span>
@@ -168,9 +208,15 @@ export function QuoteForm({ action, state: propState, data }: QuoteFormProps) {
               type="number"
               step="0.01"
               placeholder="0,00"
-              className="input input-bordered w-full"
+              className={`input input-bordered w-full ${quoteType === 'detailed' ? 'bg-gray-100 cursor-not-allowed' : ''}`}
               defaultValue={data?.total_value}
+              readOnly={quoteType === 'detailed'}
             />
+            {quoteType === 'detailed' && (
+              <p className="text-xs text-gray-500 mt-1">
+                Valor calculado automaticamente baseado nos itens e desconto
+              </p>
+            )}
             {state.errors?.total_value && (
               <p className="text-red-500 text-sm mt-1">{state.errors.total_value}</p>
             )}
@@ -188,6 +234,7 @@ export function QuoteForm({ action, state: propState, data }: QuoteFormProps) {
               placeholder="0,00"
               className="input input-bordered w-full"
               defaultValue={data?.discount}
+              onChange={handleDiscountChange}
             />
             {state.errors?.discount && (
               <p className="text-red-500 text-sm mt-1">{state.errors.discount}</p>

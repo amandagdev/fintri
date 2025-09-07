@@ -70,7 +70,8 @@ export function DashboardTable({ data }: Props) {
               <td>{formatCurrency(quote.total_value)}</td>
               <td>
                 <Link
-                  href={`/quote/edit/${quote.documentId || quote.id}`}
+                  href={`/template/${quote.documentId || quote.id}`}
+                  target="_blank"
                   className="btn btn-sm px-4 whitespace-nowrap text-sm bg-[#2cb5a0] text-white border-none hover:bg-[#155d61] transition"
                 >
                   {t('table.viewProposal')}
