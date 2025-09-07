@@ -6,8 +6,7 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import { getClients } from '@/features/clients/services/service'
 import type { Client } from '@/features/clients/types'
-
-import type { Quote } from '../state'
+import type { Quote } from '@/features/quote/state'
 
 interface UseQuoteFormProps {
   readonly data?: Quote

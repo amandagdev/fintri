@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import type { QuoteItem } from '../state'
+import type { QuoteItem } from '@/features/quote/state'
 
 interface UseQuoteItemsProps {
   readonly initialItems?: QuoteItem[]

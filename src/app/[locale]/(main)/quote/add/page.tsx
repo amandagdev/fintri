@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server'
 
-import { addQuoteAction } from '@/features/quote/actions'
+import { addQuoteAction } from '@/features/quote/actions/actions'
 import { QuoteForm } from '@/features/quote/components/quote-form/quote-form'
 
 export default async function AddQuotePage() {

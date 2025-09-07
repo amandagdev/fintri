@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { Plus } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-import type { QuoteItem } from '../../state'
+import type { QuoteItem } from '@/features/quote/state'
 
 interface QuoteItemFormProps {
   readonly onAddItem: (item: QuoteItem) => void

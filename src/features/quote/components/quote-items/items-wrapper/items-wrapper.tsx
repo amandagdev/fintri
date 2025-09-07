@@ -2,9 +2,10 @@
 
 import { useTranslations } from 'next-intl'
 
-import { QuoteItemForm } from './quote-item-form'
-import { QuoteItemsTable } from './quote-items-table'
-import type { QuoteItem } from '../../state'
+import type { QuoteItem } from '@/features/quote/state'
+
+import { QuoteItemForm } from '../item-form/item-form'
+import { QuoteItemsTable } from '../items-table'
 
 interface QuoteItemsProps {
   readonly items: QuoteItem[]

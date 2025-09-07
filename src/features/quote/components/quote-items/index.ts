@@ -1,3 +1,3 @@
-export { QuoteItemForm } from './quote-item-form'
-export { QuoteItems } from './quote-items'
-export { QuoteItemsTable } from './quote-items-table'
+export { QuoteItemForm } from './item-form'
+export { QuoteItemsTable } from './items-table'
+export { QuoteItems } from './items-wrapper'

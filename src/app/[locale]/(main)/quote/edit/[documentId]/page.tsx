@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 
-import { updateQuoteAction } from '@/features/quote/actions'
+import { updateQuoteAction } from '@/features/quote/actions/actions'
 import { QuoteForm } from '@/features/quote/components/quote-form/quote-form'
 import { getQuoteByDocumentId } from '@/features/quote/services/service'
 

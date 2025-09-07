@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
 
-import { deleteQuoteAction } from '@/features/quote/actions'
+import { deleteQuoteAction } from '@/features/quote/actions/actions'
 
 interface DeleteQuoteButtonProps {
   readonly documentId: string

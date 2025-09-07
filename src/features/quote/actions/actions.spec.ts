@@ -2,7 +2,7 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 import { addQuoteAction, deleteQuoteAction, updateQuoteAction, type State } from './actions'
-import { addQuote, deleteQuote, updateQuote } from './services/service'
+import { addQuote, deleteQuote, updateQuote } from '../services/service'
 
 jest.mock('next/cache', () => ({
   revalidatePath: jest.fn(),
