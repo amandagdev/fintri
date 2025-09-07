@@ -41,6 +41,18 @@ export function useQuoteForm({ data, onSuccess }: UseQuoteFormProps = {}) {
     }
   }, [data?.client?.id])
 
+  // Detectar tipo de quote automaticamente baseado na presença de items
+  useEffect(() => {
+    if (data) {
+      // Se tem items (QuoteItem do Strapi), é detalhado
+      if (data.items && data.items.length > 0) {
+        setQuoteType('detailed')
+      } else {
+        setQuoteType('simple')
+      }
+    }
+  }, [data])
+
   const handleClientChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedClient(e.target.value)
   }

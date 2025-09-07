@@ -67,7 +67,7 @@ export function QuoteForm({ action, state: propState, data }: QuoteFormProps) {
         <input type="hidden" name="items" value={JSON.stringify(items)} />
 
         <div className="mb-6">
-          <QuoteTypeSelector value={quoteType} onChange={setQuoteType} />
+          <QuoteTypeSelector value={quoteType} onChange={setQuoteType} disabled={!!data} />
         </div>
 
         {quoteType === 'simple' ? (

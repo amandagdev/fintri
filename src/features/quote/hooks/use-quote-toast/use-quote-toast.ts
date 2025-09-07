@@ -18,17 +18,19 @@ export function useQuoteToast({ message, onSuccess }: UseQuoteToastProps) {
       message.includes('quoteCreatedSuccessfully') ||
       message.includes('quoteUpdatedSuccessfully')
     ) {
-      const messageKey = message.replace('quote.', '').replace('errors.', '')
-      toast.success(t(messageKey))
+      toast.success(t(message))
       onSuccess?.()
-    } else if (
+
+      return
+    }
+
+    if (
       message.includes('Error') ||
       message.includes('error') ||
       message.includes('validationError') ||
       message.includes('unexpectedError')
     ) {
-      const messageKey = message.replace('quote.', '').replace('errors.', '')
-      toast.error(t(messageKey))
+      toast.error(t('errors.' + message))
     }
   }, [message, onSuccess, t])
 }
