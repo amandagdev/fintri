@@ -363,8 +363,17 @@
   },
   "dashboard": {
     "title": "Quotes",
+    "description": "View important metrics and manage all your quotes.",
     "pageTitle": "Dashboard",
     "createQuote": "Create Quote",
+    "stats": {
+      "totalQuotes": "Total Quotes",
+      "currentMonthQuotes": "Created This Month",
+      "totalValue": "Total Value",
+      "conversionRate": "Conversion Rate",
+      "totalValueDesc": "Total of all accepted quotes",
+      "conversionRateDesc": "Accepted / Sent"
+    },
     "tabs": {
       "submitted": "Submitted",
       "active": "Active",

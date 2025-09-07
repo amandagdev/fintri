@@ -378,8 +378,17 @@
   },
   "dashboard": {
     "title": "Orçamentos",
+    "description": "Visualize métricas importantes e gerencie todos os seus orçamentos.",
     "pageTitle": "Dashboard",
     "createQuote": "Criar Orçamento",
+    "stats": {
+      "totalQuotes": "Total de Orçamentos",
+      "currentMonthQuotes": "Criados Este Mês",
+      "totalValue": "Valor Total",
+      "conversionRate": "Taxa de Conversão",
+      "totalValueDesc": "Total de todos os orçamentos aceitos",
+      "conversionRateDesc": "Aceitos / Enviados"
+    },
     "tabs": {
       "submitted": "Enviado",
       "active": "Ativo",
