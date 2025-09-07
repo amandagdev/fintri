@@ -43,11 +43,12 @@ export default function QuoteTemplate({ quote }: Props) {
 
     fetchData()
   }, [])
+
   const getDisplayData = () => {
     return {
-      name: companyData?.name || userData?.username || 'Nome da Empresa',
-      address: companyData?.address || 'Endereço da Empresa',
-      email: companyData?.email || userData?.email || 'email@empresa.com',
+      name: companyData?.name || userData?.username,
+      address: companyData?.address,
+      email: companyData?.email || userData?.email,
       logo: companyData?.logo || '',
     }
   }

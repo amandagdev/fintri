@@ -59,7 +59,7 @@ export async function addQuoteAction(prevState: State, formData: FormData) {
     if (!parsed.data) {
       return { message: 'errors.validationError' }
     }
-    await addQuote({ data: parsed.data })
+    await addQuote({ data: { ...parsed.data, title: parsed.data.title || 'Orçamento' } })
     revalidatePath('/quotes')
     return { message: 'errors.quoteCreatedSuccessfully' }
   } catch (error: unknown) {
@@ -83,7 +83,9 @@ export async function updateQuoteAction(
     if (!parsed.data) {
       return { message: 'errors.validationError' }
     }
-    await updateQuote(quoteDocumentId, { data: parsed.data })
+    await updateQuote(quoteDocumentId, {
+      data: { ...parsed.data, title: parsed.data.title || 'Orçamento' },
+    })
     revalidatePath('/quotes')
     return { message: 'errors.quoteUpdatedSuccessfully' }
   } catch (error: unknown) {

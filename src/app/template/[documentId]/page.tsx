@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 
 import QuoteTemplate from '@/features/quote/components/quote-template/quote-template'
 import type { Quote } from '@/features/quote/state'
+import { axiosInstance } from '@/lib/axios'
 
 interface Props {
   params: Promise<{
@@ -11,19 +12,22 @@ interface Props {
 
 async function getPublicQuote(documentId: string): Promise<Quote | null> {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/public-quote/${documentId}`,
-      {
-        cache: 'no-store',
-      },
+    const response = await axiosInstance.get(
+      `/api/quotes?filters[documentId][$eq]=${documentId}&populate[0]=client&populate[1]=QuoteItem`,
     )
 
-    if (!response.ok) {
+    const quote = response.data.data[0]
+
+    if (!quote) {
       return null
     }
 
-    return await response.json()
-  } catch {
+    return {
+      ...quote,
+      items: quote.QuoteItem || [],
+    }
+  } catch (error) {
+    console.error('Erro ao buscar quote:', error)
     return null
   }
 }
