@@ -2,8 +2,9 @@ import { Plus } from 'lucide-react'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 
-import { QuoteList } from '@/features/quote/components/quote-list/quote-list'
 import { getQuotes } from '@/features/quote/services/service'
+
+import { QuotePageClient } from './quote-page-client'
 
 export default async function QuotePage() {
   const t = await getTranslations('quote')
@@ -16,12 +17,16 @@ export default async function QuotePage() {
           <h1 className="text-3xl font-bold text-gray-800">{t('listTitle')}</h1>
           <p className="text-gray-500 mt-1">{t('listDescription')}</p>
         </div>
-        <Link href="/quote/add" className="btn bg-[#1b6d71] text-white">
+        <Link
+          href="/quote/add"
+          className="btn text-white"
+          style={{ backgroundColor: '#2cb5a1', borderColor: '#2cb5a1' }}
+        >
           <Plus className="w-4 h-4" />
           {t('addNewButton')}
         </Link>
       </header>
-      <QuoteList quotes={quotes} />
+      <QuotePageClient quotes={quotes} />
     </main>
   )
 }

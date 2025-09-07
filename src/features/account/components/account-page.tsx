@@ -29,7 +29,7 @@ export default function AccountPage({ user, company }: AccountPageProps) {
   ]
 
   return (
-    <main className="bg-slate-50 min-h-screen p-4 sm:p-8 w-full">
+    <main className="bg-white min-h-screen p-4 sm:p-8 w-full">
       <div className="max-w-5xl mx-auto">
         <header className="mb-8">
           <h1 className="text-3xl font-bold text-gray-800">{t('header.title')}</h1>

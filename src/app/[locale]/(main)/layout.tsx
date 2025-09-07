@@ -20,7 +20,7 @@ export default async function ProtectedMainLayout({
   }
 
   return (
-    <div className="drawer lg:drawer-open min-h-screen bg-slate-50">
+    <div className="drawer lg:drawer-open min-h-screen bg-white">
       <input id="sidebar-drawer" type="checkbox" className="drawer-toggle" />
 
       <div className="drawer-content flex flex-col items-start">
