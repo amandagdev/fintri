@@ -48,9 +48,22 @@ export function ClientList({ clients }: ClientListProps) {
             </thead>
             <tbody>
               {clients.map((client: Client) => (
-                <tr key={client.id} className="hover cursor-pointer">
+                <tr key={client.id} className="hover">
                   <td>
-                    <div className="font-semibold text-base-content">{client.name}</div>
+                    <div
+                      className="font-semibold text-base-content cursor-pointer hover:text-primary"
+                      onClick={() => router.push(`/${locale}/clients/edit/${client.documentId}`)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault()
+                          router.push(`/${locale}/clients/edit/${client.documentId}`)
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                    >
+                      {client.name}
+                    </div>
                   </td>
                   <td>
                     <span className="font-medium">{client.email}</span>
@@ -82,8 +95,7 @@ export function ClientList({ clients }: ClientListProps) {
               <h3 className="text-2xl font-bold">{t('emptyStateTitle')}</h3>
               <p className="py-6 text-base-content/70">{t('emptyStateDescription')}</p>
               <button
-                className="btn text-white"
-                style={{ backgroundColor: '#2cb5a1', borderColor: '#2cb5a1' }}
+                className="btn btn-primary text-white"
                 onClick={() => router.push(`/${locale}/clients/add`)}
               >
                 {t('addNewButton')}

@@ -15,11 +15,11 @@ export function DashboardTable({ data }: Props) {
 
   const getStatusClass = (status?: string) => {
     switch (status) {
-      case 'aprovado':
+      case 'accepted':
         return 'bg-green-50 text-green-700 border border-green-200'
-      case 'pendente':
+      case 'pending':
         return 'bg-yellow-50 text-yellow-700 border border-yellow-200'
-      case 'recusado':
+      case 'rejected':
         return 'bg-red-50 text-red-700 border border-red-200'
       default:
         return 'bg-yellow-50 text-yellow-700 border border-yellow-200'
@@ -28,14 +28,14 @@ export function DashboardTable({ data }: Props) {
 
   const getStatusLabel = (status?: string) => {
     switch (status) {
-      case 'aprovado':
-        return t('filters.approved')
-      case 'pendente':
-        return t('filters.pending')
-      case 'recusado':
-        return t('filters.rejected')
+      case 'accepted':
+        return 'Aprovado'
+      case 'pending':
+        return 'Pendente'
+      case 'rejected':
+        return 'Rejeitado'
       default:
-        return t('filters.pending')
+        return 'Pendente'
     }
   }
 
@@ -72,7 +72,7 @@ export function DashboardTable({ data }: Props) {
                 <Link
                   href={`/template/${quote.documentId || quote.id}`}
                   target="_blank"
-                  className="btn btn-sm px-4 whitespace-nowrap text-sm bg-[#2cb5a0] text-white border-none hover:bg-[#155d61] transition"
+                  className="btn btn-sm btn-primary px-4 whitespace-nowrap text-sm"
                 >
                   {t('table.viewProposal')}
                 </Link>

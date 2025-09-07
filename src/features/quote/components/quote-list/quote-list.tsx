@@ -11,6 +11,7 @@ import type { Quote } from '@/features/quote/state'
 import { formatCurrency, formatDate } from '@/lib/utils'
 
 import { DeleteQuoteButton } from '../button-delete/button-delete'
+import { StatusSelect } from '../status-select'
 
 interface QuoteListProps {
   readonly quotes: Quote[]
@@ -60,16 +61,24 @@ export function QuoteList({ quotes }: QuoteListProps) {
             </thead>
             <tbody>
               {quotes.map((quote: Quote) => (
-                <tr
-                  key={quote.id}
-                  className="hover cursor-pointer"
-                  onClick={() => {
-                    const link = `${window.location.origin}/template/${quote.documentId}`
-                    window.open(link, '_blank')
-                  }}
-                >
+                <tr key={quote.id} className="hover">
                   <td>
-                    <div className="font-semibold text-base-content">
+                    <div
+                      className="font-semibold text-base-content cursor-pointer hover:text-primary"
+                      onClick={() => {
+                        const link = `${window.location.origin}/template/${quote.documentId}`
+                        window.open(link, '_blank')
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault()
+                          const link = `${window.location.origin}/template/${quote.documentId}`
+                          window.open(link, '_blank')
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                    >
                       {quote.title || 'Orçamento'}
                     </div>
                   </td>
@@ -77,7 +86,10 @@ export function QuoteList({ quotes }: QuoteListProps) {
                     <span className="font-medium">{quote.client?.name || '-'}</span>
                   </td>
                   <td className="text-center">
-                    <div className="badge badge-warning badge-sm">pendente</div>
+                    <StatusSelect
+                      currentStatus={quote.status_quote || 'pending'}
+                      quoteId={quote.documentId!}
+                    />
                   </td>
                   <td className="text-right">
                     <span className="font-semibold">{formatCurrency(quote.total_value)}</span>
@@ -118,8 +130,7 @@ export function QuoteList({ quotes }: QuoteListProps) {
                       </div>
                       <div className="divider divider-horizontal"></div>
                       <button
-                        className="btn btn-sm btn-square"
-                        style={{ backgroundColor: '#2cb5a1', borderColor: '#2cb5a1' }}
+                        className="btn btn-sm btn-square btn-primary"
                         onClick={(e) => {
                           e.stopPropagation()
                           const link = `${window.location.origin}/template/${quote.documentId}`
@@ -131,8 +142,7 @@ export function QuoteList({ quotes }: QuoteListProps) {
                         <Copy className="w-4 h-4 text-white" />
                       </button>
                       <button
-                        className="btn btn-sm btn-square"
-                        style={{ backgroundColor: '#2cb5a1', borderColor: '#2cb5a1' }}
+                        className="btn btn-sm btn-square btn-primary"
                         onClick={(e) => {
                           e.stopPropagation()
                           toast.info('Funcionalidade em desenvolvimento')
@@ -165,8 +175,7 @@ export function QuoteList({ quotes }: QuoteListProps) {
               <h3 className="text-2xl font-bold">{t('emptyStateTitle')}</h3>
               <p className="py-6 text-base-content/70">{t('emptyStateDescription')}</p>
               <button
-                className="btn text-white"
-                style={{ backgroundColor: '#2cb5a1', borderColor: '#2cb5a1' }}
+                className="btn btn-primary text-white"
                 onClick={() => router.push(`/${locale}/quote/add`)}
               >
                 {t('addNewButton')}

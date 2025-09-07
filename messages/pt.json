@@ -277,6 +277,7 @@
     "quoteCreatedSuccessfully": "Orçamento criado com sucesso!",
     "quoteUpdatedSuccessfully": "Orçamento atualizado com sucesso!",
     "quoteDeletedSuccessfully": "Orçamento excluído com sucesso!",
+    "quoteStatusUpdatedSuccessfully": "Status do orçamento atualizado com sucesso!",
     "deleteError": "Erro ao excluir orçamento",
     "quoteUpdateFailed": "Erro ao atualizar orçamento",
     "quoteNotFound": "Orçamento não encontrado",

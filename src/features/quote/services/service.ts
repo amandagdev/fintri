@@ -154,3 +154,23 @@ export async function deleteQuote(documentId: string) {
     handleQuoteApiError(error, 'deleteQuote')
   }
 }
+
+export async function updateQuoteStatus(documentId: string, status: string) {
+  try {
+    const jwt = await getJWTToken()
+    const response = await axiosInstance.put(
+      `/api/quotes/${documentId}`,
+      {
+        data: {
+          status_quote: status,
+        },
+      },
+      {
+        headers: createAuthHeaders(jwt),
+      },
+    )
+    return response.data
+  } catch (error) {
+    handleQuoteApiError(error, 'updateQuoteStatus')
+  }
+}
