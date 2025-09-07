@@ -2,7 +2,12 @@
 
 import { revalidatePath } from 'next/cache'
 
-import { addQuote, deleteQuote, updateQuote } from '@/features/quote/services/service'
+import {
+  addQuote,
+  deleteQuote,
+  updateQuote,
+  updateQuoteStatus,
+} from '@/features/quote/services/service'
 import type { FieldErrors } from '@/features/quote/state'
 import { QuoteSchema } from '@/features/quote/validation/schema'
 
@@ -59,7 +64,9 @@ export async function addQuoteAction(prevState: State, formData: FormData) {
     if (!parsed.data) {
       return { message: 'validationError' }
     }
-    await addQuote({ data: { ...parsed.data, title: parsed.data.title || 'Orçamento' } })
+    await addQuote({
+      data: { ...parsed.data, title: parsed.data.title || 'Orçamento', status_quote: 'pending' },
+    })
     revalidatePath('/quotes')
     return { message: 'quoteCreatedSuccessfully' }
   } catch (error: unknown) {
@@ -101,6 +108,17 @@ export async function deleteQuoteAction(documentId: string) {
     return { message: 'quoteDeletedSuccessfully' }
   } catch (error: unknown) {
     console.error('Erro ao excluir orçamento:', error)
+    return { message: 'unexpectedError' }
+  }
+}
+
+export async function updateQuoteStatusAction(documentId: string, status: string) {
+  try {
+    await updateQuoteStatus(documentId, status)
+    revalidatePath('/quote')
+    return { message: 'quoteStatusUpdatedSuccessfully' }
+  } catch (error: unknown) {
+    console.error('Erro ao atualizar status do orçamento:', error)
     return { message: 'unexpectedError' }
   }
 }

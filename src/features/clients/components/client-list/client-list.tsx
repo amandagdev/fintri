@@ -48,9 +48,22 @@ export function ClientList({ clients }: ClientListProps) {
             </thead>
             <tbody>
               {clients.map((client: Client) => (
-                <tr key={client.id} className="hover cursor-pointer">
+                <tr key={client.id} className="hover">
                   <td>
-                    <div className="font-semibold text-base-content">{client.name}</div>
+                    <div
+                      className="font-semibold text-base-content cursor-pointer hover:text-primary"
+                      onClick={() => router.push(`/${locale}/clients/edit/${client.documentId}`)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault()
+                          router.push(`/${locale}/clients/edit/${client.documentId}`)
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                    >
+                      {client.name}
+                    </div>
                   </td>
                   <td>
                     <span className="font-medium">{client.email}</span>

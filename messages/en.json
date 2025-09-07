@@ -319,6 +319,7 @@
     "quoteCreatedSuccessfully": "Quote created successfully!",
     "quoteUpdatedSuccessfully": "Quote updated successfully!",
     "quoteDeletedSuccessfully": "Quote deleted successfully!",
+    "quoteStatusUpdatedSuccessfully": "Quote status updated successfully!",
     "noQuotesFound": "No quotes found.",
     "emptyStateTitle": "No quotes registered",
     "emptyStateDescription": "Start by adding your first quote to manage your proposals.",
