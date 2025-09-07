@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 
-import { updateQuoteAction } from '@/features/quote/actions'
+import { updateQuoteAction } from '@/features/quote/actions/actions'
 import { QuoteForm } from '@/features/quote/components/quote-form/quote-form'
 import { getQuoteByDocumentId } from '@/features/quote/services/service'
 
@@ -24,7 +24,7 @@ export default async function EditQuotePage({ params }: EditQuotePageProps) {
       <header className="mb-8">
         <h1 className="text-3xl font-bold text-gray-800">{t('editQuote')}</h1>
         <p className="text-gray-500 mt-1">
-          {t('editQuoteDescription', { quoteName: quote.title })}
+          {t('editQuoteDescription', { quoteName: quote.title || 'Orçamento' })}
         </p>
       </header>
 

@@ -20,4 +20,15 @@ export type FieldErrors = {
   total_value?: string[]
   discount?: string[]
   notification?: string[]
+  quote_type?: string[]
+  items?: string[]
+}
+
+export interface QuoteItem {
+  id?: string
+  item_type: 'service' | 'product'
+  item_name: string
+  quantity: number
+  unit_price: number
+  total: number
 }

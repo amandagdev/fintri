@@ -1,7 +1,6 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
 
 import { addQuote, deleteQuote, updateQuote } from '@/features/quote/services/service'
 import type { FieldErrors } from '@/features/quote/state'
@@ -19,6 +18,9 @@ function parseQuoteFormData(formData: FormData) {
   const notificationJson = formData.get('notification') as string
   const notification = notificationJson ? JSON.parse(notificationJson) : undefined
 
+  const itemsJson = formData.get('items') as string
+  const items = itemsJson ? JSON.parse(itemsJson) : undefined
+
   const totalValueStr = formData.get('total_value') as string
   const discountStr = formData.get('discount') as string
 
@@ -32,6 +34,8 @@ function parseQuoteFormData(formData: FormData) {
     total_value: totalValueStr ? parseFloat(totalValueStr) : 0,
     discount: discountStr ? parseFloat(discountStr) : undefined,
     notification: notification,
+    quote_type: formData.get('quote_type') as 'simple' | 'detailed' | null,
+    items: items,
   }
 }
 
@@ -39,7 +43,7 @@ function handleQuoteValidation(parsed: { success: boolean; error?: unknown; data
   if (!parsed.success) {
     const errors = (parsed.error as { flatten: () => { fieldErrors: FieldErrors } }).flatten()
       .fieldErrors
-    return { errors, message: 'errors.failedToProcessQuoteData' }
+    return { errors, message: 'validationError' }
   }
   return null
 }
@@ -53,13 +57,14 @@ export async function addQuoteAction(prevState: State, formData: FormData) {
 
   try {
     if (!parsed.data) {
-      return { message: 'errors.failedToProcessQuoteData' }
+      return { message: 'validationError' }
     }
-    await addQuote({ data: parsed.data })
+    await addQuote({ data: { ...parsed.data, title: parsed.data.title || 'Orçamento' } })
     revalidatePath('/quotes')
-    return { message: 'errors.quoteCreatedSuccessfully' }
+    return { message: 'quoteCreatedSuccessfully' }
   } catch (error: unknown) {
-    return { message: (error as Error).message }
+    console.error('Erro ao criar orçamento:', error)
+    return { message: 'unexpectedError' }
   }
 }
 
@@ -76,22 +81,26 @@ export async function updateQuoteAction(
 
   try {
     if (!parsed.data) {
-      return { message: 'errors.failedToProcessQuoteData' }
+      return { message: 'validationError' }
     }
-    await updateQuote(quoteDocumentId, { data: parsed.data })
+    await updateQuote(quoteDocumentId, {
+      data: { ...parsed.data, title: parsed.data.title || 'Orçamento' },
+    })
     revalidatePath('/quotes')
-    return { message: 'errors.quoteUpdatedSuccessfully' }
+    return { message: 'quoteUpdatedSuccessfully' }
   } catch (error: unknown) {
-    return { message: (error as Error).message }
+    console.error('Erro ao atualizar orçamento:', error)
+    return { message: 'unexpectedError' }
   }
 }
 
 export async function deleteQuoteAction(documentId: string) {
   try {
     await deleteQuote(documentId)
-    revalidatePath('/quotes')
-    redirect('/quotes?deleted=true')
+    revalidatePath('/quote')
+    return { message: 'quoteDeletedSuccessfully' }
   } catch (error: unknown) {
-    throw error
+    console.error('Erro ao excluir orçamento:', error)
+    return { message: 'unexpectedError' }
   }
 }

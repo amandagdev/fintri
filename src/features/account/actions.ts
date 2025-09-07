@@ -29,7 +29,7 @@ export async function updatePersonalDataAction(
 
   if (!parsed.success) {
     return {
-      message: 'errors.validationFailed',
+      message: 'validationFailed',
       errors: parsed.error.flatten().fieldErrors as UserState['errors'],
     }
   }
@@ -39,7 +39,7 @@ export async function updatePersonalDataAction(
     revalidatePath('/account')
     return { message: 'success.personalDataUpdated' }
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'errors.default'
+    const errorMessage = error instanceof Error ? error.message : 'default'
     return { message: errorMessage }
   }
 }
@@ -68,7 +68,7 @@ export async function updateCompanyDataAction(
 
   if (!parsed.success) {
     return {
-      message: 'errors.validationFailed',
+      message: 'validationFailed',
       errors: parsed.error.flatten().fieldErrors as UserState['errors'],
     }
   }
@@ -79,7 +79,7 @@ export async function updateCompanyDataAction(
     revalidatePath('/pt/account')
     return { message: 'success.companyDataUpdated' }
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'errors.default'
+    const errorMessage = error instanceof Error ? error.message : 'default'
     return { message: errorMessage }
   }
 }
@@ -103,7 +103,7 @@ export async function updatePasswordAction(
 
   if (!parsed.success) {
     return {
-      message: 'errors.validationFailed',
+      message: 'validationFailed',
       errors: parsed.error.flatten().fieldErrors as UserState['errors'],
     }
   }
@@ -112,7 +112,7 @@ export async function updatePasswordAction(
     await updatePassword(parsed.data)
     return { message: 'success.passwordUpdated' }
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'errors.default'
+    const errorMessage = error instanceof Error ? error.message : 'default'
     return { message: errorMessage }
   }
 }

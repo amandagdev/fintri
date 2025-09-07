@@ -3,10 +3,11 @@
 import { useTransition } from 'react'
 
 import { Trash2 } from 'lucide-react'
+import { usePathname, useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
 
-import { deleteQuoteAction } from '@/features/quote/actions'
+import { deleteQuoteAction } from '@/features/quote/actions/actions'
 
 interface DeleteQuoteButtonProps {
   readonly documentId: string
@@ -14,15 +15,29 @@ interface DeleteQuoteButtonProps {
 
 export function DeleteQuoteButton({ documentId }: DeleteQuoteButtonProps) {
   const t = useTranslations('quote')
+  const router = useRouter()
+  const pathname = usePathname()
   const [isPending, startTransition] = useTransition()
   const modalId = `delete-quote-modal-${documentId}`
+
+  // Extrair o locale do pathname
+  const locale = pathname.split('/')[1] || 'pt'
 
   const handleDelete = () => {
     startTransition(async () => {
       try {
-        await deleteQuoteAction(documentId)
+        const result = await deleteQuoteAction(documentId)
         const modal = document.getElementById(modalId) as HTMLDialogElement
         modal?.close()
+
+        if (result.message?.includes('quoteDeletedSuccessfully')) {
+          const messageKey = result.message.replace('errors.', '')
+          toast.success(t(messageKey))
+          router.push(`/${locale}/quote`)
+        } else if (result.message?.includes('Error') || result.message?.includes('error')) {
+          const messageKey = result.message.replace('errors.', '')
+          toast.error(t(messageKey))
+        }
       } catch {
         toast.error(t('deleteError'))
         const modal = document.getElementById(modalId) as HTMLDialogElement
