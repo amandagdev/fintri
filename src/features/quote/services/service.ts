@@ -63,7 +63,13 @@ export async function getQuoteByDocumentId(documentId: string): Promise<Quote | 
       },
     )
 
-    return response.data.data[0]
+    const quote = response.data.data[0]
+    if (!quote) return null
+
+    return {
+      ...quote,
+      items: quote.QuoteItem || [],
+    }
   } catch (error) {
     handleQuoteApiError(error, 'getQuoteByDocumentId')
   }

@@ -8,7 +8,7 @@ interface SearchBarProps {
   onChange: (value: string) => void
 }
 
-export default function SearchBar(props: SearchBarProps) {
+export default function SearchBar(props: Readonly<SearchBarProps>) {
   const { placeholder, value, onChange } = props
   return (
     <label className="input input-bordered w-full sm:w-64">

@@ -3,7 +3,6 @@
 import { useEffect } from 'react'
 
 import { Edit } from 'lucide-react'
-import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
@@ -21,6 +20,9 @@ export function ClientList({ clients }: ClientListProps) {
   const router = useRouter()
   const pathname = usePathname()
 
+  // Extrair o locale do pathname
+  const locale = pathname.split('/')[1] || 'pt'
+
   useEffect(() => {
     if (searchParams.get('success') === 'true') {
       toast.success(t('successMessage'))
@@ -34,33 +36,37 @@ export function ClientList({ clients }: ClientListProps) {
   return (
     <>
       {clients.length > 0 ? (
-        <div className="overflow-x-auto bg-white rounded-lg shadow">
-          <table className="table">
+        <div className="overflow-x-auto">
+          <table className="table w-full bg-white">
             <thead>
-              <tr className="border-b-gray-200">
-                <th>{t('tableHeaderName')}</th>
-                <th>{t('tableHeaderEmail')}</th>
-                <th>{t('tableHeaderPhone')}</th>
-                <th className="text-right">{t('tableHeaderActions')}</th>
+              <tr>
+                <th className="text-left">{t('tableHeaderName')}</th>
+                <th className="text-left">{t('tableHeaderEmail')}</th>
+                <th className="text-left">{t('tableHeaderPhone')}</th>
+                <th className="text-center">{t('tableHeaderActions')}</th>
               </tr>
             </thead>
             <tbody>
               {clients.map((client: Client) => (
-                <tr key={client.id} className="hover">
+                <tr key={client.id} className="hover cursor-pointer">
                   <td>
-                    <div className="font-bold">{client.name}</div>
+                    <div className="font-semibold text-base-content">{client.name}</div>
                   </td>
-                  <td>{client.email}</td>
-                  <td>{client.phone || '-'}</td>
-                  <td className="text-right">
-                    <div className="flex items-center justify-end gap-2">
-                      <Link
-                        href={`/clients/edit/${client.documentId}`}
+                  <td>
+                    <span className="font-medium">{client.email}</span>
+                  </td>
+                  <td>
+                    <span className="font-medium">{client.phone || '-'}</span>
+                  </td>
+                  <td className="text-center">
+                    <div className="flex items-center justify-center gap-2">
+                      <button
+                        onClick={() => router.push(`/${locale}/clients/edit/${client.documentId}`)}
                         className="btn btn-ghost btn-sm btn-square"
                         aria-label={t('editButton')}
                       >
                         <Edit className="w-4 h-4" />
-                      </Link>
+                      </button>
                       <DeleteButton clientId={client.documentId} />
                     </div>
                   </td>
@@ -70,9 +76,20 @@ export function ClientList({ clients }: ClientListProps) {
           </table>
         </div>
       ) : (
-        <div className="p-12 text-center border-2 border-dashed rounded-lg">
-          <h3 className="text-xl font-semibold">{t('emptyStateTitle')}</h3>
-          <p className="mt-2 text-gray-500">{t('emptyStateDescription')}</p>
+        <div className="hero min-h-[400px] bg-base-200 rounded-lg">
+          <div className="hero-content text-center">
+            <div className="max-w-md">
+              <h3 className="text-2xl font-bold">{t('emptyStateTitle')}</h3>
+              <p className="py-6 text-base-content/70">{t('emptyStateDescription')}</p>
+              <button
+                className="btn text-white"
+                style={{ backgroundColor: '#2cb5a1', borderColor: '#2cb5a1' }}
+                onClick={() => router.push(`/${locale}/clients/add`)}
+              >
+                {t('addNewButton')}
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </>

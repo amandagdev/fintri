@@ -1,56 +1,56 @@
 export function mapLoginErrorToKey(message?: string): string {
-  if (!message) return 'errors.loginError'
+  if (!message) return 'loginError'
 
   const errorKeyMap: Record<string, string> = {
-    'Invalid identifier or password': 'errors.invalidCredentials',
+    'Invalid identifier or password': 'invalidCredentials',
   }
 
-  return errorKeyMap[message] || 'errors.default'
+  return errorKeyMap[message] || 'default'
 }
 
 export function mapRegisterErrorToKey(message?: string): string {
-  if (!message) return 'errors.default'
+  if (!message) return 'default'
 
   const errorKeyMap: Record<string, string> = {
-    'Email or Username are already taken': 'errors.emailOrUsernameTaken',
-    'password must be at least 6 characters': 'errors.passwordTooShort',
+    'Email or Username are already taken': 'emailOrUsernameTaken',
+    'password must be at least 6 characters': 'passwordTooShort',
   }
 
-  return errorKeyMap[message] || 'errors.default'
+  return errorKeyMap[message] || 'default'
 }
 
 export function mapClientErrorToKey(message?: string): string {
-  if (!message) return 'errors.clientUpdateFailed'
+  if (!message) return 'clientUpdateFailed'
 
   const errorKeyMap: Record<string, string> = {
-    'This attribute must be unique': 'errors.emailTaken',
-    'Not Found': 'errors.clientNotFound',
-    'Invalid key id': 'errors.invalidKeyId',
-    Forbidden: 'errors.unauthorized',
-    Unauthorized: 'errors.unauthorized',
-    ValidationError: 'errors.validationError',
-    'Bad Request': 'errors.badRequest',
+    'This attribute must be unique': 'emailTaken',
+    'Not Found': 'clientNotFound',
+    'Invalid key id': 'invalidKeyId',
+    Forbidden: 'unauthorized',
+    Unauthorized: 'unauthorized',
+    ValidationError: 'validationError',
+    'Bad Request': 'badRequest',
   }
 
-  return errorKeyMap[message] || `errors.clientUpdateFailed: ${message}`
+  return errorKeyMap[message] || `clientUpdateFailed: ${message}`
 }
 
 export function mapQuoteErrorToKey(message?: string): string {
-  if (!message) return 'errors.quoteUpdateFailed'
+  if (!message) return 'quoteUpdateFailed'
 
   const errorKeyMap: Record<string, string> = {
-    'This attribute must be unique': 'errors.nameAlreadyTaken',
-    'Not Found': 'errors.quoteNotFound',
-    'Invalid key id': 'errors.invalidKeyId',
-    'Invalid key quote_type': 'errors.invalidKeyId',
-    'Invalid key item_type': 'errors.invalidKeyId',
-    'Invalid key items': 'errors.invalidKeyId',
-    'Invalid format, expected a timestamp or an ISO date': 'errors.invalidDateFormat',
-    Forbidden: 'errors.unauthorized',
-    Unauthorized: 'errors.unauthorized',
-    ValidationError: 'errors.validationError',
-    'Bad Request': 'errors.badRequest',
+    'This attribute must be unique': 'nameAlreadyTaken',
+    'Not Found': 'quoteNotFound',
+    'Invalid key id': 'invalidKeyId',
+    'Invalid key quote_type': 'invalidKeyId',
+    'Invalid key item_type': 'invalidKeyId',
+    'Invalid key items': 'invalidKeyId',
+    'Invalid format, expected a timestamp or an ISO date': 'invalidDateFormat',
+    Forbidden: 'unauthorized',
+    Unauthorized: 'unauthorized',
+    ValidationError: 'validationError',
+    'Bad Request': 'badRequest',
   }
 
-  return errorKeyMap[message] || `errors.quoteUpdateFailed: ${message}`
+  return errorKeyMap[message] || `quoteUpdateFailed: ${message}`
 }

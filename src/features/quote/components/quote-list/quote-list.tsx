@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 
-import { Edit } from 'lucide-react'
+import { Copy, Download, Edit, MessageCircle } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
@@ -11,7 +11,6 @@ import type { Quote } from '@/features/quote/state'
 import { formatCurrency, formatDate } from '@/lib/utils'
 
 import { DeleteQuoteButton } from '../button-delete/button-delete'
-import { QuoteActions } from '../quote-actions/quote-actions'
 
 interface QuoteListProps {
   readonly quotes: Quote[]
@@ -46,40 +45,112 @@ export function QuoteList({ quotes }: QuoteListProps) {
   return (
     <>
       {quotes.length > 0 ? (
-        <div className="overflow-x-auto bg-white rounded-lg shadow">
-          <table className="table w-full">
+        <div className="overflow-x-auto">
+          <table className="table w-full bg-white">
             <thead>
-              <tr className="border-b-gray-200">
-                <th>{t('title')}</th>
-                <th>{t('status_quote')}</th>
-                <th>{t('client')}</th>
-                <th>{t('total_value')}</th>
-                <th>{t('discount')}</th>
-                <th>{t('quote_send_date')}</th>
-                <th>{t('quote_validate_date')}</th>
+              <tr>
+                <th className="text-left">{t('title')}</th>
+                <th className="text-left">{t('client')}</th>
+                <th className="text-center">Status</th>
+                <th className="text-right">{t('total_value')}</th>
+                <th className="text-right">{t('discount')}</th>
+                <th className="text-center">Data de Envio</th>
+                <th className="text-center">Ações</th>
               </tr>
             </thead>
             <tbody>
               {quotes.map((quote: Quote) => (
-                <tr key={quote.id} className="hover">
-                  <td>{quote.title}</td>
-                  <td>pendente</td>
-                  <td>{quote.client?.name || '-'}</td>
-                  <td>{formatCurrency(quote.total_value)}</td>
-                  <td>{formatCurrency(quote.discount)}</td>
-                  <td>{formatDate(quote.quote_send_date)}</td>
-                  <td>{formatDate(quote.quote_validate_date)}</td>
+                <tr
+                  key={quote.id}
+                  className="hover cursor-pointer"
+                  onClick={() => {
+                    const link = `${window.location.origin}/template/${quote.documentId}`
+                    window.open(link, '_blank')
+                  }}
+                >
+                  <td>
+                    <div className="font-semibold text-base-content">
+                      {quote.title || 'Orçamento'}
+                    </div>
+                  </td>
+                  <td>
+                    <span className="font-medium">{quote.client?.name || '-'}</span>
+                  </td>
+                  <td className="text-center">
+                    <div className="badge badge-warning badge-sm">pendente</div>
+                  </td>
                   <td className="text-right">
-                    <div className="flex items-center justify-end gap-2">
+                    <span className="font-semibold">{formatCurrency(quote.total_value)}</span>
+                  </td>
+                  <td className="text-right">
+                    {quote.discount && quote.discount > 0 ? (
+                      <span className="font-medium">{formatCurrency(quote.discount)}</span>
+                    ) : (
+                      <span className="text-base-content/50">-</span>
+                    )}
+                  </td>
+                  <td className="text-center">
+                    {quote.quote_send_date ? (
+                      <span className="text-sm">{formatDate(quote.quote_send_date)}</span>
+                    ) : (
+                      <span className="text-base-content/50">-</span>
+                    )}
+                  </td>
+                  <td className="text-center">
+                    <div className="flex items-center justify-center gap-2">
                       <button
-                        onClick={() => router.push(`/${locale}/quote/edit/${quote.documentId}`)}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          router.push(`/${locale}/quote/edit/${quote.documentId}`)
+                        }}
                         className="btn btn-ghost btn-sm btn-square"
                         aria-label={t('editButton')}
                       >
                         <Edit className="w-4 h-4" />
                       </button>
-                      <DeleteQuoteButton documentId={quote.documentId!} />
-                      <QuoteActions quoteId={quote.id!} />
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        onKeyDown={(e) => e.stopPropagation()}
+                        role="button"
+                        tabIndex={0}
+                      >
+                        <DeleteQuoteButton documentId={quote.documentId!} />
+                      </div>
+                      <div className="divider divider-horizontal"></div>
+                      <button
+                        className="btn btn-sm btn-square"
+                        style={{ backgroundColor: '#2cb5a1', borderColor: '#2cb5a1' }}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          const link = `${window.location.origin}/template/${quote.documentId}`
+                          navigator.clipboard.writeText(link)
+                          toast.success('Link copiado!')
+                        }}
+                        aria-label={t('copyLink')}
+                      >
+                        <Copy className="w-4 h-4 text-white" />
+                      </button>
+                      <button
+                        className="btn btn-sm btn-square"
+                        style={{ backgroundColor: '#2cb5a1', borderColor: '#2cb5a1' }}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          toast.info('Funcionalidade em desenvolvimento')
+                        }}
+                        aria-label={t('downloadPDF')}
+                      >
+                        <Download className="w-4 h-4 text-white" />
+                      </button>
+                      <button
+                        className="btn btn-ghost btn-sm btn-square"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          toast.info('Funcionalidade em desenvolvimento')
+                        }}
+                        aria-label="Enviar WhatsApp"
+                      >
+                        <MessageCircle className="w-4 h-4" />
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -88,9 +159,20 @@ export function QuoteList({ quotes }: QuoteListProps) {
           </table>
         </div>
       ) : (
-        <div className="p-12 text-center rounded-lg">
-          <h3 className="text-xl font-semibold">{t('emptyStateTitle')}</h3>
-          <p className="mt-2 text-gray-500">{t('emptyStateDescription')}</p>
+        <div className="hero min-h-[400px] bg-base-200 rounded-lg">
+          <div className="hero-content text-center">
+            <div className="max-w-md">
+              <h3 className="text-2xl font-bold">{t('emptyStateTitle')}</h3>
+              <p className="py-6 text-base-content/70">{t('emptyStateDescription')}</p>
+              <button
+                className="btn text-white"
+                style={{ backgroundColor: '#2cb5a1', borderColor: '#2cb5a1' }}
+                onClick={() => router.push(`/${locale}/quote/add`)}
+              >
+                {t('addNewButton')}
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </>

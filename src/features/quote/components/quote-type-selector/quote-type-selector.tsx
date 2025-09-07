@@ -5,9 +5,10 @@ import { useTranslations } from 'next-intl'
 interface QuoteTypeSelectorProps {
   readonly value: 'simple' | 'detailed'
   readonly onChange: (value: 'simple' | 'detailed') => void
+  readonly disabled?: boolean
 }
 
-export function QuoteTypeSelector({ value, onChange }: QuoteTypeSelectorProps) {
+export function QuoteTypeSelector({ value, onChange, disabled = false }: QuoteTypeSelectorProps) {
   const t = useTranslations('quote')
 
   return (
@@ -23,6 +24,7 @@ export function QuoteTypeSelector({ value, onChange }: QuoteTypeSelectorProps) {
             value="simple"
             checked={value === 'simple'}
             onChange={(e) => onChange(e.target.value as 'simple' | 'detailed')}
+            disabled={disabled}
             className="radio"
           />
           <span className="label-text ml-2">{t('form.simpleQuote')}</span>
@@ -34,6 +36,7 @@ export function QuoteTypeSelector({ value, onChange }: QuoteTypeSelectorProps) {
             value="detailed"
             checked={value === 'detailed'}
             onChange={(e) => onChange(e.target.value as 'simple' | 'detailed')}
+            disabled={disabled}
             className="radio"
           />
           <span className="label-text ml-2">{t('form.detailedQuote')}</span>
