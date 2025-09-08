@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
-import { axiosInstance } from '@/lib/axios'
+import { axiosInstance, getStrapiImageUrl } from '@/lib/axios'
 
 export async function GET(
   _request: NextRequest,
@@ -20,7 +20,7 @@ export async function GET(
       return NextResponse.json({ error: 'Quote not found' }, { status: 404 })
     }
 
-    const companyResponse = await axiosInstance.get('/api/company').catch(() => null)
+    const companyResponse = await axiosInstance.get('/api/company?populate=*').catch(() => null)
     const company = companyResponse?.data?.data || companyResponse?.data || null
 
     const companyData = company
@@ -30,10 +30,7 @@ export async function GET(
           address: (company.address as string) || '',
           email: (company.email as string) || '',
           phone: (company.phone as string) || '',
-          logo:
-            ((company.logo as Record<string, unknown>)?.url as string) ||
-            (company.logo as string) ||
-            '',
+          logo: getStrapiImageUrl((company.logo as Record<string, unknown>)?.url as string),
         }
       : null
 

@@ -4,13 +4,13 @@ import { revalidatePath } from 'next/cache'
 
 import { unformatCNPJ, unformatCPF, unformatPhone } from '@/lib/utils'
 
-import { updateCompanyData, updatePassword, updatePersonalData } from './services/user-service'
-import type {
-  UpdateCompanyDataPayload,
-  UpdatePasswordPayload,
-  UpdatePersonalDataPayload,
-  UserState,
-} from './types'
+import {
+  removeCompanyLogo,
+  updateCompanyData,
+  updatePassword,
+  updatePersonalData,
+} from './services/user-service'
+import type { UpdatePasswordPayload, UpdatePersonalDataPayload, UserState } from './types'
 import { CompanyDataSchema, PasswordSchema, PersonalDataSchema } from './validation/schemas'
 
 export async function updatePersonalDataAction(
@@ -57,18 +57,17 @@ export async function updateCompanyDataAction(
   const phone = formData.get('phone')
   const logo = formData.get('logo')
 
-  const data: UpdateCompanyDataPayload = {
+  const basicData = {
     company: {
       name: name && typeof name === 'string' ? name : '',
       cnpj: cnpj && typeof cnpj === 'string' ? unformatCNPJ(cnpj) : '',
       address: address && typeof address === 'string' ? address : '',
       email: email && typeof email === 'string' ? email : '',
       phone: phone && typeof phone === 'string' ? unformatPhone(phone) : '',
-      ...(logo && typeof logo === 'string' && logo.trim() !== '' ? { logo } : {}),
     },
   }
 
-  const parsed = CompanyDataSchema.safeParse(data)
+  const parsed = CompanyDataSchema.safeParse(basicData)
 
   if (!parsed.success) {
     return {
@@ -78,10 +77,22 @@ export async function updateCompanyDataAction(
   }
 
   try {
-    await updateCompanyData(parsed.data)
+    await updateCompanyData(parsed.data, logo as File | null)
     revalidatePath('/account')
     revalidatePath('/pt/account')
     return { message: 'success.companyDataUpdated' }
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'default'
+    return { message: errorMessage }
+  }
+}
+
+export async function removeCompanyLogoAction(): Promise<UserState> {
+  try {
+    await removeCompanyLogo()
+    revalidatePath('/account')
+    revalidatePath('/pt/account')
+    return { message: 'success.logoRemoved' }
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'default'
     return { message: errorMessage }

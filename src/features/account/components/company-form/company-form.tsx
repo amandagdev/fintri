@@ -1,12 +1,12 @@
 'use client'
 
-import { useActionState, useEffect } from 'react'
+import { startTransition, useActionState, useEffect, useState } from 'react'
 
 import { useTranslations } from 'next-intl'
 import { IMaskInput } from 'react-imask'
 import { toast } from 'sonner'
 
-import { updateCompanyDataAction } from '../../actions'
+import { removeCompanyLogoAction, updateCompanyDataAction } from '../../actions'
 import type { Company } from '../../types'
 import Wrapper from '../../utils/wrapper'
 
@@ -17,6 +17,8 @@ interface CompanyFormProps {
 export default function CompanyForm({ company }: CompanyFormProps) {
   const t = useTranslations('account')
   const [state, formAction] = useActionState(updateCompanyDataAction, {})
+  const [removeState, removeAction] = useActionState(removeCompanyLogoAction, {})
+  const [previewLogo, setPreviewLogo] = useState<string | null>(company?.logo || null)
 
   useEffect(() => {
     if (state.message && typeof state.message === 'string') {
@@ -27,6 +29,28 @@ export default function CompanyForm({ company }: CompanyFormProps) {
       }
     }
   }, [state.message, t])
+
+  useEffect(() => {
+    if (removeState.message && typeof removeState.message === 'string') {
+      if (removeState.message.includes('success')) {
+        toast.success(t(removeState.message))
+        setPreviewLogo(null)
+      } else {
+        toast.error(t(removeState.message))
+      }
+    }
+  }, [removeState.message, t])
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        setPreviewLogo(e.target?.result as string)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
 
   return (
     <Wrapper title={t('companyForm.title')} description={t('companyForm.description')}>
@@ -139,11 +163,32 @@ export default function CompanyForm({ company }: CompanyFormProps) {
             <label className="label" htmlFor="companyLogo">
               <span className="label-text">{t('companyForm.logoLabel')}</span>
             </label>
+            {previewLogo && (
+              <div className="mb-4">
+                <div className="flex items-center gap-4">
+                  <img
+                    src={previewLogo}
+                    alt="Logo atual"
+                    className="w-20 h-20 object-contain border border-gray-300 rounded"
+                  />
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-error text-white"
+                    onClick={() => startTransition(() => removeAction())}
+                  >
+                    Remover Logo
+                  </button>
+                </div>
+              </div>
+            )}
             <input
               id="logo"
               name="logo"
               type="file"
+              accept="image/*"
               className="file-input file-input-bordered w-full"
+              placeholder={company?.logo ? company.logo.split('/').pop() : 'Escolher arquivo'}
+              onChange={handleFileChange}
             />
             {state.errors?.company?.logo && (
               <label className="label">

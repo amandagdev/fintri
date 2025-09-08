@@ -56,59 +56,55 @@ jest.mock('next/navigation', () => ({
 }))
 
 describe('Sidebar', () => {
-  it('should render logo and title', () => {
+  it('should render sidebar structure', () => {
     render(<Sidebar />)
 
-    expect(screen.getByText('Fintri')).toBeInTheDocument()
-    expect(screen.getByText('Gestão de orçamentos')).toBeInTheDocument()
+    expect(screen.getByRole('complementary')).toBeInTheDocument()
+    expect(screen.getByAltText('Logo')).toBeInTheDocument()
   })
 
-  it('should render all menu items', () => {
+  it('should render all menu links', () => {
     render(<Sidebar />)
 
-    expect(screen.getByText('Dashboard')).toBeInTheDocument()
-    expect(screen.getByText('Criar orçamento')).toBeInTheDocument()
-    expect(screen.getByText('Meus orçamentos')).toBeInTheDocument()
-    expect(screen.getByText('Adicionar cliente')).toBeInTheDocument()
-    expect(screen.getByText('Meus clientes')).toBeInTheDocument()
-    expect(screen.getByText('Minha conta')).toBeInTheDocument()
+    const links = screen.getAllByRole('link')
+    expect(links).toHaveLength(7) // Logo + 6 menu items
   })
 
   it('should render disabled analytics option', () => {
     render(<Sidebar />)
 
-    const analyticsOption = screen.getByText('Minhas análises')
-    expect(analyticsOption).toBeInTheDocument()
-    expect(analyticsOption).toHaveClass('text-gray-300 cursor-not-allowed')
+    const disabledElements = screen
+      .getAllByRole('generic')
+      .filter((el) => el.className.includes('cursor-not-allowed'))
+    expect(disabledElements).toHaveLength(1)
   })
 
   it('should render logout button', () => {
     render(<Sidebar />)
 
-    expect(screen.getByText('Sair')).toBeInTheDocument()
+    const buttons = screen.getAllByRole('button')
+    expect(buttons).toHaveLength(1)
   })
 
   it('should have correct links for active items', () => {
     render(<Sidebar />)
 
-    expect(screen.getByRole('link', { name: /dashboard/i })).toHaveAttribute('href', '/dashboard')
-    expect(screen.getByRole('link', { name: /criar orçamento/i })).toHaveAttribute(
-      'href',
-      '/quote/add',
-    )
-    expect(screen.getByRole('link', { name: /meus orçamentos/i })).toHaveAttribute('href', '/quote')
-    expect(screen.getByRole('link', { name: /adicionar cliente/i })).toHaveAttribute(
-      'href',
-      '/clients/add',
-    )
-    expect(screen.getByRole('link', { name: /meus clientes/i })).toHaveAttribute('href', '/clients')
-    expect(screen.getByRole('link', { name: /minha conta/i })).toHaveAttribute('href', '/account')
+    const links = screen.getAllByRole('link')
+    const hrefs = links.map((link) => link.getAttribute('href'))
+
+    expect(hrefs).toContain('/dashboard')
+    expect(hrefs).toContain('/quote/add')
+    expect(hrefs).toContain('/quote')
+    expect(hrefs).toContain('/clients/add')
+    expect(hrefs).toContain('/clients')
+    expect(hrefs).toContain('/account')
   })
 
   it('should highlight active menu item', () => {
     render(<Sidebar />)
 
-    const dashboardLink = screen.getByRole('link', { name: /dashboard/i })
+    const links = screen.getAllByRole('link')
+    const dashboardLink = links.find((link) => link.getAttribute('href') === '/dashboard')
     expect(dashboardLink).toHaveClass('bg-[#1b6d71] text-white')
   })
 

@@ -174,7 +174,8 @@
     "success": {
       "personalDataUpdated": "Personal data updated successfully!",
       "companyDataUpdated": "Company data updated successfully!",
-      "passwordUpdated": "Password updated successfully!"
+      "passwordUpdated": "Password updated successfully!",
+      "logoRemoved": "Logo removed successfully!"
     },
     "errors": {
       "default": "An error occurred, please try again.",

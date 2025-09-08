@@ -41,6 +41,11 @@ export default function QuoteTemplate({ quote, company }: Props) {
     }
   }
 
+  const formatQuoteId = (documentId: string) => {
+    if (!documentId) return 'N/A'
+    return documentId.slice(-8).toUpperCase()
+  }
+
   const getDisplayData = () => {
     return {
       name: company?.name || quote.client?.name || '',
@@ -178,7 +183,9 @@ export default function QuoteTemplate({ quote, company }: Props) {
               </div>
               <div className="text-right">
                 <div className="text-sm text-gray-500 mb-1">{t('template.quoteNumber')}</div>
-                <div className="text-lg font-semibold text-gray-800">#{quote.documentId}</div>
+                <div className="text-lg font-semibold text-gray-800">
+                  #{formatQuoteId(quote.documentId || quote.id || '')}
+                </div>
               </div>
             </div>
           </div>
