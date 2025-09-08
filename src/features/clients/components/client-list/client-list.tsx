@@ -7,6 +7,8 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
 
+import { formatCPForCNPJ, formatPhone } from '@/lib/utils'
+
 import type { Client } from '../../types'
 import { DeleteButton } from '../button-delete/button-delete'
 
@@ -43,6 +45,7 @@ export function ClientList({ clients }: ClientListProps) {
                 <th className="text-left">{t('tableHeaderName')}</th>
                 <th className="text-left">{t('tableHeaderEmail')}</th>
                 <th className="text-left">{t('tableHeaderPhone')}</th>
+                <th className="text-left">{t('tableHeaderTaxId')}</th>
                 <th className="text-center">{t('tableHeaderActions')}</th>
               </tr>
             </thead>
@@ -69,7 +72,14 @@ export function ClientList({ clients }: ClientListProps) {
                     <span className="font-medium">{client.email}</span>
                   </td>
                   <td>
-                    <span className="font-medium">{client.phone || '-'}</span>
+                    <span className="font-medium">
+                      {client.phone ? formatPhone(client.phone) : '-'}
+                    </span>
+                  </td>
+                  <td>
+                    <span className="font-medium">
+                      {client.cpf_or_cnpj ? formatCPForCNPJ(client.cpf_or_cnpj) : '-'}
+                    </span>
                   </td>
                   <td className="text-center">
                     <div className="flex items-center justify-center gap-2">

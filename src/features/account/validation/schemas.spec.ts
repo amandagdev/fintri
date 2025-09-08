@@ -73,6 +73,7 @@ describe('Account Validation Schemas', () => {
           cnpj: '12345678000195',
           address: 'Rua Teste, 123',
           email: 'empresa@test.com',
+          phone: '11999999999',
           logo: 'logo-url',
         },
       }
@@ -91,7 +92,8 @@ describe('Account Validation Schemas', () => {
           name: 'Empresa Teste',
           cnpj: '',
           address: '',
-          email: 'valid@email.com', // Valid email required
+          email: 'valid@email.com',
+          phone: '',
           logo: '',
         },
       }
@@ -107,10 +109,11 @@ describe('Account Validation Schemas', () => {
     it('should accept data with empty company name (optional field)', () => {
       const dataWithEmptyName = {
         company: {
-          name: '', // Optional field can be empty
+          name: '',
           cnpj: '12345678000195',
           address: 'Rua Teste, 123',
           email: 'empresa@test.com',
+          phone: '11999999999',
         },
       }
 
@@ -122,6 +125,25 @@ describe('Account Validation Schemas', () => {
       }
     })
 
+    it('should accept data with empty email', () => {
+      const dataWithEmptyEmail = {
+        company: {
+          name: 'Empresa Teste',
+          cnpj: '12345678000195',
+          address: 'Rua Teste, 123',
+          email: '',
+          phone: '11999999999',
+        },
+      }
+
+      const result = CompanyDataSchema.safeParse(dataWithEmptyEmail)
+
+      expect(result.success).toBe(true)
+      if (result.success) {
+        expect(result.data).toEqual(dataWithEmptyEmail)
+      }
+    })
+
     it('should reject data with invalid email', () => {
       const invalidData = {
         company: {
@@ -129,6 +151,7 @@ describe('Account Validation Schemas', () => {
           cnpj: '12345678000195',
           address: 'Rua Teste, 123',
           email: 'invalid-email',
+          phone: '11999999999',
         },
       }
 

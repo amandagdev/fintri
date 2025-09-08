@@ -145,6 +145,8 @@
       "addressPlaceholder": "Street, Number, District, City - State, ZIP Code",
       "companyEmailLabel": "Business Email",
       "companyEmailPlaceholder": "contact@yourcompany.com",
+      "phoneLabel": "Business Phone",
+      "phonePlaceholder": "(555) 123-4567",
       "logoLabel": "Company Logo"
     },
     "planSection": {
@@ -198,6 +200,7 @@
     "tableHeaderName": "Name",
     "tableHeaderEmail": "Email",
     "tableHeaderPhone": "Phone",
+    "tableHeaderTaxId": "Tax ID",
     "tableHeaderActions": "Actions",
     "emptyStateTitle": "No clients registered",
     "emptyStateDescription": "Start by adding your first client to create quotes.",
@@ -265,6 +268,9 @@
       "validateDate": "Validate Date",
       "status": "Status",
       "pending": "Pending",
+      "accepted": "Accepted",
+      "rejected": "Rejected",
+      "expired": "Expired",
       "subtotal": "Subtotal:",
       "discount": "Discount:",
       "total": "Total:",

@@ -1,6 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
+import { IMaskInput } from 'react-imask'
 
 import Wrapper from '@/features/account/utils/wrapper'
 
@@ -68,7 +69,8 @@ export function ClientForm({ action, state, initialData }: AddClientFormProps) {
             <label className="label" htmlFor="phone">
               <span className="label-text">{t('form.phoneLabel')}</span>
             </label>
-            <input
+            <IMaskInput
+              mask="(00) 00000-0000"
               id="phone"
               name="phone"
               type="tel"
@@ -82,7 +84,8 @@ export function ClientForm({ action, state, initialData }: AddClientFormProps) {
             <label className="label" htmlFor="cpf_or_cnpj">
               <span className="label-text">{t('form.taxIdLabel')}</span>
             </label>
-            <input
+            <IMaskInput
+              mask={[{ mask: '000.000.000-00' }, { mask: '00.000.000/0000-00' }]}
               id="cpf_or_cnpj"
               name="cpf_or_cnpj"
               type="text"

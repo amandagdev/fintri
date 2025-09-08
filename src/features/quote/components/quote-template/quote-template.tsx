@@ -1,55 +1,47 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 
 import { Download, Share2 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-import type { Company, User } from '@/features/account/types'
-import { formatCurrency, formatDate } from '@/lib/utils'
+import type { Company } from '@/features/account/types'
+import { formatCurrency, formatDate, formatPhone } from '@/lib/utils'
 
 import type { Quote } from '../../state'
 import { generateQuotePDF } from '../../utils/pdf-generator'
 
 interface Props {
   readonly quote: Quote
+  readonly company?: Company | null
 }
 
-export default function QuoteTemplate({ quote }: Props) {
+export default function QuoteTemplate({ quote, company }: Props) {
   const t = useTranslations('quote')
   const templateRef = useRef<HTMLDivElement>(null)
-  const [companyData, setCompanyData] = useState<Company | null>(null)
-  const [userData, setUserData] = useState<User | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/api/quote-data')
-        const data = await response.json()
-
-        if (response.ok) {
-          setCompanyData(data.company)
-          setUserData(data.user)
-        } else {
-          console.error('Erro ao buscar dados:', data.error)
-        }
-      } catch (error) {
-        console.error('Erro ao buscar dados:', error)
-      } finally {
-        setIsLoading(false)
-      }
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case 'pending':
+        return t('template.pending')
+      case 'accepted':
+        return t('template.accepted')
+      case 'rejected':
+        return t('template.rejected')
+      case 'expired':
+        return t('template.expired')
+      default:
+        return t('template.pending')
     }
-
-    fetchData()
-  }, [])
+  }
 
   const getDisplayData = () => {
     return {
-      name: companyData?.name || userData?.username,
-      address: companyData?.address,
-      email: companyData?.email || userData?.email,
-      logo: companyData?.logo || '',
+      name: company?.name || quote.client?.name || '',
+      address: company?.address || '',
+      email: company?.email || quote.client?.email || '',
+      phone: company?.phone || quote.client?.phone || '',
+      logo: company?.logo || '',
     }
   }
 
@@ -93,19 +85,7 @@ export default function QuoteTemplate({ quote }: Props) {
       })
     } else {
       navigator.clipboard.writeText(window.location.href)
-      // Mostrar toast de sucesso
     }
-  }
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50 py-8 flex items-center justify-center">
-        <div className="text-center">
-          <div className="loading loading-spinner loading-lg"></div>
-          <p className="mt-4 text-gray-600">Carregando orçamento...</p>
-        </div>
-      </div>
-    )
   }
 
   const displayData = getDisplayData()
@@ -160,8 +140,22 @@ export default function QuoteTemplate({ quote }: Props) {
                 )}
                 <div>
                   <h2 className="text-3xl font-bold text-gray-800 mb-2">{displayData.name}</h2>
-                  <p className="text-gray-600">{displayData.address}</p>
-                  <p className="text-gray-600">{displayData.email}</p>
+                  {displayData.address && (
+                    <p className="text-gray-600">
+                      <span className="font-medium">Endereço:</span> {displayData.address}
+                    </p>
+                  )}
+                  {displayData.email && (
+                    <p className="text-gray-600">
+                      <span className="font-medium">Email:</span> {displayData.email}
+                    </p>
+                  )}
+                  {displayData.phone && (
+                    <p className="text-gray-600">
+                      <span className="font-medium">Telefone:</span>{' '}
+                      {formatPhone(displayData.phone)}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="text-right">
@@ -188,7 +182,7 @@ export default function QuoteTemplate({ quote }: Props) {
               <div>
                 <div className="text-sm text-gray-500">{t('template.status')}</div>
                 <p className="font-medium text-gray-800">
-                  {quote.status_quote || t('template.pending')}
+                  {getStatusText(quote.status_quote || 'pending')}
                 </p>
               </div>
             </div>

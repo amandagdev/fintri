@@ -2,6 +2,8 @@
 
 import { revalidatePath } from 'next/cache'
 
+import { unformatCNPJ, unformatCPF, unformatPhone } from '@/lib/utils'
+
 import { updateCompanyData, updatePassword, updatePersonalData } from './services/user-service'
 import type {
   UpdateCompanyDataPayload,
@@ -21,8 +23,8 @@ export async function updatePersonalDataAction(
 
   const data: UpdatePersonalDataPayload = {
     fullName: fullName && typeof fullName === 'string' ? fullName : undefined,
-    phone: phone && typeof phone === 'string' ? phone : undefined,
-    cpf: cpf && typeof cpf === 'string' ? cpf : undefined,
+    phone: phone && typeof phone === 'string' ? unformatPhone(phone) : undefined,
+    cpf: cpf && typeof cpf === 'string' ? unformatCPF(cpf) : undefined,
   }
 
   const parsed = PersonalDataSchema.safeParse(data)
@@ -52,14 +54,16 @@ export async function updateCompanyDataAction(
   const cnpj = formData.get('cnpj')
   const address = formData.get('address')
   const email = formData.get('email')
+  const phone = formData.get('phone')
   const logo = formData.get('logo')
 
   const data: UpdateCompanyDataPayload = {
     company: {
       name: name && typeof name === 'string' ? name : '',
-      cnpj: cnpj && typeof cnpj === 'string' ? cnpj : '',
+      cnpj: cnpj && typeof cnpj === 'string' ? unformatCNPJ(cnpj) : '',
       address: address && typeof address === 'string' ? address : '',
       email: email && typeof email === 'string' ? email : '',
+      phone: phone && typeof phone === 'string' ? unformatPhone(phone) : '',
       ...(logo && typeof logo === 'string' && logo.trim() !== '' ? { logo } : {}),
     },
   }

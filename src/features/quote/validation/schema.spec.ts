@@ -76,8 +76,7 @@ describe('Quote Schema Validation', () => {
   describe('invalid data', () => {
     it('fails validation for missing required fields', () => {
       const invalidQuote = {
-        description: 'Sem título',
-        total_value: 1000,
+        description: 'Sem total_value',
       }
 
       const result = QuoteSchema.safeParse(invalidQuote)
@@ -85,9 +84,9 @@ describe('Quote Schema Validation', () => {
       expect(result.success).toBe(false)
       if (!result.success) {
         expect(result.error.issues).toHaveLength(1)
-        expect(result.error.issues[0].path).toEqual(['title'])
+        expect(result.error.issues[0].path).toEqual(['total_value'])
         expect(result.error.issues[0].message).toBe(
-          'Invalid input: expected string, received undefined',
+          'Invalid input: expected number, received undefined',
         )
       }
     })
@@ -104,6 +103,28 @@ describe('Quote Schema Validation', () => {
       expect(result.success).toBe(true)
     })
 
+    it('validates client with phone and address fields', () => {
+      const validQuote = {
+        title: 'Orçamento com Cliente Completo',
+        total_value: 1000,
+        client: {
+          id: '1',
+          name: 'Cliente',
+          email: 'cliente@test.com',
+          phone: '11999999999',
+          address: 'Rua Teste, 123',
+        },
+      }
+
+      const result = QuoteSchema.safeParse(validQuote)
+
+      expect(result.success).toBe(true)
+      if (result.success) {
+        expect(result.data.client.phone).toBe('11999999999')
+        expect(result.data.client.address).toBe('Rua Teste, 123')
+      }
+    })
+
     it('fails validation for negative total_value', () => {
       const invalidQuote = {
         title: 'Orçamento Negativo',
@@ -116,7 +137,7 @@ describe('Quote Schema Validation', () => {
       if (!result.success) {
         expect(result.error.issues).toHaveLength(1)
         expect(result.error.issues[0].path).toEqual(['total_value'])
-        expect(result.error.issues[0].message).toBe('quote.form.totalValueRequired')
+        expect(result.error.issues[0].message).toBe('form.totalValueRequired')
       }
     })
 
@@ -133,7 +154,7 @@ describe('Quote Schema Validation', () => {
       if (!result.success) {
         expect(result.error.issues).toHaveLength(1)
         expect(result.error.issues[0].path).toEqual(['discount'])
-        expect(result.error.issues[0].message).toBe('quote.form.discountInvalid')
+        expect(result.error.issues[0].message).toBe('form.discountInvalid')
       }
     })
 

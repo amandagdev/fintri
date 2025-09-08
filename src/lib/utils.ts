@@ -95,3 +95,56 @@ export function formatDateForInput(dateString?: string): string {
     return ''
   }
 }
+
+export function formatCPF(value: string): string {
+  const cleaned = value.replace(/\D/g, '')
+  if (cleaned.length <= 11) {
+    return cleaned.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
+  }
+  return value
+}
+
+export function formatCNPJ(value: string): string {
+  const cleaned = value.replace(/\D/g, '')
+  if (cleaned.length <= 14) {
+    return cleaned.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5')
+  }
+  return value
+}
+
+export function formatPhone(value: string): string {
+  const cleaned = value.replace(/\D/g, '')
+  if (cleaned.length <= 11) {
+    if (cleaned.length <= 10) {
+      return cleaned.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3')
+    } else {
+      return cleaned.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')
+    }
+  }
+  return value
+}
+
+export function formatCPForCNPJ(value: string): string {
+  const cleaned = value.replace(/\D/g, '')
+  if (cleaned.length <= 11) {
+    return formatCPF(value)
+  } else {
+    return formatCNPJ(value)
+  }
+}
+
+export function unformatCPF(value: string): string {
+  return value.replace(/\D/g, '')
+}
+
+export function unformatCNPJ(value: string): string {
+  return value.replace(/\D/g, '')
+}
+
+export function unformatPhone(value: string): string {
+  return value.replace(/\D/g, '')
+}
+
+export function unformatCPForCNPJ(value: string): string {
+  return value.replace(/\D/g, '')
+}
