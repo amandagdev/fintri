@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
-import { axiosInstance } from '@/lib/axios'
+import { axiosInstance, getStrapiImageUrl } from '@/lib/axios'
 
 export async function GET(
   _request: NextRequest,
@@ -30,9 +30,7 @@ export async function GET(
           address: (company.address as string) || '',
           email: (company.email as string) || '',
           phone: (company.phone as string) || '',
-          logo: company.logo
-            ? `${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}${(company.logo as Record<string, unknown>)?.url as string}`
-            : '',
+          logo: getStrapiImageUrl((company.logo as Record<string, unknown>)?.url as string),
         }
       : null
 

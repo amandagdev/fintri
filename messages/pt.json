@@ -173,7 +173,8 @@
     "success": {
       "personalDataUpdated": "Dados pessoais atualizados com sucesso!",
       "companyDataUpdated": "Dados da empresa atualizados com sucesso!",
-      "passwordUpdated": "Senha atualizada com sucesso!"
+      "passwordUpdated": "Senha atualizada com sucesso!",
+      "logoRemoved": "Logo removida com sucesso!"
     },
     "errors": {
       "default": "Ocorreu um erro, por favor, tente novamente.",

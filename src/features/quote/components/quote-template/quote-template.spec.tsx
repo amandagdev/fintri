@@ -1,6 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { useTranslations } from 'next-intl'
-import { toast } from 'sonner'
 
 import QuoteTemplate from './quote-template'
 
@@ -135,6 +134,19 @@ describe('QuoteTemplate', () => {
     render(<QuoteTemplate quote={mockQuote} company={mockCompany} />)
 
     expect(screen.getByText('template.pending')).toBeInTheDocument()
+  })
+
+  it('should display formatted quote ID', () => {
+    render(<QuoteTemplate quote={mockQuote} company={mockCompany} />)
+
+    expect(screen.getByText('#DOC1')).toBeInTheDocument()
+  })
+
+  it('should display formatted quote ID with fallback when documentId is empty', () => {
+    const quoteWithoutDocumentId = { ...mockQuote, documentId: '' }
+    render(<QuoteTemplate quote={quoteWithoutDocumentId} company={mockCompany} />)
+
+    expect(screen.getByText('#1')).toBeInTheDocument()
   })
 
   it('should display quote items section when available', () => {

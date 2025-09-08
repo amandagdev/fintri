@@ -70,8 +70,8 @@ export default function Sidebar() {
         })}
       </ul>
 
-      <div className="p-4 border-t border-white/20">
-        <button className="flex items-center gap-3 w-full text-left rounded-lg px-3 py-2 hover:bg-[#1b6d71] hover:text-white transition">
+      <div className="p-4 border-t border-white/20 ">
+        <button className="flex items-center gap-3 w-full text-left cursor-pointer rounded-lg px-3 py-2 hover:bg-[#1b6d71] hover:text-white transition">
           <LogOut size={18} />
           {t('logout')}
         </button>

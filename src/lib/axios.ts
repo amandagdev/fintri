@@ -8,9 +8,20 @@ const getStrapiUrl = () => {
   return process.env.NEXT_PUBLIC_STRAPI_URL || process.env.STRAPI_URL
 }
 
+export const getStrapiImageUrl = (imagePath: string) => {
+  if (!imagePath) return ''
+
+  const baseUrl = getStrapiUrl()
+  return `${baseUrl}${imagePath}`
+}
+
 export const axiosInstance = axios.create({
   baseURL: getStrapiUrl(),
   headers: {
     'Content-Type': 'application/json',
   },
+})
+
+export const axiosUploadInstance = axios.create({
+  baseURL: getStrapiUrl(),
 })

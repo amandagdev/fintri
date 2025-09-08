@@ -1,4 +1,4 @@
-import { axiosInstance } from '@/lib/axios'
+import { axiosInstance, axiosUploadInstance, getStrapiImageUrl } from '@/lib/axios'
 import { createAuthHeaders, getJWTToken, handleApiError } from '@/lib/service-utils'
 
 import type {
@@ -62,7 +62,10 @@ export async function updatePersonalData(payload: UpdatePersonalDataPayload): Pr
   }
 }
 
-export async function updateCompanyData(payload: UpdateCompanyDataPayload): Promise<void> {
+export async function updateCompanyData(
+  payload: UpdateCompanyDataPayload,
+  logoFile?: File | null,
+): Promise<void> {
   try {
     const jwt = await getJWTToken()
 
@@ -73,8 +76,57 @@ export async function updateCompanyData(payload: UpdateCompanyDataPayload): Prom
         headers: createAuthHeaders(jwt),
       },
     )
+
+    if (logoFile) {
+      const companyResponse = await axiosInstance.get('/api/company', {
+        headers: createAuthHeaders(jwt),
+      })
+      const companyId = companyResponse.data.data?.id
+
+      if (companyId) {
+        const uploadFormData = new FormData()
+        uploadFormData.append('files', logoFile)
+        uploadFormData.append('ref', 'api::company.company')
+        uploadFormData.append('refId', companyId.toString())
+        uploadFormData.append('field', 'logo')
+
+        await axiosUploadInstance.post('/api/upload', uploadFormData, {
+          headers: {
+            ...createAuthHeaders(jwt),
+          },
+        })
+      }
+    }
   } catch (error) {
     handleApiError(error, 'updateCompanyData', 'account.errors')
+  }
+}
+
+export async function removeCompanyLogo(): Promise<void> {
+  try {
+    const jwt = await getJWTToken()
+
+    const companyResponse = await axiosInstance.get('/api/company?populate=*', {
+      headers: createAuthHeaders(jwt),
+    })
+    const company = companyResponse.data.data
+    const logoId = company?.logo?.id
+
+    if (logoId) {
+      await axiosInstance.delete(`/api/upload/files/${logoId}`, {
+        headers: createAuthHeaders(jwt),
+      })
+
+      await axiosInstance.put(
+        '/api/company',
+        { data: { logo: null } },
+        {
+          headers: createAuthHeaders(jwt),
+        },
+      )
+    }
+  } catch (error) {
+    handleApiError(error, 'removeCompanyLogo', 'account.errors')
   }
 }
 
@@ -110,9 +162,7 @@ function mapCompanyData(companyData: Record<string, unknown> | null): Company {
   }
 
   const logoUrl = (companyData.logo as Record<string, unknown>)?.url as string
-  const fullLogoUrl = logoUrl
-    ? `${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}${logoUrl}`
-    : ''
+  const fullLogoUrl = getStrapiImageUrl(logoUrl)
 
   return {
     name: (companyData.name as string) || '',
