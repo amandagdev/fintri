@@ -2,14 +2,20 @@
 
 import { useRef } from 'react'
 
-import { Download, Share2 } from 'lucide-react'
+import { Copy, Download, Share2 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { toast } from 'sonner'
 
 import type { Company } from '@/features/account/types'
 import { formatCurrency, formatDate, formatPhone } from '@/lib/utils'
 
 import type { Quote } from '../../state'
 import { generateQuotePDF } from '../../utils/pdf-generator'
+import {
+  copyToClipboard,
+  handleButtonState,
+  shareToWhatsAppFromTemplate,
+} from '../../utils/share-utils'
 
 interface Props {
   readonly quote: Quote
@@ -46,45 +52,37 @@ export default function QuoteTemplate({ quote, company }: Props) {
   }
 
   const handleDownload = async () => {
-    if (!templateRef.current) return
-
     const button = document.querySelector('[data-download-button]') as HTMLButtonElement
-    const originalContent = button?.innerHTML
+    if (!button) return
+
+    button.setAttribute('data-original-content', button.innerHTML)
 
     await generateQuotePDF({
-      element: templateRef.current,
-      fileName: `orcamento-${quote.documentId || quote.id}.pdf`,
+      documentId: quote.documentId || quote.id || '',
+      fileName: `orcamento-${quote.documentId || quote.id || 'unknown'}.pdf`,
       onProgress: (message) => {
-        if (button) {
-          button.disabled = true
-          button.innerHTML = `<span class="loading loading-spinner loading-sm"></span> ${message}`
-        }
+        handleButtonState(button, true, message)
       },
       onError: (error) => {
         alert(error)
-        if (button && originalContent) {
-          button.disabled = false
-          button.innerHTML = originalContent
-        }
+        handleButtonState(button, false)
       },
       onSuccess: () => {
-        if (button && originalContent) {
-          button.disabled = false
-          button.innerHTML = originalContent
-        }
+        handleButtonState(button, false)
       },
     })
   }
 
   const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: `Orçamento - ${quote.title}`,
-        text: `Orçamento: ${quote.title}`,
-        url: window.location.href,
-      })
+    shareToWhatsAppFromTemplate(quote.title || 'Orçamento')
+  }
+
+  const handleCopyLink = async () => {
+    const success = await copyToClipboard(window.location.href)
+    if (success) {
+      toast.success(t('copyLinkSuccess'))
     } else {
-      navigator.clipboard.writeText(window.location.href)
+      toast.error(t('copyLinkError'))
     }
   }
 
@@ -92,8 +90,23 @@ export default function QuoteTemplate({ quote, company }: Props) {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            @media print {
+              body { margin: 0; padding: 0; }
+              .min-h-screen { min-height: auto !important; padding: 0 !important; }
+              .max-w-4xl { max-width: none !important; margin: 0 !important; padding: 0 !important; }
+              .bg-gray-50 { background: white !important; }
+              .py-8 { padding: 0 !important; }
+              .mb-6 { margin-bottom: 1rem !important; }
+              .pb-6 { padding-bottom: 1rem !important; }
+              .gap-4 { gap: 0.5rem !important; }
+            }
+          `,
+        }}
+      />
       <div className="max-w-4xl mx-auto px-4">
-        {/* Header com ações */}
         <div className="mb-6 flex justify-between items-center">
           <div>
             {quote.client?.name ? (
@@ -118,6 +131,10 @@ export default function QuoteTemplate({ quote, company }: Props) {
               <Download className="w-4 h-4" />
               {t('pdf.downloadButton')}
             </button>
+            <button onClick={handleCopyLink} className="btn btn-outline btn-sm">
+              <Copy className="w-4 h-4" />
+              {t('copyLink')}
+            </button>
             <button onClick={handleShare} className="btn btn-outline btn-sm">
               <Share2 className="w-4 h-4" />
               {t('pdf.shareButton')}
@@ -125,9 +142,10 @@ export default function QuoteTemplate({ quote, company }: Props) {
           </div>
         </div>
 
-        {/* Template do orçamento */}
-        <div ref={templateRef} className="bg-white rounded-lg shadow-lg p-8">
-          {/* Cabeçalho */}
+        <div
+          ref={templateRef}
+          className="bg-white rounded-lg shadow-lg p-8 print:p-4 print:shadow-none print:rounded-none"
+        >
           <div className="border-b border-gray-200 pb-6 mb-6">
             <div className="flex justify-between items-start">
               <div className="flex items-start gap-4">
@@ -165,7 +183,6 @@ export default function QuoteTemplate({ quote, company }: Props) {
             </div>
           </div>
 
-          {/* Detalhes do orçamento */}
           <div className="mb-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-3">
               {t('template.quoteDetails')}
@@ -188,7 +205,6 @@ export default function QuoteTemplate({ quote, company }: Props) {
             </div>
           </div>
 
-          {/* Produto/Item ou Itens do Orçamento */}
           <div className="mb-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-3">
               {quote.items && quote.items.length > 0
