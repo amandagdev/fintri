@@ -25,7 +25,7 @@ export async function getCurrentUser(): Promise<User> {
 export async function getCompanyData(): Promise<Company> {
   try {
     const jwt = await getJWTToken()
-    const response = await axiosInstance.get('/api/company', {
+    const response = await axiosInstance.get('/api/company?populate=*', {
       headers: createAuthHeaders(jwt),
     })
 
@@ -109,16 +109,18 @@ function mapCompanyData(companyData: Record<string, unknown> | null): Company {
     return getEmptyCompany()
   }
 
+  const logoUrl = (companyData.logo as Record<string, unknown>)?.url as string
+  const fullLogoUrl = logoUrl
+    ? `${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}${logoUrl}`
+    : ''
+
   return {
     name: (companyData.name as string) || '',
     cnpj: (companyData.cnpj as string) || '',
     address: (companyData.address as string) || '',
     email: (companyData.email as string) || '',
     phone: (companyData.phone as string) || '',
-    logo:
-      ((companyData.logo as Record<string, unknown>)?.url as string) ||
-      (companyData.logo as string) ||
-      '',
+    logo: fullLogoUrl,
   }
 }
 

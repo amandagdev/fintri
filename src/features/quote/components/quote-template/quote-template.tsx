@@ -42,13 +42,15 @@ export default function QuoteTemplate({ quote, company }: Props) {
   }
 
   const getDisplayData = () => {
-    return {
+    const data = {
       name: company?.name || quote.client?.name || '',
       address: company?.address || '',
       email: company?.email || quote.client?.email || '',
       phone: company?.phone || quote.client?.phone || '',
       logo: company?.logo || '',
     }
+    console.log('Display data:', data)
+    return data
   }
 
   const handleDownload = async () => {

@@ -20,7 +20,7 @@ export async function GET(
       return NextResponse.json({ error: 'Quote not found' }, { status: 404 })
     }
 
-    const companyResponse = await axiosInstance.get('/api/company').catch(() => null)
+    const companyResponse = await axiosInstance.get('/api/company?populate=*').catch(() => null)
     const company = companyResponse?.data?.data || companyResponse?.data || null
 
     const companyData = company
@@ -30,10 +30,9 @@ export async function GET(
           address: (company.address as string) || '',
           email: (company.email as string) || '',
           phone: (company.phone as string) || '',
-          logo:
-            ((company.logo as Record<string, unknown>)?.url as string) ||
-            (company.logo as string) ||
-            '',
+          logo: company.logo
+            ? `${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}${(company.logo as Record<string, unknown>)?.url as string}`
+            : '',
         }
       : null
 
