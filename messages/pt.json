@@ -43,6 +43,44 @@
       }
     ]
   },
+  "faq": {
+    "title": "Perguntas Frequentes",
+    "subtitle": "Encontre respostas para as dúvidas mais comuns sobre a Fintri",
+    "whatIsFintri": {
+      "question": "O que é o Fintri?",
+      "answer": "O Fintri é uma plataforma completa de gestão de orçamentos desenvolvida especificamente para autônomos e pequenos negócios. Nossa ferramenta permite criar, enviar e acompanhar orçamentos de forma profissional e eficiente, centralizando todo o processo em uma única plataforma."
+    },
+    "clientManagement": {
+      "question": "Como funciona o gerenciamento de clientes?",
+      "answer": "O Fintri oferece um sistema completo de gestão de clientes onde você pode cadastrar informações completas como nome, contato e endereço, visualizar histórico de orçamentos por cliente, aplicar filtros e busca inteligente, e manter um banco de dados organizado para facilitar futuras propostas e follow-ups."
+    },
+    "quoteTypes": {
+      "question": "Quais tipos de orçamento posso criar?",
+      "answer": "O Fintri oferece dois tipos de orçamento: Orçamento Simples, ideal para propostas básicas com valor total e descrição geral, e Orçamento Detalhado, perfeito para projetos complexos com itens específicos, quantidades, valores unitários e cálculos automáticos. O sistema detecta automaticamente o tipo baseado no conteúdo."
+    },
+    "pdfGeneration": {
+      "question": "Como funciona a geração de PDF?",
+      "answer": "Todos os orçamentos podem ser convertidos em PDF profissional com sua marca. O sistema gera automaticamente um documento formatado com logo da empresa, dados do cliente, itens detalhados, valores calculados, condições comerciais e data de validade. O PDF é otimizado para impressão e compartilhamento."
+    },
+    "sharingQuotes": {
+      "question": "Como posso compartilhar meus orçamentos?",
+      "answer": "O Fintri oferece múltiplas formas de compartilhamento: Link seguro que gera um link único para visualização online, WhatsApp que compartilha diretamente via WhatsApp com mensagem personalizada, E-mail que envia por email com template profissional, e Download PDF que baixa o arquivo para envio offline. Todos os métodos mantêm a segurança e profissionalismo."
+    },
+    "pricing": {
+      "question": "Qual o valor do Fintri?",
+      "answer": "O Fintri oferece um plano único por R$ 29,00/mês que inclui todos os recursos: orçamentos ilimitados, gestão completa de clientes, geração de PDF, compartilhamento por link, dashboard financeiro, suporte prioritário e atualizações automáticas. Sem taxas ocultas, sem surpresas. Cancele quando quiser."
+    },
+    "support": {
+      "question": "Que tipo de suporte vocês oferecem?",
+      "answer": "Oferecemos suporte completo através de atendimento pelo WhatsApp durante horário comercial, E-mail com resposta em até 24h e Suporte prioritário para usuários ativos. Nossa equipe está sempre disponível para ajudar você a aproveitar ao máximo a plataforma."
+    },
+    "integration": {
+      "question": "O Fintri se integra com outras ferramentas?",
+      "answer": "Atualmente, o Fintri funciona como uma solução completa e independente. Estamos sempre desenvolvendo novas integrações baseadas no feedback dos usuários. Se você tem necessidades específicas de integração, entre em contato conosco para discutirmos soluções personalizadas."
+    },
+    "stillHaveQuestions": "Ainda tem dúvidas?",
+    "contactUs": "Entre em Contato"
+  },
   "landingPrice": {
     "title": "Um Preço Simples, Sem Surpresas",
     "subtitle": "Todos os recursos, sem burocracia. Cancele quando quiser.",
