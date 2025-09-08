@@ -1,8 +1,7 @@
-import html2canvas from 'html2canvas'
-import jsPDF from 'jspdf'
+import { downloadFile } from './share-utils'
 
 interface GeneratePDFOptions {
-  element: HTMLElement
+  documentId: string
   fileName: string
   onProgress?: (message: string) => void
   onError?: (error: string) => void
@@ -10,7 +9,7 @@ interface GeneratePDFOptions {
 }
 
 export async function generateQuotePDF({
-  element,
+  documentId,
   fileName,
   onProgress,
   onError,
@@ -19,46 +18,27 @@ export async function generateQuotePDF({
   try {
     onProgress?.('Gerando PDF...')
 
-    // Capturar o template como canvas
-    const canvas = await html2canvas(element, {
-      scale: 2, // Maior qualidade
-      useCORS: true,
-      allowTaint: true,
-      backgroundColor: '#ffffff',
-      width: element.scrollWidth,
-      height: element.scrollHeight,
+    const templateUrl = `${window.location.origin}/template/${documentId}`
+
+    const response = await fetch('/api/generate-pdf', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        url: templateUrl,
+        fileName,
+      }),
     })
 
-    onProgress?.('Criando documento...')
-
-    // Criar PDF
-    const imgData = canvas.toDataURL('image/png')
-    const pdf = new jsPDF('p', 'mm', 'a4')
-
-    // Calcular dimensões para ajustar ao A4
-    const imgWidth = 210 // A4 width in mm
-    const pageHeight = 295 // A4 height in mm
-    const imgHeight = (canvas.height * imgWidth) / canvas.width
-
-    let heightLeft = imgHeight
-    let position = 0
-
-    // Adicionar primeira página
-    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
-    heightLeft -= pageHeight
-
-    // Adicionar páginas adicionais se necessário
-    while (heightLeft >= 0) {
-      position = heightLeft - imgHeight
-      pdf.addPage()
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
-      heightLeft -= pageHeight
+    if (!response.ok) {
+      throw new Error('Failed to generate PDF')
     }
 
     onProgress?.('Finalizando...')
 
-    // Download do PDF
-    pdf.save(fileName)
+    const blob = await response.blob()
+    downloadFile(blob, fileName)
 
     onSuccess?.()
   } catch (error) {

@@ -10,6 +10,8 @@ import { toast } from 'sonner'
 import type { Quote } from '@/features/quote/state'
 import { formatCurrency, formatDate } from '@/lib/utils'
 
+import { generateQuotePDF } from '../../utils/pdf-generator'
+import { copyToClipboard, handleButtonState, shareToWhatsApp } from '../../utils/share-utils'
 import { DeleteQuoteButton } from '../button-delete/button-delete'
 import { StatusSelect } from '../status-select'
 
@@ -23,8 +25,26 @@ export function QuoteList({ quotes }: QuoteListProps) {
   const router = useRouter()
   const pathname = usePathname()
 
-  // Extrair o locale do pathname
   const locale = pathname.split('/')[1] || 'pt'
+
+  const handleDownloadPDF = async (quote: Quote, button: HTMLButtonElement) => {
+    button.setAttribute('data-original-content', button.innerHTML)
+
+    await generateQuotePDF({
+      documentId: quote.documentId || quote.id || '',
+      fileName: `orcamento-${quote.documentId || quote.id || 'unknown'}.pdf`,
+      onProgress: (message) => {
+        handleButtonState(button, true, message)
+      },
+      onError: (error) => {
+        toast.error(error)
+        handleButtonState(button, false)
+      },
+      onSuccess: () => {
+        handleButtonState(button, false)
+      },
+    })
+  }
 
   useEffect(() => {
     if (searchParams.get('success') === 'true') {
@@ -40,8 +60,6 @@ export function QuoteList({ quotes }: QuoteListProps) {
       router.replace(pathname, { scroll: false })
     }
   }, [searchParams, t, router, pathname])
-
-  console.log(quotes)
 
   return (
     <>
@@ -63,24 +81,16 @@ export function QuoteList({ quotes }: QuoteListProps) {
               {quotes.map((quote: Quote) => (
                 <tr key={quote.id} className="hover">
                   <td>
-                    <div
-                      className="font-semibold text-base-content cursor-pointer hover:text-primary"
+                    <button
+                      className="font-semibold text-base-content cursor-pointer hover:text-primary bg-transparent border-none p-0 text-left"
                       onClick={() => {
                         const link = `${window.location.origin}/template/${quote.documentId}`
                         window.open(link, '_blank')
                       }}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault()
-                          const link = `${window.location.origin}/template/${quote.documentId}`
-                          window.open(link, '_blank')
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
+                      type="button"
                     >
                       {quote.title || 'Orçamento'}
-                    </div>
+                    </button>
                   </td>
                   <td>
                     <span className="font-medium">{quote.client?.name || '-'}</span>
@@ -120,22 +130,19 @@ export function QuoteList({ quotes }: QuoteListProps) {
                       >
                         <Edit className="w-4 h-4" />
                       </button>
-                      <div
-                        onClick={(e) => e.stopPropagation()}
-                        onKeyDown={(e) => e.stopPropagation()}
-                        role="button"
-                        tabIndex={0}
-                      >
-                        <DeleteQuoteButton documentId={quote.documentId!} />
-                      </div>
+                      <DeleteQuoteButton documentId={quote.documentId!} />
                       <div className="divider divider-horizontal"></div>
                       <button
                         className="btn btn-sm btn-square btn-primary"
-                        onClick={(e) => {
+                        onClick={async (e) => {
                           e.stopPropagation()
                           const link = `${window.location.origin}/template/${quote.documentId}`
-                          navigator.clipboard.writeText(link)
-                          toast.success('Link copiado!')
+                          const success = await copyToClipboard(link)
+                          if (success) {
+                            toast.success(t('copyLinkSuccess'))
+                          } else {
+                            toast.error(t('copyLinkError'))
+                          }
                         }}
                         aria-label={t('copyLink')}
                       >
@@ -143,9 +150,14 @@ export function QuoteList({ quotes }: QuoteListProps) {
                       </button>
                       <button
                         className="btn btn-sm btn-square btn-primary"
-                        onClick={(e) => {
+                        onClick={async (e) => {
                           e.stopPropagation()
-                          toast.info('Funcionalidade em desenvolvimento')
+                          try {
+                            await handleDownloadPDF(quote, e.currentTarget)
+                          } catch (error) {
+                            console.error('Error generating PDF:', error)
+                            toast.error('Erro ao gerar PDF')
+                          }
                         }}
                         aria-label={t('downloadPDF')}
                       >
@@ -155,7 +167,7 @@ export function QuoteList({ quotes }: QuoteListProps) {
                         className="btn btn-ghost btn-sm btn-square"
                         onClick={(e) => {
                           e.stopPropagation()
-                          toast.info('Funcionalidade em desenvolvimento')
+                          shareToWhatsApp(quote.title || 'Orçamento', quote.documentId!)
                         }}
                         aria-label="Enviar WhatsApp"
                       >

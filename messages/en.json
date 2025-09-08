@@ -252,7 +252,7 @@
       "finalizing": "Finalizing...",
       "error": "Error generating PDF. Please try again.",
       "downloadButton": "PDF",
-      "shareButton": "Share"
+      "shareButton": "WhatsApp"
     },
     "template": {
       "welcome": "Welcome",
@@ -313,6 +313,8 @@
     "editQuoteDescription": "Edit the details for {quoteName}.",
     "deleteButton": "Delete quote",
     "copyLink": "Copy Link",
+    "copyLinkSuccess": "Link copied successfully!",
+    "copyLinkError": "Error copying link",
     "downloadPdf": "Download PDF",
     "sendEmail": "Email",
     "linkCopied": "Link copied to clipboard!",
