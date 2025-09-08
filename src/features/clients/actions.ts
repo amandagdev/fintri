@@ -3,6 +3,8 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
+import { unformatCPForCNPJ, unformatPhone } from '@/lib/utils'
+
 import { createClient, deleteClient, updateClient } from './services/service'
 import type { ClientFormData } from './types'
 import { clientSchema } from './validation/schema'
@@ -15,11 +17,14 @@ export type State = {
 
 // Helper function to parse form data consistently
 function parseClientFormData(formData: FormData) {
+  const phone = formData.get('phone') as string
+  const cpfOrCnpj = formData.get('cpf_or_cnpj') as string
+
   return {
     name: formData.get('name'),
     email: formData.get('email'),
-    phone: formData.get('phone'),
-    cpf_or_cnpj: formData.get('cpf_or_cnpj'),
+    phone: phone ? unformatPhone(phone) : phone,
+    cpf_or_cnpj: cpfOrCnpj ? unformatCPForCNPJ(cpfOrCnpj) : cpfOrCnpj,
     address: formData.get('address'),
   }
 }

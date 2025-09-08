@@ -11,7 +11,8 @@ export const CompanyDataSchema = z.object({
     name: z.string().optional(),
     cnpj: z.string().optional(),
     address: z.string().optional(),
-    email: z.string().email('invalidEmail').optional(),
+    email: z.union([z.string().email({ message: 'invalidEmail' }), z.literal('')]).optional(),
+    phone: z.string().optional(),
     logo: z.string().optional(),
   }),
 })

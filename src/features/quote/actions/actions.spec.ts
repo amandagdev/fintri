@@ -14,7 +14,7 @@ jest.mock('next/navigation', () => ({
   }),
 }))
 
-jest.mock('./services/service', () => ({
+jest.mock('../services/service', () => ({
   addQuote: jest.fn(),
   updateQuote: jest.fn(),
   deleteQuote: jest.fn(),

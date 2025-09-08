@@ -22,6 +22,9 @@ export const QuoteSchema = z.object({
     .object({
       id: z.union([z.string(), z.number()]).transform((val) => String(val)),
       name: z.string(),
+      email: z.string().optional(),
+      phone: z.string().optional(),
+      address: z.string().optional(),
     })
     .optional(),
   total_value: z.number().min(0, 'form.totalValueRequired'),

@@ -144,6 +144,8 @@
       "addressPlaceholder": "Rua, Número, Bairro, Cidade - Estado, CEP",
       "companyEmailLabel": "Email Comercial",
       "companyEmailPlaceholder": "contato@suaempresa.com",
+      "phoneLabel": "Telefone Comercial",
+      "phonePlaceholder": "(11) 99999-9999",
       "logoLabel": "Logo da Empresa"
     },
     "planSection": {
@@ -201,6 +203,7 @@
     "tableHeaderName": "Nome",
     "tableHeaderEmail": "Email",
     "tableHeaderPhone": "Telefone",
+    "tableHeaderTaxId": "CPF/CNPJ",
     "tableHeaderActions": "Ações",
     "emptyStateTitle": "Nenhum cliente cadastrado",
     "emptyStateDescription": "Comece adicionando seu primeiro cliente para criar orçamentos.",
@@ -320,6 +323,9 @@
       "validateDate": "Data de Validade",
       "status": "Status",
       "pending": "Pendente",
+      "accepted": "Aceito",
+      "rejected": "Rejeitado",
+      "expired": "Expirado",
       "subtotal": "Subtotal:",
       "discount": "Desconto:",
       "total": "Total:",

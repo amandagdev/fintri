@@ -3,6 +3,7 @@
 import { useActionState, useEffect } from 'react'
 
 import { useTranslations } from 'next-intl'
+import { IMaskInput } from 'react-imask'
 import { toast } from 'sonner'
 
 import { updateCompanyDataAction } from '../../actions'
@@ -54,7 +55,8 @@ export default function CompanyForm({ company }: CompanyFormProps) {
             <label className="label" htmlFor="cnpj">
               <span className="label-text">{t('companyForm.cnpjLabel')}</span>
             </label>
-            <input
+            <IMaskInput
+              mask="00.000.000/0000-00"
               id="cnpj"
               name="cnpj"
               type="text"
@@ -106,6 +108,28 @@ export default function CompanyForm({ company }: CompanyFormProps) {
               <label className="label">
                 <span className="label-text-alt text-error">
                   {t(state.errors.company.email[0])}
+                </span>
+              </label>
+            )}
+          </div>
+
+          <div className="form-control">
+            <label className="label" htmlFor="phone">
+              <span className="label-text">{t('companyForm.phoneLabel')}</span>
+            </label>
+            <IMaskInput
+              mask="(00) 00000-0000"
+              id="phone"
+              name="phone"
+              type="tel"
+              defaultValue={company?.phone || ''}
+              placeholder={t('companyForm.phonePlaceholder')}
+              className={`input input-bordered w-full ${state.errors?.company?.phone ? 'input-error' : ''}`}
+            />
+            {state.errors?.company?.phone && (
+              <label className="label">
+                <span className="label-text-alt text-error">
+                  {t(state.errors.company.phone[0])}
                 </span>
               </label>
             )}

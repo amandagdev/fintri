@@ -10,6 +10,7 @@ export interface Company {
   cnpj?: string
   address?: string
   email?: string
+  phone?: string
   logo?: string
 }
 
@@ -40,6 +41,7 @@ export interface UserState {
       cnpj?: string[]
       address?: string[]
       email?: string[]
+      phone?: string[]
       logo?: string[]
     }
     currentPassword?: string[]

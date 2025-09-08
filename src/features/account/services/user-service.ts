@@ -114,6 +114,7 @@ function mapCompanyData(companyData: Record<string, unknown> | null): Company {
     cnpj: (companyData.cnpj as string) || '',
     address: (companyData.address as string) || '',
     email: (companyData.email as string) || '',
+    phone: (companyData.phone as string) || '',
     logo:
       ((companyData.logo as Record<string, unknown>)?.url as string) ||
       (companyData.logo as string) ||
@@ -127,6 +128,7 @@ function getEmptyCompany(): Company {
     cnpj: '',
     address: '',
     email: '',
+    phone: '',
     logo: '',
   }
 }
