@@ -23,7 +23,7 @@
       },
       {
         "title": "Real-Time Status",
-        "description": "Know instantly if your quote has been sent and viewed."
+        "description": "Know instantly if your quote has been viewed and downloaded."
       },
       {
         "title": "Centralized History",
@@ -34,12 +34,12 @@
         "description": "Copy existing quotes to speed up new proposals."
       },
       {
-        "title": "Financial Dashboard",
+        "title": "Detailed Dashboard",
         "description": "See total sales and your funnel's performance in real time."
       },
       {
         "title": "Flexible Sharing",
-        "description": "Share via a secure link, email, or download a PDF with your brand."
+        "description": "Share via a secure link, WhatsApp, or download a PDF with your brand."
       }
     ]
   },
@@ -68,7 +68,7 @@
     },
     "pricing": {
       "question": "What is Fintri's price?",
-      "answer": "Fintri offers a single plan for $19/month that includes all features: unlimited quotes, complete client management, PDF generation, link sharing, financial dashboard, priority support and automatic updates. No hidden fees, no surprises. Cancel anytime."
+      "answer": "Fintri offers a single plan for $19/month that includes all features: unlimited quotes, complete client management, PDF generation, link sharing, detailed dashboard, priority support and automatic updates. No hidden fees, no surprises. Cancel anytime."
     },
     "support": {
       "question": "What kind of support do you offer?",
@@ -91,9 +91,9 @@
     "cta": "Try 7 Days Free",
     "features": [
       "Unlimited quotes and clients",
-      "Share proposals via link or PDF",
+      "Share proposals via link, WhatsApp or PDF",
       "Sent and viewed status tracking",
-      "Complete financial dashboard",
+      "Detailed dashboard",
       "Email support"
     ]
   },
@@ -438,15 +438,17 @@
       "conversionRateDesc": "Accepted / Sent"
     },
     "tracking": {
+      "title": "Statistics",
       "totalViews": "Views",
       "totalDownloads": "Downloads",
-      "uniqueSessions": "Unique Sessions",
-      "activeQuotes": "Active Quotes",
+      "activeQuotes": "Active",
       "totalViewsDesc": "Total views",
       "totalDownloadsDesc": "Total PDF downloads",
-      "uniqueSessionsDesc": "Unique customer sessions",
       "activeQuotesDesc": "Quotes with activity",
-      "recentActivity": "Recent Activity"
+      "recentActivity": "Recent Activity",
+      "recentActivityDesc": "Latest interactions",
+      "noRecentActivity": "No recent activity",
+      "noRecentActivityDesc": "Tracking data will appear here when there are views or downloads of your quotes"
     },
     "tabs": {
       "submitted": "Submitted",
