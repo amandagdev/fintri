@@ -112,7 +112,7 @@ export default function QuoteTemplate({ quote, company }: Props) {
   const displayData = getDisplayData()
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen  py-8">
       <style
         dangerouslySetInnerHTML={{
           __html: `
@@ -130,35 +130,45 @@ export default function QuoteTemplate({ quote, company }: Props) {
         }}
       />
       <div className="max-w-4xl mx-auto px-4">
-        <div className="mb-6 flex justify-between items-center">
+        <div className="mb-6 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div>
             {quote.client?.name ? (
               <>
                 <p className="text-sm text-gray-600 mb-1">{t('template.welcome')}</p>
-                <h1 className="text-2xl font-bold text-gray-800">{quote.client.name},</h1>
+                <h1 className="text-xl md:text-2xl font-bold text-gray-800">
+                  {quote.client.name},
+                </h1>
                 <p className="text-sm text-gray-600 mt-1">{t('template.welcomeWithName')}</p>
               </>
             ) : (
               <>
-                <h1 className="text-2xl font-bold text-gray-800">{t('template.welcome')},</h1>
+                <h1 className="text-xl md:text-2xl font-bold text-gray-800">
+                  {t('template.welcome')},
+                </h1>
                 <p className="text-sm text-gray-600 mt-1">{t('template.welcomeWithoutName')}</p>
               </>
             )}
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <button
               onClick={handleDownload}
-              className="btn btn-outline btn-sm"
+              className="btn btn-outline btn-sm flex-1 sm:flex-none py-3 sm:py-2"
               data-download-button
             >
               <Download className="w-4 h-4" />
               {t('pdf.downloadButton')}
             </button>
-            <button onClick={handleCopyLink} className="btn btn-outline btn-sm">
+            <button
+              onClick={handleCopyLink}
+              className="btn btn-outline btn-sm flex-1 sm:flex-none py-3 sm:py-2"
+            >
               <Copy className="w-4 h-4" />
               {t('copyLink')}
             </button>
-            <button onClick={handleShare} className="btn btn-outline btn-sm">
+            <button
+              onClick={handleShare}
+              className="btn btn-outline btn-sm flex-1 sm:flex-none py-3 sm:py-2"
+            >
               <Share2 className="w-4 h-4" />
               {t('pdf.shareButton')}
             </button>
@@ -167,41 +177,53 @@ export default function QuoteTemplate({ quote, company }: Props) {
 
         <div
           ref={templateRef}
-          className="bg-white rounded-lg shadow-lg p-8 print:p-4 print:shadow-none print:rounded-none"
+          className="bg-white rounded-lg shadow-lg p-4 sm:p-6 lg:p-8 print:p-4 print:shadow-none print:rounded-none"
         >
           <div className="border-b border-gray-200 pb-6 mb-6">
-            <div className="flex justify-between items-start">
-              <div className="flex items-start gap-4">
+            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-4">
+              <div className="flex flex-col sm:flex-row items-start gap-4">
                 {displayData.logo && (
                   <img
                     src={displayData.logo}
                     alt="Logo da empresa"
-                    className="w-16 h-16 object-contain"
+                    className="w-16 h-16 object-contain flex-shrink-0"
                   />
                 )}
-                <div>
-                  <h2 className="text-3xl font-bold text-gray-800 mb-2">{displayData.name}</h2>
-                  {displayData.address && (
-                    <p className="text-gray-600">
-                      <span className="font-medium">Endereço:</span> {displayData.address}
-                    </p>
-                  )}
-                  {displayData.email && (
-                    <p className="text-gray-600">
-                      <span className="font-medium">Email:</span> {displayData.email}
-                    </p>
-                  )}
-                  {displayData.phone && (
-                    <p className="text-gray-600">
-                      <span className="font-medium">Telefone:</span>{' '}
-                      {formatPhone(displayData.phone)}
-                    </p>
-                  )}
+                <div className="flex-1">
+                  <div className="text-sm text-gray-500 mb-1 lg:hidden">
+                    {t('template.quoteNumber')}
+                  </div>
+                  <div className="text-lg font-semibold text-gray-800 mb-2 lg:hidden">
+                    #{formatQuoteId(quote.documentId || quote.id || '')}
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">
+                    {displayData.name}
+                  </h2>
+                  <div className="space-y-1">
+                    {displayData.address && (
+                      <p className="text-gray-600 text-sm">
+                        <span className="font-medium">Endereço:</span> {displayData.address}
+                      </p>
+                    )}
+                    {displayData.email && (
+                      <p className="text-gray-600 text-sm">
+                        <span className="font-medium">Email:</span> {displayData.email}
+                      </p>
+                    )}
+                    {displayData.phone && (
+                      <p className="text-gray-600 text-sm">
+                        <span className="font-medium">Telefone:</span>{' '}
+                        {formatPhone(displayData.phone)}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
-              <div className="text-right">
-                <div className="text-sm text-gray-500 mb-1">{t('template.quoteNumber')}</div>
-                <div className="text-lg font-semibold text-gray-800">
+              <div className="text-left lg:text-right lg:flex-shrink-0">
+                <div className="text-sm text-gray-500 mb-1 hidden lg:block">
+                  {t('template.quoteNumber')}
+                </div>
+                <div className="text-lg font-semibold text-gray-800 hidden lg:block">
                   #{formatQuoteId(quote.documentId || quote.id || '')}
                 </div>
               </div>
@@ -212,7 +234,7 @@ export default function QuoteTemplate({ quote, company }: Props) {
             <h3 className="text-lg font-semibold text-gray-800 mb-3">
               {t('template.quoteDetails')}
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <div>
                 <div className="text-sm text-gray-500">{t('template.sendDate')}</div>
                 <p className="font-medium text-gray-800">{formatDate(quote.quote_send_date)}</p>
@@ -238,7 +260,7 @@ export default function QuoteTemplate({ quote, company }: Props) {
             </h3>
             {quote.items && quote.items.length > 0 ? (
               <div className="bg-gray-50 p-4 rounded-lg">
-                <div className="overflow-x-auto">
+                <div className="hidden md:block overflow-x-auto">
                   <table className="table table-zebra w-full">
                     <thead>
                       <tr>
@@ -285,6 +307,43 @@ export default function QuoteTemplate({ quote, company }: Props) {
                       ))}
                     </tbody>
                   </table>
+                </div>
+                <div className="md:hidden space-y-4">
+                  {quote.items.map((item, index) => (
+                    <div
+                      key={`${item.item_type}-${item.item_name}-${index}`}
+                      className="bg-white p-4 rounded-lg border border-gray-200"
+                    >
+                      <div className="flex justify-between items-start mb-2">
+                        <div className="font-medium text-gray-800">{item.item_name}</div>
+                        <span className="text-xs font-medium text-gray-500 uppercase">
+                          {item.item_type === 'service' ? t('form.service') : t('form.product')}
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-sm">
+                        <div>
+                          <span className="text-gray-500">{t('template.quantity')}:</span>
+                          <span className="ml-1 font-medium text-gray-700">{item.quantity}</span>
+                        </div>
+                        <div>
+                          <span className="text-gray-500">{t('template.unitPrice')}:</span>
+                          <span className="ml-1 font-medium text-gray-700">
+                            {formatCurrency(item.unit_price)}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="mt-2 pt-2 border-t border-gray-100">
+                        <div className="flex justify-between items-center">
+                          <span className="font-medium text-gray-600">
+                            {t('template.itemTotal')}:
+                          </span>
+                          <span className="font-semibold text-gray-800">
+                            {formatCurrency(item.total)}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             ) : (

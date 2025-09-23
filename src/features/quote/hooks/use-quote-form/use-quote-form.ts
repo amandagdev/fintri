@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 import { usePathname, useRouter } from 'next/navigation'
 
-import { getClients } from '@/features/clients/services/service'
+import { getClientsClient } from '@/features/clients/services/client-service'
 import type { Client } from '@/features/clients/types'
 import type { Quote } from '@/features/quote/state'
 
@@ -26,7 +26,7 @@ export function useQuoteForm({ data, onSuccess }: UseQuoteFormProps = {}) {
 
   useEffect(() => {
     const fetchClients = async () => {
-      const fetchedClients = await getClients()
+      const fetchedClients = await getClientsClient()
       setClients(fetchedClients)
     }
     fetchClients()
