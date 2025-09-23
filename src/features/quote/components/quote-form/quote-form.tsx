@@ -4,6 +4,8 @@ import { useActionState, useState } from 'react'
 
 import { useFormStatus } from 'react-dom'
 
+import type { Client } from '@/features/clients/types'
+
 import { QuoteDetailedForm } from './detailed-form'
 import { QuoteSimpleForm } from './simple-form'
 import { useQuoteCalculations } from '../../hooks/use-quote-calculations'
@@ -20,14 +22,20 @@ interface QuoteFormProps {
   ) => Promise<{ errors?: FieldErrors; message?: string }>
   readonly state?: { errors?: FieldErrors; message?: string }
   readonly data?: Quote
+  readonly clients?: Client[]
 }
 
-export function QuoteForm({ action, state: propState, data }: QuoteFormProps) {
+export function QuoteForm({
+  action,
+  state: propState,
+  data,
+  clients: propClients,
+}: QuoteFormProps) {
   const [state, formAction] = useActionState(action, propState || initialState)
   const { pending } = useFormStatus()
 
   const { clients, selectedClient, quoteType, setQuoteType, handleClientChange, handleSuccess } =
-    useQuoteForm({ data })
+    useQuoteForm({ data, clients: propClients })
 
   const [items, setItems] = useState<QuoteItem[]>(data?.items || [])
 

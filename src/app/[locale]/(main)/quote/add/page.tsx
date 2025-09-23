@@ -1,10 +1,12 @@
 import { getTranslations } from 'next-intl/server'
 
+import { getClients } from '@/features/clients/services/service'
 import { addQuoteAction } from '@/features/quote/actions/actions'
 import { QuoteForm } from '@/features/quote/components/quote-form/quote-form'
 
 export default async function AddQuotePage() {
   const t = await getTranslations('quote')
+  const clients = await getClients()
 
   return (
     <main className="p-6 lg:p-8 w-full">
@@ -13,7 +15,7 @@ export default async function AddQuotePage() {
         <p className="text-gray-500 mt-1">{t('addQuoteDescription')}</p>
       </header>
 
-      <QuoteForm action={addQuoteAction} />
+      <QuoteForm action={addQuoteAction} clients={clients} />
     </main>
   )
 }
