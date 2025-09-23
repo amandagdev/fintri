@@ -20,7 +20,22 @@ export const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 10000,
 })
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    console.error('Axios Error:', {
+      message: error.message,
+      status: error.response?.status,
+      statusText: error.response?.statusText,
+      data: error.response?.data,
+      url: error.config?.url,
+    })
+    return Promise.reject(error)
+  },
+)
 
 export const axiosUploadInstance = axios.create({
   baseURL: getStrapiUrl(),

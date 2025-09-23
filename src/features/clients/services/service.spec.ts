@@ -1,5 +1,6 @@
-import type { AxiosError } from 'axios'
 import { cookies } from 'next/headers'
+
+import type { AxiosError } from 'axios'
 
 import { axiosInstance } from '@/lib/axios'
 import { mapClientErrorToKey } from '@/utils/strapi-error-map'

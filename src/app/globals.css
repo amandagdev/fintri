@@ -2,12 +2,12 @@
 @plugin "daisyui";
 
 :root {
-  --color-primary: #2cb5a1;
-  --color-primary-light: #5eead4;
-  --color-primary-dark: #0d9488;
-  --color-secondary: #0d9488;
-  --color-secondary-light: #2cb5a1;
-  --color-secondary-dark: #0f766e;
+  --color-primary: #355fea;
+  --color-primary-light: #588fff;
+  --color-primary-dark: #2a4bc7;
+  --color-secondary: #2a4bc7;
+  --color-secondary-light: #355fea;
+  --color-secondary-dark: #1e3ba3;
   --color-success: #22c55e;
   --color-warning: #f59e0b;
   --color-error: #ef4444;
@@ -44,17 +44,6 @@ body {
 
 .border-primary {
   border-color: var(--color-primary);
-}
-
-.btn-primary {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: var(--color-primary-dark);
-  border-color: var(--color-primary-dark);
 }
 
 .btn-primary {

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+
 import { useTranslations } from 'next-intl'
 
 import type { Quote } from '@/features/quote/state'
@@ -43,7 +44,7 @@ export function DashboardTable({ data }: Props) {
     <div className="overflow-x-auto">
       <table className="table w-full">
         <thead>
-          <tr className="text-[#1b6d71] text-sm font-medium border-b border-gray-200">
+          <tr className="text-primary text-sm font-medium border-b border-gray-200">
             <th className="bg-white">{t('table.title')}</th>
             <th className="bg-white">{t('table.client')}</th>
             <th className="bg-white">{t('table.date')}</th>

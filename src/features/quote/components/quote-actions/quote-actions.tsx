@@ -1,6 +1,7 @@
 import { Copy, Download, Mail } from 'lucide-react'
-import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
+
+import { useTranslations } from 'next-intl'
 
 interface QuoteActionsProps {
   readonly quoteId: string
@@ -31,15 +32,15 @@ export function QuoteActions({ quoteId }: QuoteActionsProps) {
 
   return (
     <div className="flex gap-2">
-      <button className="btn btn-sm bg-[#1b6d71] text-white" onClick={handleCopyLink}>
+      <button className="btn btn-sm bg-primary text-white" onClick={handleCopyLink}>
         <Copy className="h-4 w-4" />
         {t('copyLink')}
       </button>
-      <button className="btn btn-sm bg-[#1b6d71] text-white" onClick={handleDownloadPdf}>
+      <button className="btn btn-sm bg-primary text-white" onClick={handleDownloadPdf}>
         <Download className="h-4 w-4" />
         {t('downloadPdf')}
       </button>
-      <button className="btn btn-sm bg-[#1b6d71] text-white" onClick={handleSendEmail}>
+      <button className="btn btn-sm bg-primary text-white" onClick={handleSendEmail}>
         <Mail className="h-4 w-4" />
         {t('sendEmail')}
       </button>

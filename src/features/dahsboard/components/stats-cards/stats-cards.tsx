@@ -1,6 +1,7 @@
 'use client'
 
 import { BarChart3, Calendar, FileText } from 'lucide-react'
+
 import { useTranslations } from 'next-intl'
 
 import type { Quote } from '@/features/quote/state'
@@ -39,9 +40,7 @@ export function StatsCards({ quotes }: StatsCardsProps) {
 
       <div className="stat bg-white rounded-lg shadow-sm border border-base-200">
         <div className="stat-title">{t('totalValue')}</div>
-        <div className="stat-value text-emerald-800">
-          {formatCurrency(stats.totalAcceptedValue)}
-        </div>
+        <div className="stat-value text-primary">{formatCurrency(stats.totalAcceptedValue)}</div>
         <div className="stat-desc">{t('totalValueDesc')}</div>
       </div>
 

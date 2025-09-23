@@ -23,8 +23,8 @@ export default function Tabs(props: TabsProps) {
           className={`tab flex-1 text-base rounded-sm
             ${
               activeTab === tab.value
-                ? 'tab-active !bg-[#2cb5a0] !text-white shadow-md'
-                : '!text-gray-500 font-medium hover:!bg-[#1b6d71]/10'
+                ? 'tab-active !bg-primary !text-white shadow-md'
+                : '!text-gray-500 font-medium hover:!bg-primary/10'
             }
           `}
         >

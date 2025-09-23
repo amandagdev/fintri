@@ -4,8 +4,6 @@ import { useActionState, useState } from 'react'
 
 import { useFormStatus } from 'react-dom'
 
-import Wrapper from '@/features/account/utils/wrapper'
-
 import { QuoteDetailedForm } from './detailed-form'
 import { QuoteSimpleForm } from './simple-form'
 import { useQuoteCalculations } from '../../hooks/use-quote-calculations'
@@ -43,7 +41,7 @@ export function QuoteForm({ action, state: propState, data }: QuoteFormProps) {
   )
 
   return (
-    <Wrapper title="" footer={button}>
+    <div className="space-y-6">
       <form id="quote-form" action={formAction} className="flex flex-col gap-4">
         <input type="hidden" name="id" value={data?.id} />
         <input
@@ -93,6 +91,8 @@ export function QuoteForm({ action, state: propState, data }: QuoteFormProps) {
 
         {state.message && <p className="text-green-500 text-sm mt-1">{state.message}</p>}
       </form>
-    </Wrapper>
+
+      <div className="flex justify-end">{button}</div>
+    </div>
   )
 }

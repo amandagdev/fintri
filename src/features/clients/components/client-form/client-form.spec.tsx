@@ -20,6 +20,10 @@ jest.mock('react-dom', () => ({
   useFormStatus: jest.fn(() => ({ pending: false })),
 }))
 
+jest.mock('react-imask', () => ({
+  IMaskInput: ({ ...props }: React.InputHTMLAttributes<HTMLInputElement>) => <input {...props} />,
+}))
+
 jest.mock('../../actions', () => ({
   addClientAction: jest.fn((_prevState: unknown, _formData: FormData) =>
     Promise.resolve({ success: true }),

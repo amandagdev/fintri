@@ -103,15 +103,17 @@
     "email": "contact@fintri.com"
   },
   "loginPage": {
-    "welcome": "FINTRI",
-    "newUser": "Are you a new user?",
-    "createAccount": "Create an account",
-    "emailLabel": "E-mail",
+    "title": "Sign in to your account",
+    "emailLabel": "Email",
     "emailPlaceholder": "your@email.com",
     "passwordLabel": "Password",
-    "forgotPassword": "Forgot password?",
-    "loginButton": "Log in",
-    "socialLogin": "Or log in with",
+    "forgotPassword": "Forgot your password?",
+    "loginButton": "Sign in",
+    "loginButtonLoading": "Signing in...",
+    "continueWith": "Or continue with",
+    "continueWithGoogle": "Continue with Google",
+    "noAccount": "Don't have an account?",
+    "registerHere": "Register here",
     "errors": {
       "default": "An unexpected error occurred. Please try again.",
       "invalidCredentials": "Invalid email or password.",
@@ -120,6 +122,7 @@
     }
   },
   "registerPage": {
+    "title": "Create your account",
     "alreadyUser": "Already have an account?",
     "login": "Log in",
     "nameLabel": "Name",
@@ -130,6 +133,8 @@
     "passwordPlaceholder": "Create a password",
     "registerButton": "Register",
     "registering": "Registering...",
+    "continueWith": "Or continue with",
+    "continueWithGoogle": "Continue with Google",
     "errors": {
       "default": "An unexpected error occurred. Please try again.",
       "usernameTooShort": "Username must be at least 3 characters.",

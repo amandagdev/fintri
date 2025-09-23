@@ -3,8 +3,9 @@
 import { useRef } from 'react'
 
 import { Copy, Download, Share2 } from 'lucide-react'
-import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
+
+import { useTranslations } from 'next-intl'
 
 import type { Company } from '@/features/account/types'
 import { formatCurrency, formatDate, formatPhone } from '@/lib/utils'

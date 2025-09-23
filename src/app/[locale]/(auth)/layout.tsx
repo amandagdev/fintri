@@ -1,8 +1,10 @@
 import type { ReactNode } from 'react'
 
 import { notFound } from 'next/navigation'
-import { NextIntlClientProvider, hasLocale } from 'next-intl'
+
 import { getMessages } from 'next-intl/server'
+
+import { NextIntlClientProvider, hasLocale } from 'next-intl'
 
 import { routing } from '@/i18n/routing'
 
@@ -23,7 +25,7 @@ export default async function AuthLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <div className="flex min-h-screen items-center justify-center bg-white">{children}</div>
+      <div className="min-h-screen bg-white">{children}</div>
     </NextIntlClientProvider>
   )
 }

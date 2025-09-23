@@ -1,5 +1,6 @@
-import type { AxiosError } from 'axios'
 import { cookies } from 'next/headers'
+
+import type { AxiosError } from 'axios'
 
 import { mapClientErrorToKey, mapQuoteErrorToKey } from '@/utils/strapi-error-map'
 
@@ -47,7 +48,7 @@ export function handleQuoteApiError(error: unknown, _context: string): never {
 export function handleApiError(
   error: unknown,
   _context: string,
-  errorNamespace: string = 'errors',
+  _errorNamespace = 'errors',
 ): never {
   const axiosError = error as AxiosError<{ error: { message?: string } }>
 
@@ -58,6 +59,22 @@ export function handleApiError(
   if (axiosError.response?.status === 404) {
     throw new Error('errors.notFound')
   }
+
+  if (axiosError.response?.status === 400) {
+    const errorMessage = axiosError.response?.data?.error?.message || 'Bad Request'
+    throw new Error(`errors.badRequest: ${errorMessage}`)
+  }
+
+  if (axiosError.response?.status === 500) {
+    throw new Error('errors.serverError')
+  }
+
+  console.error('API Error:', {
+    status: axiosError.response?.status,
+    statusText: axiosError.response?.statusText,
+    data: axiosError.response?.data,
+    message: axiosError.message,
+  })
 
   throw new Error('errors.default')
 }

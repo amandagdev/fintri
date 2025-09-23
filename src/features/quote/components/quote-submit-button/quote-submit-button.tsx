@@ -14,7 +14,7 @@ export function SubmitButton({ formId, buttonTextKey, pending }: SubmitButtonPro
     <button
       type="submit"
       form={formId}
-      className="btn bg-[#1b6d71] text-white w-full"
+      className="btn bg-primary text-white w-full"
       aria-disabled={pending}
     >
       {pending ? t('loading') : t(buttonTextKey)}

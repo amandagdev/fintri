@@ -1,7 +1,8 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { useFormStatus } from 'react-dom'
+
+import { useTranslations } from 'next-intl'
 
 export function SubmitButton() {
   const t = useTranslations('registerPage')
@@ -9,7 +10,7 @@ export function SubmitButton() {
 
   return (
     <button
-      className="btn border-none text-lg bg-[#1b6d71] hover:bg-[#155a5e] text-white"
+      className="btn border-none text-lg bg-primary hover:bg-primary-dark text-white"
       type="submit"
       disabled={pending}
     >

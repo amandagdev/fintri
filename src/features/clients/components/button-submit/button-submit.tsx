@@ -1,7 +1,8 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { useFormStatus } from 'react-dom'
+
+import { useTranslations } from 'next-intl'
 
 export function SubmitButton({ formId, buttonTextKey }: { formId: string; buttonTextKey: string }) {
   const t = useTranslations('clients')
@@ -11,7 +12,7 @@ export function SubmitButton({ formId, buttonTextKey }: { formId: string; button
     <button
       type="submit"
       form={formId}
-      className="btn bg-[#1b6d71] hover:bg-[#2cb5a0] text-white"
+      className="btn bg-primary hover:bg-primary-dark text-white"
       disabled={pending}
     >
       {pending ? (

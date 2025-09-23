@@ -1,5 +1,8 @@
 'use client'
 
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+
 import {
   BarChart2,
   FilePlus,
@@ -10,9 +13,7 @@ import {
   UserPlus,
   Users,
 } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+
 import { useTranslations } from 'next-intl'
 
 export default function Sidebar() {
@@ -33,8 +34,9 @@ export default function Sidebar() {
   return (
     <aside className="w-72 bg-white text-gray-500 flex flex-col min-h-screen border-r border-gray-200">
       <div className="p-4 border-b border-white/20 flex flex-col items-center">
-        <Link href="/" className="text-xl text-[#1b6d71] font-bold">
-          <Image src="/images/logo.png" alt="Logo" width={80} height={50} />
+        <Link href="/">
+          {/* <Image src="/images/logo.png" alt="Fintri Logo" width={80} height={80} /> */}
+          <h1 className="text-primary text-center text-4xl font-bold">Fintri</h1>
         </Link>
         <p className="text-md text-gray-500">{t('subtitle')}</p>
       </div>
@@ -48,7 +50,7 @@ export default function Sidebar() {
               <Link
                 href={item.href}
                 className={`flex items-center gap-3 rounded-lg px-3 py-2 transition ${
-                  isActive ? 'bg-[#1b6d71] text-white' : 'hover:bg-[#1b6d71] hover:text-white'
+                  isActive ? 'bg-primary text-white' : 'hover:bg-primary hover:text-white'
                 }`}
               >
                 <Icon size={18} />
@@ -71,7 +73,7 @@ export default function Sidebar() {
       </ul>
 
       <div className="p-4 border-t border-white/20 ">
-        <button className="flex items-center gap-3 w-full text-left cursor-pointer rounded-lg px-3 py-2 hover:bg-[#1b6d71] hover:text-white transition">
+        <button className="flex items-center gap-3 w-full text-left cursor-pointer rounded-lg px-3 py-2 hover:bg-primary hover:text-white transition">
           <LogOut size={18} />
           {t('logout')}
         </button>
