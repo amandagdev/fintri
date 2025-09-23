@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation'
 
 import { useTranslations } from 'next-intl'
 
+import { useAuth } from '@/features/auth/hooks/use-auth'
 import { registerUser } from '@/features/auth/register/actions'
 import { initialState } from '@/features/auth/register/state'
 
@@ -34,12 +35,31 @@ export default function RegisterPage() {
   const t = useTranslations('registerPage')
   const [state, formAction] = useActionState(registerUser, initialState)
   const router = useRouter()
+  const { isAuthenticated, isLoading } = useAuth()
+
+  useEffect(() => {
+    if (!isLoading && isAuthenticated) {
+      router.push('/dashboard')
+    }
+  }, [isAuthenticated, isLoading, router])
 
   useEffect(() => {
     if (state.success) {
       router.push('/dashboard')
     }
   }, [state.success, router])
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="loading loading-spinner loading-lg"></div>
+      </div>
+    )
+  }
+
+  if (isAuthenticated) {
+    return null
+  }
 
   const handleGoogleRegister = () => {
     console.log('Google registration clicked')

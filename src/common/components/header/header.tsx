@@ -1,19 +1,25 @@
+'use client'
+
 import Link from 'next/link'
 
 import { Menu } from 'lucide-react'
 
 import { useTranslations } from 'next-intl'
 
+import { useAuth } from '@/features/auth/hooks/use-auth'
+
+import UserMenu from '../user-menu/user-menu'
+
 export default function Header() {
   const t = useTranslations('HomePage')
+  const { isAuthenticated, isLoading } = useAuth()
 
   return (
     <div className="navbar bg-white shadow-sm px-4 sm:px-8 lg:px-20">
       <div className="navbar-start">
-        {/* <Link href="/" className="text-xl text-primary font-bold">
-          <Image src="/images/logo.png" alt="Logo" width={80} height={50} />
-        </Link> */}
-        <h1 className="text-primary text-center text-4xl font-bold">Fintri</h1>
+        <Link href="/" className="text-primary text-center text-4xl font-bold">
+          Fintri
+        </Link>
       </div>
 
       <div className="navbar-center hidden lg:flex">
@@ -32,17 +38,27 @@ export default function Header() {
       </div>
 
       <div className="navbar-end gap-4">
-        <Link href="/login">
-          <button className="btn bg-primary border-none hover:bg-primary-dark text-white font-normal hidden sm:flex">
-            {t('login')}
-          </button>
-        </Link>
+        {!isLoading && (
+          <>
+            {isAuthenticated ? (
+              <UserMenu />
+            ) : (
+              <>
+                <Link href="/login">
+                  <button className="btn bg-primary border-none hover:bg-primary-dark text-white font-normal hidden sm:flex">
+                    {t('login')}
+                  </button>
+                </Link>
 
-        <Link href="/register">
-          <button className="btn bg-primary border-none hover:bg-primary-dark text-white font-normal hidden sm:flex">
-            {t('register')}
-          </button>
-        </Link>
+                <Link href="/register">
+                  <button className="btn bg-primary border-none hover:bg-primary-dark text-white font-normal hidden sm:flex">
+                    {t('register')}
+                  </button>
+                </Link>
+              </>
+            )}
+          </>
+        )}
 
         <div className="dropdown dropdown-end lg:hidden">
           <button tabIndex={0} className="btn btn-ghost">
@@ -55,12 +71,20 @@ export default function Header() {
             <li>
               <Link href="#preco">{t('price')}</Link>
             </li>
-            <li className="mt-2">
-              <button className="btn bg-primary w-full">{t('login')}</button>
-            </li>
-            <li className="mt-2">
-              <button className="btn w-full bg-primary">{t('register')}</button>
-            </li>
+            {!isLoading && !isAuthenticated && (
+              <>
+                <li className="mt-2">
+                  <Link href="/login" className="btn bg-primary w-full text-white">
+                    {t('login')}
+                  </Link>
+                </li>
+                <li className="mt-2">
+                  <Link href="/register" className="btn w-full bg-primary text-white">
+                    {t('register')}
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

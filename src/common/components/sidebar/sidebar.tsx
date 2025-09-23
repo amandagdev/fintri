@@ -16,6 +16,8 @@ import {
 
 import { useTranslations } from 'next-intl'
 
+import { logoutClient } from '@/features/auth/utils/logout-client'
+
 export default function Sidebar() {
   const t = useTranslations('sidebar')
   const pathname = usePathname()
@@ -30,6 +32,10 @@ export default function Sidebar() {
   ]
 
   const disabledItems = [{ label: t('analytics'), icon: BarChart2 }]
+
+  const handleLogout = () => {
+    logoutClient()
+  }
 
   return (
     <aside className="w-72 bg-white text-gray-500 flex flex-col min-h-screen border-r border-gray-200">
@@ -59,10 +65,10 @@ export default function Sidebar() {
             </li>
           )
         })}
-        {disabledItems.map((item, index) => {
+        {disabledItems.map((item) => {
           const Icon = item.icon
           return (
-            <li key={`disabled-${index}`}>
+            <li key={`disabled-${item.label}`}>
               <div className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-300 cursor-not-allowed">
                 <Icon size={18} />
                 {item.label}
@@ -73,7 +79,10 @@ export default function Sidebar() {
       </ul>
 
       <div className="p-4 border-t border-white/20 ">
-        <button className="flex items-center gap-3 w-full text-left cursor-pointer rounded-lg px-3 py-2 hover:bg-primary hover:text-white transition">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-3 w-full text-left cursor-pointer rounded-lg px-3 py-2 hover:bg-primary hover:text-white transition"
+        >
           <LogOut size={18} />
           {t('logout')}
         </button>

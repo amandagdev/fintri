@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation'
 
 import { useTranslations } from 'next-intl'
 
+import { useAuth } from '@/features/auth/hooks/use-auth'
 import { loginUser } from '@/features/auth/login/actions'
 import { initialLoginState } from '@/features/auth/login/state'
 
@@ -17,12 +18,31 @@ export default function LoginPage() {
   const router = useRouter()
   const [state, formAction] = useActionState(loginUser, initialLoginState)
   const { pending } = useFormStatus()
+  const { isAuthenticated, isLoading } = useAuth()
+
+  useEffect(() => {
+    if (!isLoading && isAuthenticated) {
+      router.push('/dashboard')
+    }
+  }, [isAuthenticated, isLoading, router])
 
   useEffect(() => {
     if (state.success) {
       router.push('/dashboard')
     }
   }, [state.success, router])
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="loading loading-spinner loading-lg"></div>
+      </div>
+    )
+  }
+
+  if (isAuthenticated) {
+    return null
+  }
 
   const handleGoogleLogin = () => {
     window.location.href = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/connect/google`
