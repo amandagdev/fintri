@@ -2,10 +2,12 @@
 
 import { useTransition } from 'react'
 
-import { Trash2 } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
-import { useTranslations } from 'next-intl'
+
+import { Trash2 } from 'lucide-react'
 import { toast } from 'sonner'
+
+import { useTranslations } from 'next-intl'
 
 import { deleteQuoteAction } from '@/features/quote/actions/actions'
 
@@ -76,7 +78,7 @@ export function DeleteQuoteButton({ documentId }: DeleteQuoteButtonProps) {
             <button
               onClick={handleDelete}
               disabled={isPending}
-              className="btn bg-[#2cb5a0] text-white"
+              className="btn bg-primary text-white"
             >
               {isPending ? (
                 <>

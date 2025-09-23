@@ -105,7 +105,7 @@ describe('Sidebar', () => {
 
     const links = screen.getAllByRole('link')
     const dashboardLink = links.find((link) => link.getAttribute('href') === '/dashboard')
-    expect(dashboardLink).toHaveClass('bg-[#1b6d71] text-white')
+    expect(dashboardLink).toHaveClass('bg-primary text-white')
   })
 
   it('should have correct CSS classes for sidebar', () => {

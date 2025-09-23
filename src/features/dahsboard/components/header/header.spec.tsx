@@ -9,7 +9,10 @@ const mockTranslations = {
 }
 
 jest.mock('next-intl', () => ({
-  useTranslations: () => (key: string) => mockTranslations[key as keyof typeof mockTranslations],
+  useTranslations: () => (key: string) => {
+    const value = mockTranslations[key as keyof typeof mockTranslations]
+    return value || key
+  },
 }))
 
 jest.mock('next/link', () => {
@@ -34,10 +37,8 @@ describe('Header', () => {
   it('should render title and description', () => {
     render(<Header />)
 
-    expect(screen.getByText('Orçamentos')).toBeInTheDocument()
-    expect(
-      screen.getByText('Visualize métricas importantes e gerencie todos os seus orçamentos.'),
-    ).toBeInTheDocument()
+    expect(screen.getByText('title')).toBeInTheDocument()
+    expect(screen.getByText('description')).toBeInTheDocument()
   })
 
   it('should render create quote button', () => {
@@ -51,19 +52,17 @@ describe('Header', () => {
   it('should have correct CSS classes', () => {
     render(<Header />)
 
-    const title = screen.getByText('Orçamentos')
+    const title = screen.getByText('title')
     expect(title).toHaveClass('text-2xl font-bold text-gray-600')
 
-    const description = screen.getByText(
-      'Visualize métricas importantes e gerencie todos os seus orçamentos.',
-    )
+    const description = screen.getByText('description')
     expect(description).toHaveClass('text-gray-500 mt-1')
   })
 
   it('should render button with correct classes', () => {
     render(<Header />)
 
-    const button = screen.getByRole('link', { name: /criar orçamento/i })
+    const button = screen.getByRole('link', { name: 'createQuote' })
     expect(button).toHaveClass(
       'btn btn-primary flex items-center gap-2 w-full md:w-auto justify-center',
     )

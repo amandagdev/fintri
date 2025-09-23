@@ -2,10 +2,12 @@
 
 import { useEffect } from 'react'
 
-import { Edit } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useTranslations } from 'next-intl'
+
+import { Edit } from 'lucide-react'
 import { toast } from 'sonner'
+
+import { useTranslations } from 'next-intl'
 
 import { formatCPForCNPJ, formatPhone } from '@/lib/utils'
 

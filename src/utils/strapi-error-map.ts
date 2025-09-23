@@ -30,6 +30,10 @@ export function mapClientErrorToKey(message?: string): string {
     Unauthorized: 'unauthorized',
     ValidationError: 'validationError',
     'Bad Request': 'badRequest',
+    'An unexpected response was received from the server': 'unexpectedResponse',
+    'Network Error': 'networkError',
+    'Request failed with status code 400': 'badRequest',
+    'Request failed with status code 500': 'serverError',
   }
 
   return errorKeyMap[message] || `clientUpdateFailed: ${message}`

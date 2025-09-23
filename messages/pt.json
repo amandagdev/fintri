@@ -103,14 +103,17 @@
     "email": "contato@fintri.com"
   },
   "loginPage": {
-    "newUser": "É novo por aqui?",
-    "createAccount": "Crie uma conta",
-    "emailLabel": "E-mail",
+    "title": "Entre na sua conta",
+    "emailLabel": "Email",
     "emailPlaceholder": "seu@email.com",
     "passwordLabel": "Senha",
-    "forgotPassword": "Esqueceu a senha?",
+    "forgotPassword": "Esqueceu sua senha?",
     "loginButton": "Entrar",
-    "socialLogin": "Ou entre com",
+    "loginButtonLoading": "Entrando...",
+    "continueWith": "Ou continue com",
+    "continueWithGoogle": "Continuar com Google",
+    "noAccount": "Não tem uma conta?",
+    "registerHere": "Registre-se aqui",
     "errors": {
       "invalidCredentials": "E-mail ou senha inválidos.",
       "loginError": "Erro ao fazer login.",
@@ -119,6 +122,7 @@
     }
   },
   "registerPage": {
+    "title": "Crie sua conta",
     "alreadyUser": "Já possui uma conta?",
     "login": "Entrar",
     "nameLabel": "Nome",
@@ -129,6 +133,8 @@
     "passwordPlaceholder": "Criar uma senha",
     "registerButton": "Cadastrar",
     "registering": "Cadastrando...",
+    "continueWith": "Ou continue com",
+    "continueWithGoogle": "Continuar com Google",
     "errors": {
       "default": "Ocorreu um erro inesperado, por favor, tente novamente.",
       "usernameTooShort": "O nome de usuário deve ter pelo menos 3 caracteres.",
@@ -224,7 +230,8 @@
       "passwordConfirmationRequired": "A confirmação da senha é obrigatória.",
       "passwordsDoNotMatch": "As senhas não coincidem.",
       "unauthenticated": "Usuário não autenticado. Faça o login novamente.",
-      "notFound": "Recurso não encontrado."
+      "notFound": "Recurso não encontrado.",
+      "badRequest": "Requisição inválida. Verifique os dados informados."
     }
   },
   "common": {

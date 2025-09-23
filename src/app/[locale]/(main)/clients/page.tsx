@@ -1,5 +1,6 @@
-import { Plus } from 'lucide-react'
 import Link from 'next/link'
+
+import { Plus } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 
 import { getClients } from '@/features/clients/services/service'

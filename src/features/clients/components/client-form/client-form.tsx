@@ -1,9 +1,10 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
+
 import { IMaskInput } from 'react-imask'
 
-import Wrapper from '@/features/account/utils/wrapper'
+import { useTranslations } from 'next-intl'
 
 import type { State } from '../../actions'
 import type { ClientFormData } from '../../types'
@@ -18,11 +19,31 @@ interface AddClientFormProps {
 export function ClientForm({ action, state, initialData }: AddClientFormProps) {
   const t = useTranslations('clients')
 
+  const [formValues, setFormValues] = useState({
+    name: initialData?.name || '',
+    email: initialData?.email || '',
+    phone: initialData?.phone || '',
+    cpf_or_cnpj: initialData?.cpf_or_cnpj || '',
+    address: initialData?.address || '',
+  })
+
+  useEffect(() => {
+    if (state.success) {
+      setFormValues({
+        name: '',
+        email: '',
+        phone: '',
+        cpf_or_cnpj: '',
+        address: '',
+      })
+    }
+  }, [state.success])
+
   const buttonTextKey = initialData ? 'form.updateButton' : 'form.saveButton'
   const button = <SubmitButton formId="client-form" buttonTextKey={buttonTextKey} />
 
   return (
-    <Wrapper title="" footer={button}>
+    <div className="space-y-6">
       <form id="client-form" action={action} className="space-y-6">
         {initialData?.documentId && (
           <input type="hidden" name="documentId" defaultValue={initialData.documentId} />
@@ -40,7 +61,8 @@ export function ClientForm({ action, state, initialData }: AddClientFormProps) {
               placeholder={t('form.fullNamePlaceholder')}
               className="input input-bordered w-full"
               required
-              defaultValue={initialData?.name || ''}
+              value={formValues.name}
+              onChange={(e) => setFormValues((prev) => ({ ...prev, name: e.target.value }))}
             />
             {state.errors?.name && (
               <p className="text-red-500 text-sm mt-1">{t(state.errors.name as never)}</p>
@@ -58,7 +80,8 @@ export function ClientForm({ action, state, initialData }: AddClientFormProps) {
               placeholder={t('form.emailPlaceholder')}
               className="input input-bordered w-full"
               required
-              defaultValue={initialData?.email || ''}
+              value={formValues.email}
+              onChange={(e) => setFormValues((prev) => ({ ...prev, email: e.target.value }))}
             />
             {state.errors?.email && (
               <p className="text-red-500 text-sm mt-1">{t(state.errors.email as never)}</p>
@@ -76,7 +99,8 @@ export function ClientForm({ action, state, initialData }: AddClientFormProps) {
               type="tel"
               placeholder={t('form.phonePlaceholder')}
               className="input input-bordered w-full"
-              defaultValue={initialData?.phone || ''}
+              value={formValues.phone}
+              onAccept={(value) => setFormValues((prev) => ({ ...prev, phone: value || '' }))}
             />
           </div>
 
@@ -91,7 +115,8 @@ export function ClientForm({ action, state, initialData }: AddClientFormProps) {
               type="text"
               placeholder={t('form.taxIdPlaceholder')}
               className="input input-bordered w-full"
-              defaultValue={initialData?.cpf_or_cnpj || ''}
+              value={formValues.cpf_or_cnpj}
+              onAccept={(value) => setFormValues((prev) => ({ ...prev, cpf_or_cnpj: value || '' }))}
             />
           </div>
         </div>
@@ -106,7 +131,8 @@ export function ClientForm({ action, state, initialData }: AddClientFormProps) {
             type="text"
             placeholder={t('form.addressPlaceholder')}
             className="input input-bordered w-full"
-            defaultValue={initialData?.address || ''}
+            value={formValues.address}
+            onChange={(e) => setFormValues((prev) => ({ ...prev, address: e.target.value }))}
           />
         </div>
 
@@ -114,6 +140,8 @@ export function ClientForm({ action, state, initialData }: AddClientFormProps) {
           <p className="text-red-500 text-center mt-4">{t(state.message as never)}</p>
         )}
       </form>
-    </Wrapper>
+
+      <div className="flex justify-end">{button}</div>
+    </div>
   )
 }

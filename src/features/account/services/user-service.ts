@@ -42,19 +42,18 @@ export async function updatePersonalData(payload: UpdatePersonalDataPayload): Pr
   try {
     const jwt = await getJWTToken()
 
-    let response
-    try {
-      response = await axiosInstance.put('/api/users/me', payload, {
-        headers: createAuthHeaders(jwt),
-      })
-    } catch {
-      const userData = await axiosInstance.get('/api/users/me', {
-        headers: createAuthHeaders(jwt),
-      })
-      response = await axiosInstance.put(`/api/users/${userData.data.id}`, payload, {
-        headers: createAuthHeaders(jwt),
-      })
+    const meResponse = await axiosInstance.get('/api/users/me', {
+      headers: createAuthHeaders(jwt),
+    })
+    const userId = meResponse.data?.id
+
+    if (!userId) {
+      throw new Error('errors.notFound')
     }
+
+    const response = await axiosInstance.put(`/api/users/${userId}`, payload, {
+      headers: createAuthHeaders(jwt),
+    })
 
     return mapUserData(response.data)
   } catch (error) {

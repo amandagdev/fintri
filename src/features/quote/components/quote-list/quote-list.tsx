@@ -2,10 +2,12 @@
 
 import { useEffect } from 'react'
 
-import { Copy, Download, Edit, MessageCircle } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useTranslations } from 'next-intl'
+
+import { Copy, Download, Edit, MessageCircle } from 'lucide-react'
 import { toast } from 'sonner'
+
+import { useTranslations } from 'next-intl'
 
 import type { Quote } from '@/features/quote/state'
 import { formatCurrency, formatDate } from '@/lib/utils'

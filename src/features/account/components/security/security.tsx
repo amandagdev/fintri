@@ -2,8 +2,9 @@
 
 import { useActionState, useEffect } from 'react'
 
-import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
+
+import { useTranslations } from 'next-intl'
 
 import { updatePasswordAction } from '../../actions'
 import Wrapper from '../../utils/wrapper'
@@ -29,7 +30,7 @@ export default function Security() {
           title={t('securitySection.changePasswordTitle')}
           description={t('securitySection.changePasswordDescription')}
           footer={
-            <button type="submit" className="btn bg-[#1b6d71] text-white hover:bg-[#2cb5a0]">
+            <button type="submit" className="btn bg-primary text-white hover:bg-primary-dark">
               {t('securitySection.updatePasswordButton')}
             </button>
           }

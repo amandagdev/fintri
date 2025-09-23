@@ -13,11 +13,11 @@ jest.mock('next/link', () => {
 })
 
 describe('Header', () => {
-  it('renders logo with link to home page', () => {
+  it('renders logo as heading', () => {
     render(<Header />)
-    const logoLink = screen.getByRole('link', { name: /logo/i })
-    expect(logoLink).toBeInTheDocument()
-    expect(logoLink).toHaveAttribute('href', '/')
+    const logoHeading = screen.getByRole('heading', { name: 'Fintri' })
+    expect(logoHeading).toBeInTheDocument()
+    expect(logoHeading).toHaveTextContent('Fintri')
   })
 
   const getVisibleElement = (role: string, name: string | RegExp) => {

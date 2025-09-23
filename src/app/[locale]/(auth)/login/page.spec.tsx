@@ -42,7 +42,7 @@ describe('LoginPage', () => {
     expect(screen.getByPlaceholderText(/emailPlaceholder/)).toBeInTheDocument()
 
     expect(screen.getByText(/passwordLabel/)).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('Senha')).toBeInTheDocument()
+    expect(screen.getByPlaceholderText(/passwordLabel/)).toBeInTheDocument()
   })
 
   it('renders forgot password link with correct href', () => {

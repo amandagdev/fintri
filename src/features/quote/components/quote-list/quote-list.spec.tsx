@@ -1,9 +1,11 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import { useRouter } from 'next/navigation'
-import { useTranslations } from 'next-intl'
-import { toast } from 'sonner'
+global.Request = jest.fn() as jest.MockedFunction<typeof Request>
 
-// Mocks
+import { useRouter } from 'next/navigation'
+
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+
+import { useTranslations } from 'next-intl'
+
 jest.mock('next-intl', () => ({
   useTranslations: jest.fn(),
 }))
@@ -31,7 +33,10 @@ jest.mock('../../utils/share-utils', () => ({
   handleButtonState: jest.fn(),
 }))
 
-// Import after mocks
+jest.mock('@/features/quote/actions/actions', () => ({
+  deleteQuoteAction: jest.fn(),
+}))
+
 import { QuoteList } from './quote-list'
 
 const mockUseTranslations = useTranslations as jest.MockedFunction<typeof useTranslations>
@@ -113,7 +118,7 @@ describe('QuoteList', () => {
     fireEvent.click(copyButtons[0])
 
     await waitFor(() => {
-      expect(copyToClipboard).toHaveBeenCalledWith('http://localhost:3000/template/doc1')
+      expect(copyToClipboard).toHaveBeenCalledWith('http://localhost/template/doc1')
     })
   })
 

@@ -1,5 +1,6 @@
-import { render, screen, waitFor } from '@testing-library/react'
 import { notFound } from 'next/navigation'
+
+import { render, screen, waitFor } from '@testing-library/react'
 
 import { EditClientForm } from '@/features/clients/components/client-edit/client-edit'
 import { getClientByDocumentId } from '@/features/clients/services/service'

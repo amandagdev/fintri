@@ -5,16 +5,10 @@
     "ecmaVersion": 2020,
     "sourceType": "module",
     "ecmaFeatures": {
-      "jsx": true
-    }
+      "jsx": true,
+    },
   },
-  "plugins": [
-    "@typescript-eslint",
-    "import",
-    "jsx-a11y",
-    "react-hooks",
-    "prettier"
-  ],
+  "plugins": ["@typescript-eslint", "import", "jsx-a11y", "react-hooks", "prettier"],
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "plugin:jsx-a11y/recommended",
@@ -22,73 +16,69 @@
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
   ],
   "rules": {
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-unused-vars": [
       "warn",
       {
-        "argsIgnorePattern": "^_"
-      }
+        "argsIgnorePattern": "^_",
+      },
     ],
     "@typescript-eslint/consistent-type-imports": "error",
     "tailwindcss/no-custom-classname": "off",
     "import/order": [
       "warn",
       {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          [
-            "parent",
-            "sibling",
-            "index"
-          ]
-        ],
+        "groups": ["builtin", "external", "internal", ["parent", "sibling", "index"]],
         "pathGroups": [
           {
             "pattern": "react",
             "group": "external",
-            "position": "before"
-          }
+            "position": "before",
+          },
+          {
+            "pattern": "react-dom",
+            "group": "external",
+            "position": "before",
+          },
+          {
+            "pattern": "next/**",
+            "group": "external",
+            "position": "before",
+          },
+          {
+            "pattern": "next-intl",
+            "group": "external",
+            "position": "after",
+          },
         ],
-        "pathGroupsExcludedImportTypes": [
-          "react"
-        ],
+        "pathGroupsExcludedImportTypes": ["react"],
         "alphabetize": {
           "order": "asc",
-          "caseInsensitive": true
+          "caseInsensitive": true,
         },
-        "newlines-between": "always"
-      }
+        "newlines-between": "always",
+      },
     ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "prettier/prettier": "warn"
+    "prettier/prettier": "warn",
   },
-  "ignorePatterns": [
-    "node_modules/",
-    ".next/",
-    "out/",
-    "public/"
-  ],
+  "ignorePatterns": ["node_modules/", ".next/", "out/", "public/"],
   "settings": {
     "import/resolver": {
-      "typescript": {}
-    }
+      "typescript": {},
+    },
   },
   "overrides": [
     {
-      "files": [
-        "*.js",
-        "*.cjs"
-      ],
+      "files": ["*.js", "*.cjs"],
       "rules": {
         "@typescript-eslint/no-var-requires": "off",
-        "@typescript-eslint/no-require-imports": "off"
-      }
-    }
-  ]
+        "@typescript-eslint/no-require-imports": "off",
+      },
+    },
+  ],
 }

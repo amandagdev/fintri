@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import { ChevronDown, ChevronUp } from 'lucide-react'
+
 import { useTranslations } from 'next-intl'
 
 interface FAQItem {
@@ -100,12 +101,13 @@ export default function LandingFAQ() {
 
         <div className="text-center mt-12">
           <p className="text-gray-600 mb-4">{t('stillHaveQuestions')}</p>
-          <a
-            href="/contact"
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#1b6d71] hover:bg-[#2cb5a0] transition-colors duration-200"
+          <button
+            type="button"
+            disabled
+            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-400 cursor-not-allowed opacity-50"
           >
             {t('contactUs')}
-          </a>
+          </button>
         </div>
       </div>
     </section>

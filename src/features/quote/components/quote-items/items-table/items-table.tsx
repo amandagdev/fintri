@@ -1,6 +1,7 @@
 'use client'
 
 import { Trash2 } from 'lucide-react'
+
 import { useTranslations } from 'next-intl'
 
 import type { QuoteItem } from '@/features/quote/state'

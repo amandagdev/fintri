@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+
 import { getTranslations } from 'next-intl/server'
 
 import { EditClientForm } from '@/features/clients/components/client-edit/client-edit'

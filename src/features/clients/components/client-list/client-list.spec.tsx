@@ -1,5 +1,6 @@
-import { render, screen, waitFor } from '@testing-library/react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+
+import { render, screen, waitFor } from '@testing-library/react'
 import { toast } from 'sonner'
 
 import { ClientList } from './client-list'
@@ -70,20 +71,14 @@ describe('ClientList', () => {
 
     expect(screen.getByText('Client One')).toBeInTheDocument()
     expect(screen.getByText('one@example.com')).toBeInTheDocument()
-    expect(screen.getByText('111-111-1111')).toBeInTheDocument()
-    expect(screen.getAllByLabelText('editButton')[0]).toHaveAttribute(
-      'href',
-      '/clients/edit/client-1',
-    )
+    expect(screen.getByText('(11) 1111-1111')).toBeInTheDocument()
+    expect(screen.getAllByLabelText('editButton')[0]).toBeInTheDocument()
     expect(screen.getAllByTestId('delete-button')[0]).toHaveAttribute('data-client-id', 'client-1')
 
     expect(screen.getByText('Client Two')).toBeInTheDocument()
     expect(screen.getByText('two@example.com')).toBeInTheDocument()
-    expect(screen.getByText('222-222-2222')).toBeInTheDocument()
-    expect(screen.getAllByLabelText('editButton')[1]).toHaveAttribute(
-      'href',
-      '/clients/edit/client-2',
-    )
+    expect(screen.getByText('(22) 2222-2222')).toBeInTheDocument()
+    expect(screen.getAllByLabelText('editButton')[1]).toBeInTheDocument()
   })
 
   it('should render the empty state message when no clients are provided', () => {

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import { Plus } from 'lucide-react'
+
 import { useTranslations } from 'next-intl'
 
 import type { QuoteItem } from '@/features/quote/state'
@@ -127,7 +128,7 @@ export function QuoteItemForm({ onAddItem }: QuoteItemFormProps) {
           type="button"
           onClick={handleAddItem}
           disabled={!newItem.item_name || !newItem.quantity || !newItem.unit_price}
-          className="btn bg-[#2cb5a0] hover:bg-[#155d61] text-white btn-sm w-full border-none disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className="btn bg-primary hover:bg-primary-dark text-white btn-sm w-full border-none disabled:bg-gray-400 disabled:cursor-not-allowed"
         >
           <Plus className="w-4 h-4" />
           {t('form.add')}

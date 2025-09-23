@@ -11,17 +11,17 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          50: '#f0fdfa',
-          100: '#ccfbf1',
-          200: '#99f6e4',
-          300: '#5eead4',
-          400: '#2dd4bf',
-          500: '#2cb5a1',
-          600: '#0d9488',
-          700: '#0f766e',
-          800: '#115e59',
-          900: '#134e4a',
-          950: '#042f2e',
+          50: '#eff4ff',
+          100: '#dde9ff',
+          200: '#bdd4ff',
+          300: '#8bb5ff',
+          400: '#588fff',
+          500: '#355fea',
+          600: '#2a4bc7',
+          700: '#1e3ba3',
+          800: '#1c3285',
+          900: '#1d2c6d',
+          950: '#141c47',
         },
         secondary: {
           50: '#f8fafc',
@@ -86,9 +86,9 @@ module.exports = {
     themes: [
       {
         light: {
-          primary: '#2cb5a1',
+          primary: '#355fea',
           'primary-content': '#ffffff',
-          secondary: '#0d9488',
+          secondary: '#2a4bc7',
           'secondary-content': '#ffffff',
           accent: '#ef4444',
           'accent-content': '#ffffff',

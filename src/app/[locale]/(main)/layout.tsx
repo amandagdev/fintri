@@ -1,6 +1,7 @@
-import { Menu } from 'lucide-react'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
+
+import { Menu } from 'lucide-react'
 
 import Sidebar from '@/common/components/sidebar/sidebar'
 

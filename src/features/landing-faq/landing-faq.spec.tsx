@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
+
 import { useTranslations } from 'next-intl'
 
 import LandingFAQ from './landing-faq'
@@ -50,7 +51,7 @@ describe('LandingFAQ', () => {
     render(<LandingFAQ />)
 
     expect(screen.getByRole('heading', { level: 2 })).toBeInTheDocument()
-    expect(screen.getAllByRole('button')).toHaveLength(8)
+    expect(screen.getAllByRole('button')).toHaveLength(9)
   })
 
   it('should toggle FAQ item when clicked', () => {
@@ -69,7 +70,8 @@ describe('LandingFAQ', () => {
   it('should render contact section', () => {
     render(<LandingFAQ />)
 
-    const contactButton = screen.getByRole('link', { name: 'contactUs' })
+    const contactButton = screen.getByRole('button', { name: 'contactUs' })
     expect(contactButton).toBeInTheDocument()
+    expect(contactButton).toBeDisabled()
   })
 })
