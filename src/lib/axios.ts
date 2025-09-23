@@ -4,6 +4,12 @@ const getStrapiUrl = () => {
   return process.env.NEXT_PUBLIC_STRAPI_URL
 }
 
+export const createAuthHeaders = (jwt: string): Record<string, string> => {
+  return {
+    Authorization: `Bearer ${jwt}`,
+  }
+}
+
 export const getStrapiImageUrl = (imagePath: string) => {
   if (!imagePath) return ''
 

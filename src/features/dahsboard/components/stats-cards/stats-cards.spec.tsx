@@ -64,9 +64,11 @@ describe('StatsCards', () => {
   it('should render all stat cards', () => {
     render(<StatsCards quotes={mockQuotes} />)
 
+    expect(screen.getByText('Orçamentos')).toBeInTheDocument()
+    expect(screen.getByText('Status')).toBeInTheDocument()
+    expect(screen.getByText('Valor Total Faturado')).toBeInTheDocument()
     expect(screen.getByText('Total de Orçamentos')).toBeInTheDocument()
-    expect(screen.getByText('Criados Este Mês')).toBeInTheDocument()
-    expect(screen.getByText('Valor Total')).toBeInTheDocument()
+    expect(screen.getAllByText('Este Mês')).toHaveLength(2)
     expect(screen.getByText('Taxa de Conversão')).toBeInTheDocument()
   })
 
@@ -76,24 +78,33 @@ describe('StatsCards', () => {
     expect(screen.getAllByText('2')).toHaveLength(2)
     expect(screen.getByText('R$ 1.000,00')).toBeInTheDocument()
     expect(screen.getByText('50.0%')).toBeInTheDocument()
+    expect(screen.getAllByText('1')).toHaveLength(2)
+    expect(screen.getByText('0')).toBeInTheDocument()
   })
 
   it('should display correct descriptions', () => {
     render(<StatsCards quotes={mockQuotes} />)
 
-    expect(screen.getByText('Total de todos os orçamentos aceitos')).toBeInTheDocument()
-    expect(screen.getByText('Aceitos / Enviados')).toBeInTheDocument()
+    expect(screen.getByText('Atividade de Orçamentos')).toBeInTheDocument()
+    expect(screen.getByText('Distribuição de Status')).toBeInTheDocument()
+    expect(screen.getByText('Últimos 12 Meses')).toBeInTheDocument()
+    expect(screen.getByText('Aceitos')).toBeInTheDocument()
+    expect(screen.getAllByText('Pendentes')).toHaveLength(2)
+    expect(screen.getByText('Rejeitados')).toBeInTheDocument()
   })
 
   it('should render with correct CSS classes', () => {
     render(<StatsCards quotes={mockQuotes} />)
 
-    const cards = screen
+    const whiteCards = screen
       .getAllByRole('generic')
-      .filter((el) =>
-        el.className.includes('stat bg-white rounded-lg shadow-sm border border-base-200'),
-      )
-    expect(cards).toHaveLength(4)
+      .filter((el) => el.className.includes('bg-white rounded-xl shadow-sm border border-gray-100'))
+    const primaryCard = screen
+      .getAllByRole('generic')
+      .filter((el) => el.className.includes('bg-primary'))
+
+    expect(whiteCards).toHaveLength(2)
+    expect(primaryCard).toHaveLength(1)
   })
 
   it('should handle empty quotes array', () => {
@@ -103,5 +114,6 @@ describe('StatsCards', () => {
     expect(screen.getAllByText('2')).toHaveLength(2)
     expect(screen.getByText('R$ 1.000,00')).toBeInTheDocument()
     expect(screen.getByText('50.0%')).toBeInTheDocument()
+    expect(screen.getAllByText('0')).toHaveLength(3)
   })
 })

@@ -23,7 +23,7 @@
       },
       {
         "title": "Status em Tempo Real",
-        "description": "Saiba na hora se seu orçamento foi enviado e visualizado."
+        "description": "Saiba na hora se seu orçamento foi visualizado e baixado."
       },
       {
         "title": "Histórico Centralizado",
@@ -34,12 +34,12 @@
         "description": "Copie orçamentos existentes para agilizar novas propostas."
       },
       {
-        "title": "Dashboard Financeiro",
+        "title": "Dashboard Detalhada",
         "description": "Veja o total de vendas e o desempenho do seu funil em tempo real."
       },
       {
         "title": "Compartilhamento Flexível",
-        "description": "Envie por link seguro, e-mail ou baixe em PDF com sua marca."
+        "description": "Envie por link seguro, whatsapp ou baixe em PDF com sua marca."
       }
     ]
   },
@@ -56,7 +56,7 @@
     },
     "quoteTypes": {
       "question": "Quais tipos de orçamento posso criar?",
-      "answer": "O Fintri oferece dois tipos de orçamento: Orçamento Simples, ideal para propostas básicas com valor total e descrição geral, e Orçamento Detalhado, perfeito para projetos complexos com itens específicos, quantidades, valores unitários e cálculos automáticos. O sistema detecta automaticamente o tipo baseado no conteúdo."
+      "answer": "O Fintri oferece dois tipos de orçamento: Orçamento Simples, ideal para propostas básicas com valor total e descrição geral, e Orçamento Detalhado, perfeito para projetos complexos com itens específicos, quantidades, valores unitários e cálculos automáticos."
     },
     "pdfGeneration": {
       "question": "Como funciona a geração de PDF?",
@@ -68,7 +68,7 @@
     },
     "pricing": {
       "question": "Qual o valor do Fintri?",
-      "answer": "O Fintri oferece um plano único por R$ 29,00/mês que inclui todos os recursos: orçamentos ilimitados, gestão completa de clientes, geração de PDF, compartilhamento por link, dashboard financeiro, suporte prioritário e atualizações automáticas. Sem taxas ocultas, sem surpresas. Cancele quando quiser."
+      "answer": "O Fintri oferece um plano único por R$ 29,00/mês que inclui todos os recursos: orçamentos ilimitados, gestão completa de clientes, geração de PDF, compartilhamento por link, dashboard detalhada, suporte prioritário e atualizações automáticas. Sem taxas ocultas, sem surpresas. Cancele quando quiser."
     },
     "support": {
       "question": "Que tipo de suporte vocês oferecem?",
@@ -91,9 +91,9 @@
     "cta": "Experimente 7 Dias Grátis",
     "features": [
       "Orçamentos e clientes ilimitados",
-      "Envio de propostas por link ou PDF",
+      "Envio de propostas por link, whatsapp ou PDF",
       "Status de envio e visualização",
-      "Dashboard financeiro completo",
+      "Dashboard detalhada",
       "Suporte por e-mail"
     ]
   },
@@ -453,6 +453,19 @@
       "conversionRate": "Taxa de Conversão",
       "totalValueDesc": "Total de todos os orçamentos aceitos",
       "conversionRateDesc": "Aceitos / Enviados"
+    },
+    "tracking": {
+      "title": "Estatísticas",
+      "totalViews": "Visualizações",
+      "totalDownloads": "Downloads",
+      "activeQuotes": "Ativos",
+      "totalViewsDesc": "Total de visualizações",
+      "totalDownloadsDesc": "Total de downloads de PDF",
+      "activeQuotesDesc": "Orçamentos com atividade",
+      "recentActivity": "Atividade Recente",
+      "recentActivityDesc": "Últimas interações",
+      "noRecentActivity": "Nenhuma atividade recente",
+      "noRecentActivityDesc": "Os dados de tracking aparecerão aqui quando houver visualizações ou downloads dos seus orçamentos"
     },
     "tabs": {
       "submitted": "Enviado",
