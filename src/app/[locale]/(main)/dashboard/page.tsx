@@ -7,7 +7,7 @@ export default async function DashboardPage() {
   const quotes = await getQuotes()
 
   return (
-    <main className="bg-white p-6 space-y-6 w-full h-screen">
+    <main className="bg-white p-4 sm:p-6 space-y-4 sm:space-y-6 w-full min-h-screen">
       <div className="space-y-4">
         <Header />
       </div>

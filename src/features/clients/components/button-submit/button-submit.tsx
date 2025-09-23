@@ -16,9 +16,7 @@ export function SubmitButton({ formId, buttonTextKey }: { formId: string; button
       disabled={pending}
     >
       {pending ? (
-        <span className="loading loading-spinner" role="status">
-          {t('form.loading')}
-        </span>
+        <span className="loading loading-spinner" role="status"></span>
       ) : (
         t(buttonTextKey as never)
       )}

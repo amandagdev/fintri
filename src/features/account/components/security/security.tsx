@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl'
 
 import { updatePasswordAction } from '../../actions'
 import Wrapper from '../../utils/wrapper'
+import { SubmitButton } from '../submit-button/submit-button'
 
 export default function Security() {
   const t = useTranslations('account')
@@ -29,11 +30,7 @@ export default function Security() {
         <Wrapper
           title={t('securitySection.changePasswordTitle')}
           description={t('securitySection.changePasswordDescription')}
-          footer={
-            <button type="submit" className="btn bg-primary text-white hover:bg-primary-dark">
-              {t('securitySection.updatePasswordButton')}
-            </button>
-          }
+          footer={<SubmitButton textKey="securitySection.updatePasswordButton" />}
         >
           <div className="form-control">
             <label className="label" htmlFor="currentPassword">

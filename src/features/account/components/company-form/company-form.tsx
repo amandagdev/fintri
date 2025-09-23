@@ -10,6 +10,7 @@ import { useTranslations } from 'next-intl'
 import { removeCompanyLogoAction, updateCompanyDataAction } from '../../actions'
 import type { Company } from '../../types'
 import Wrapper from '../../utils/wrapper'
+import { SubmitButton } from '../submit-button/submit-button'
 
 interface CompanyFormProps {
   readonly company?: Company
@@ -200,9 +201,7 @@ export default function CompanyForm({ company }: CompanyFormProps) {
         </div>
 
         <div className="flex justify-end pt-4">
-          <button type="submit" className="btn bg-primary text-white hover:bg-primary/90">
-            {t('common.saveChanges')}
-          </button>
+          <SubmitButton textKey="common.saveChanges" />
         </div>
       </form>
     </Wrapper>

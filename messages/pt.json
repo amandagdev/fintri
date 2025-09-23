@@ -258,6 +258,11 @@
     "updateSuccessMessage": "Cliente atualizado com sucesso!",
     "clientUpdateFailed": "Erro ao atualizar cliente",
     "clientNotFound": "Cliente não encontrado",
+    "confirmDeleteTitle": "Confirmar Exclusão",
+    "confirmDeleteMessage": "Tem certeza que deseja excluir este cliente? Esta ação não pode ser desfeita.",
+    "confirmDelete": "Excluir",
+    "cancel": "Cancelar",
+    "deleteError": "Erro ao excluir cliente",
     "form": {
       "fullNameLabel": "Nome Completo do Cliente",
       "fullNamePlaceholder": "Ex: João da Silva",
@@ -465,6 +470,8 @@
       "share": "Compartilhar"
     },
     "searchPlaceholder": "Buscar...",
-    "filterLabel": "Filtrar"
+    "filterLabel": "Filtrar",
+    "emptyStateTitle": "Nenhum orçamento encontrado",
+    "emptyStateDescription": "Comece criando seu primeiro orçamento para visualizar as métricas e gerenciar suas propostas."
   }
 }

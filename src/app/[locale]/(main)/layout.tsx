@@ -25,13 +25,10 @@ export default async function ProtectedMainLayout({
       <input id="sidebar-drawer" type="checkbox" className="drawer-toggle" />
 
       <div className="drawer-content flex flex-col items-start">
-        <label
-          htmlFor="sidebar-drawer"
-          className="btn btn-ghost lg:hidden absolute top-4 left-4 z-10"
-        >
+        <label htmlFor="sidebar-drawer" className="btn btn-ghost lg:hidden fixed top-4 left-4 z-50">
           <Menu className="w-6 h-6" />
         </label>
-        {children}
+        <div className="w-full pt-16 lg:pt-0">{children}</div>
       </div>
 
       <div className="drawer-side">

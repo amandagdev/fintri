@@ -26,7 +26,6 @@ export function QuoteList({ quotes }: QuoteListProps) {
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
-
   const locale = pathname.split('/')[1] || 'pt'
 
   const handleDownloadPDF = async (quote: Quote, button: HTMLButtonElement) => {
@@ -35,8 +34,8 @@ export function QuoteList({ quotes }: QuoteListProps) {
     await generateQuotePDF({
       documentId: quote.documentId || quote.id || '',
       fileName: `orcamento-${quote.documentId || quote.id || 'unknown'}.pdf`,
-      onProgress: (message) => {
-        handleButtonState(button, true, message)
+      onProgress: () => {
+        handleButtonState(button, true)
       },
       onError: (error) => {
         toast.error(error)

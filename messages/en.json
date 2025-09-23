@@ -251,6 +251,11 @@
     "editButton": "Edit client",
     "deleteButton": "Delete client",
     "updateSuccessMessage": "Client updated successfully!",
+    "confirmDeleteTitle": "Confirm Deletion",
+    "confirmDeleteMessage": "Are you sure you want to delete this client? This action cannot be undone.",
+    "confirmDelete": "Delete",
+    "cancel": "Cancel",
+    "deleteError": "Error deleting client",
     "form": {
       "fullNameLabel": "Client's Full Name",
       "fullNamePlaceholder": "E.g.: John Doe",
@@ -448,6 +453,8 @@
       "share": "Share"
     },
     "searchPlaceholder": "Search...",
-    "filterLabel": "Filter"
+    "filterLabel": "Filter",
+    "emptyStateTitle": "No quotes found",
+    "emptyStateDescription": "Start by creating your first quote to view metrics and manage your proposals."
   }
 }
