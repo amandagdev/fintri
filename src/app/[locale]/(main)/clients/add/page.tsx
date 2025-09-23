@@ -1,25 +1,21 @@
 'use client'
 
-import { useActionState, useEffect } from 'react'
-
-import { useRouter } from 'next/navigation'
+import { useActionState } from 'react'
 
 import { useTranslations } from 'next-intl'
 
 import { addClientAction } from '@/features/clients/actions'
 import { ClientForm } from '@/features/clients/components/client-form/client-form'
+import { useClientForm } from '@/features/clients/hooks/use-client-form'
+import { useClientToast } from '@/features/clients/hooks/use-client-toast'
 import { initialState } from '@/features/clients/state'
 
 export default function AddClientPage() {
   const t = useTranslations('clients')
-  const router = useRouter()
   const [state, formAction] = useActionState(addClientAction, initialState)
+  const { handleSuccess } = useClientForm()
 
-  useEffect(() => {
-    if (state.success) {
-      router.push('/clients?success=true')
-    }
-  }, [state.success, router])
+  useClientToast({ message: state.message, onSuccess: handleSuccess })
 
   return (
     <main className="p-6 lg:p-8 w-full">

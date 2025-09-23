@@ -22,10 +22,8 @@ export function useQuoteForm({ data, onSuccess }: UseQuoteFormProps = {}) {
   )
   const [quoteType, setQuoteType] = useState<'simple' | 'detailed'>(data?.quote_type || 'simple')
 
-  // Extrair o locale do pathname
   const locale = pathname.split('/')[1] || 'pt'
 
-  // Carregar clientes
   useEffect(() => {
     const fetchClients = async () => {
       const fetchedClients = await getClients()
@@ -34,17 +32,14 @@ export function useQuoteForm({ data, onSuccess }: UseQuoteFormProps = {}) {
     fetchClients()
   }, [])
 
-  // Atualizar cliente selecionado quando data mudar
   useEffect(() => {
     if (data?.client?.id) {
       setSelectedClient(String(data.client.id))
     }
   }, [data?.client?.id])
 
-  // Detectar tipo de quote automaticamente baseado na presença de items
   useEffect(() => {
     if (data) {
-      // Se tem items (QuoteItem do Strapi), é detalhado
       if (data.items && data.items.length > 0) {
         setQuoteType('detailed')
       } else {
@@ -66,15 +61,10 @@ export function useQuoteForm({ data, onSuccess }: UseQuoteFormProps = {}) {
   }
 
   return {
-    // Estados
     clients,
     selectedClient,
     quoteType,
-
-    // Setters
     setQuoteType,
-
-    // Handlers
     handleClientChange,
     handleSuccess,
   }

@@ -1,7 +1,6 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
 
 import { unformatCPForCNPJ, unformatPhone } from '@/lib/utils'
 
@@ -15,7 +14,6 @@ export type State = {
   success?: boolean
 }
 
-// Helper function to parse form data consistently
 function parseClientFormData(formData: FormData) {
   const phone = formData.get('phone') as string
   const cpfOrCnpj = formData.get('cpf_or_cnpj') as string
@@ -29,7 +27,6 @@ function parseClientFormData(formData: FormData) {
   }
 }
 
-// Helper function to handle common validation and error response
 function handleClientValidation(parsed: { success: boolean; error?: unknown; data?: unknown }) {
   if (!parsed.success) {
     const fieldErrors: State['errors'] = {}
@@ -81,7 +78,7 @@ export async function updateClientAction(
     }
     await updateClient(clientDocumentId, { data: parsed.data })
     revalidatePath('/clients')
-    redirect('/clients?updated=true')
+    return { message: 'clientUpdatedSuccessfully' }
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'default'
     return { message: errorMessage }

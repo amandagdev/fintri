@@ -135,10 +135,6 @@ export function ClientForm({ action, state, initialData }: AddClientFormProps) {
             onChange={(e) => setFormValues((prev) => ({ ...prev, address: e.target.value }))}
           />
         </div>
-
-        {state.message && (
-          <p className="text-red-500 text-center mt-4">{t(state.message as never)}</p>
-        )}
       </form>
 
       <div className="flex justify-end">{button}</div>

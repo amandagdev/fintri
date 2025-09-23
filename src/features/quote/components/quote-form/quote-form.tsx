@@ -88,8 +88,6 @@ export function QuoteForm({ action, state: propState, data }: QuoteFormProps) {
             onDiscountChange={handleDiscountChange}
           />
         )}
-
-        {state.message && <p className="text-green-500 text-sm mt-1">{state.message}</p>}
       </form>
 
       <div className="flex justify-end">{button}</div>
