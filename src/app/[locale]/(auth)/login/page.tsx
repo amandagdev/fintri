@@ -109,10 +109,7 @@ export default function LoginPage() {
             <div className="form-control">
               <button type="submit" disabled={pending} className="btn btn-primary w-full">
                 {pending ? (
-                  <>
-                    <span className="loading loading-spinner loading-sm"></span>
-                    {t('loginButtonLoading')}
-                  </>
+                  <span className="loading loading-spinner loading-sm"></span>
                 ) : (
                   t('loginButton')
                 )}

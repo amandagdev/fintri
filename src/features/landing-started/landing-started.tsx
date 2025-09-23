@@ -1,5 +1,7 @@
 import { useTranslations } from 'next-intl'
 
+import Carousel from './carousel'
+
 type Feature = {
   title: string
   description: string
@@ -28,14 +30,8 @@ export default function LandingStarted() {
           </div>
         </div>
 
-        <div className="hidden lg:flex w-full lg:justify-end">
-          {/* <Image
-            src="/images/landing-started.png"
-            alt="Dashboard da plataforma Fintri"
-            width={500}
-            height={200}
-            className="rounded-lg shadow-xl lg:h-[400px] lg:w-[400px]"
-          /> */}
+        <div className="hidden lg:flex w-full lg:justify-center">
+          <Carousel />
         </div>
       </div>
     </section>
