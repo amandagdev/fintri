@@ -22,7 +22,10 @@ export default function Plan() {
             {t('planSection.nextBillingText')} {nextBillingDate}.
           </p>
         </div>
-        <button className="btn btn-outline border-primary text-primary hover:bg-primary hover:text-white mt-4 sm:mt-0">
+        <button
+          className="btn btn-outline border-gray-300 text-gray-400 cursor-not-allowed mt-4 sm:mt-0"
+          disabled
+        >
           {t('planSection.manageButton')}
         </button>
       </div>

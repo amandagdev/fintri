@@ -1,5 +1,6 @@
 import AccountPage from './account-page'
-import { getCompanyData, getCurrentUser } from '../services/user-service'
+import { getCompanyData } from '../services/company-service'
+import { getCurrentUser } from '../services/personal-service'
 
 export default async function AccountWrapper() {
   const user = await getCurrentUser()

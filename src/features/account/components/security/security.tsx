@@ -54,7 +54,7 @@ export default function Security() {
             )}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             <div className="form-control">
               <label className="label" htmlFor="password">
                 <span className="label-text">{t('securitySection.newPasswordLabel')}</span>

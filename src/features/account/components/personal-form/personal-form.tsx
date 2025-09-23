@@ -1,9 +1,11 @@
 'use client'
 
-import { useActionState, useEffect } from 'react'
+import { useActionState, useEffect, useState } from 'react'
+
+import { IMaskInput } from 'react-imask'
+import { toast } from 'sonner'
 
 import { useTranslations } from 'next-intl'
-import { toast } from 'sonner'
 
 import { updatePersonalDataAction } from '../../actions'
 import Wrapper from '../../utils/wrapper'
@@ -20,11 +22,18 @@ interface PersonalFormProps {
 export default function PersonalForm({ user }: PersonalFormProps) {
   const t = useTranslations('account')
   const [state, formAction] = useActionState(updatePersonalDataAction, {})
+  const [formValues, setFormValues] = useState({
+    username: user?.username || '',
+    phone: user?.phone || '',
+    cpf: user?.cpf || '',
+  })
+  const [formKey, setFormKey] = useState(0)
 
   useEffect(() => {
     if (state.message && typeof state.message === 'string') {
       if (state.message.includes('success')) {
         toast.success(t(state.message))
+        setFormKey((prev) => prev + 1)
       } else {
         toast.error(t(state.message))
       }
@@ -43,7 +52,8 @@ export default function PersonalForm({ user }: PersonalFormProps) {
               id="username"
               name="username"
               type="text"
-              defaultValue={user?.username || ''}
+              value={formValues.username}
+              onChange={(e) => setFormValues((prev) => ({ ...prev, username: e.target.value }))}
               placeholder={t('personalForm.fullNamePlaceholder')}
               className={`input input-bordered w-full ${state.errors?.fullName ? 'input-error' : ''}`}
             />
@@ -71,13 +81,16 @@ export default function PersonalForm({ user }: PersonalFormProps) {
             <label className="label" htmlFor="phone">
               <span className="label-text">{t('personalForm.phoneLabel')}</span>
             </label>
-            <input
+            <IMaskInput
+              key={`phone-${formKey}`}
+              mask="(00) 00000-0000"
               id="phone"
               name="phone"
               type="tel"
-              defaultValue={user?.phone || ''}
               placeholder={t('personalForm.phonePlaceholder')}
               className={`input input-bordered w-full ${state.errors?.phone ? 'input-error' : ''}`}
+              value={formValues.phone}
+              onAccept={(value) => setFormValues((prev) => ({ ...prev, phone: value || '' }))}
             />
             {state.errors?.phone && (
               <label className="label">
@@ -90,13 +103,16 @@ export default function PersonalForm({ user }: PersonalFormProps) {
             <label className="label" htmlFor="cpf">
               <span className="label-text">{t('personalForm.cpfLabel')}</span>
             </label>
-            <input
+            <IMaskInput
+              key={`cpf-${formKey}`}
+              mask="000.000.000-00"
               id="cpf"
               name="cpf"
               type="text"
-              defaultValue={user?.cpf || ''}
               placeholder={t('personalForm.cpfPlaceholder')}
               className={`input input-bordered w-full ${state.errors?.cpf ? 'input-error' : ''}`}
+              value={formValues.cpf}
+              onAccept={(value) => setFormValues((prev) => ({ ...prev, cpf: value || '' }))}
             />
             {state.errors?.cpf && (
               <label className="label">
@@ -107,7 +123,7 @@ export default function PersonalForm({ user }: PersonalFormProps) {
         </div>
 
         <div className="flex justify-end pt-4">
-          <button type="submit" className="btn bg-[#1b6d71] text-white hover:bg-[#2cb5a0]">
+          <button type="submit" className="btn bg-primary text-white hover:bg-primary/90">
             {t('common.saveChanges')}
           </button>
         </div>

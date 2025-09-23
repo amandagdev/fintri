@@ -2,9 +2,10 @@
 
 import { startTransition, useActionState, useEffect, useState } from 'react'
 
-import { useTranslations } from 'next-intl'
 import { IMaskInput } from 'react-imask'
 import { toast } from 'sonner'
+
+import { useTranslations } from 'next-intl'
 
 import { removeCompanyLogoAction, updateCompanyDataAction } from '../../actions'
 import type { Company } from '../../types'
@@ -199,7 +200,7 @@ export default function CompanyForm({ company }: CompanyFormProps) {
         </div>
 
         <div className="flex justify-end pt-4">
-          <button type="submit" className="btn bg-[#1b6d71] text-white hover:bg-[#2cb5a0]">
+          <button type="submit" className="btn bg-primary text-white hover:bg-primary/90">
             {t('common.saveChanges')}
           </button>
         </div>
