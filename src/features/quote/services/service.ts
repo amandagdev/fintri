@@ -48,8 +48,9 @@ export async function getQuotes(): Promise<Quote[]> {
     })
 
     return response.data.data
-  } catch {
-    return []
+  } catch (error) {
+    console.error('Error fetching quotes:', error)
+    handleQuoteApiError(error, 'getQuotes')
   }
 }
 

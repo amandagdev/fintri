@@ -385,6 +385,7 @@
     "errors": {
       "default": "An unexpected error occurred, please try again.",
       "unauthenticated": "User not authenticated.",
+      "forbidden": "Access denied. You don't have permission to access this resource.",
       "fetchFailed": "Failed to fetch quotes.",
       "addFailed": "Failed to add quote.",
       "updateFailed": "Failed to update quote.",

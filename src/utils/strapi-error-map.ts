@@ -1,22 +1,22 @@
 export function mapLoginErrorToKey(message?: string): string {
-  if (!message) return 'loginError'
+  if (!message) return 'errors.loginError'
 
   const errorKeyMap: Record<string, string> = {
-    'Invalid identifier or password': 'invalidCredentials',
+    'Invalid identifier or password': 'errors.invalidCredentials',
   }
 
-  return errorKeyMap[message] || 'default'
+  return errorKeyMap[message] || 'errors.default'
 }
 
 export function mapRegisterErrorToKey(message?: string): string {
-  if (!message) return 'default'
+  if (!message) return 'errors.default'
 
   const errorKeyMap: Record<string, string> = {
-    'Email or Username are already taken': 'emailOrUsernameTaken',
-    'password must be at least 6 characters': 'passwordTooShort',
+    'Email or Username are already taken': 'errors.emailOrUsernameTaken',
+    'password must be at least 6 characters': 'errors.passwordTooShort',
   }
 
-  return errorKeyMap[message] || 'default'
+  return errorKeyMap[message] || 'errors.default'
 }
 
 export function mapClientErrorToKey(message?: string): string {

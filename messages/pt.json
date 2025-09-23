@@ -415,6 +415,7 @@
     "errors": {
       "default": "Ocorreu um erro inesperado, por favor, tente novamente.",
       "unauthenticated": "Usuário não autenticado.",
+      "forbidden": "Acesso negado. Você não tem permissão para acessar este recurso.",
       "fetchFailed": "Falha ao buscar orçamentos.",
       "addFailed": "Falha ao adicionar orçamento.",
       "updateFailed": "Falha ao atualizar orçamento.",
