@@ -41,6 +41,10 @@ export function handleQuoteApiError(error: unknown, _context: string): never {
     throw new Error('quote.errors.unauthenticated')
   }
 
+  if (axiosError.response?.status === 403) {
+    throw new Error('quote.errors.forbidden')
+  }
+
   const errorKey = mapQuoteErrorToKey(strapiMessage)
   throw new Error(errorKey)
 }
