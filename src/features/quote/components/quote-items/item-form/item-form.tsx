@@ -108,16 +108,16 @@ export function QuoteItemForm({ onAddItem }: QuoteItemFormProps) {
         <IMaskInput
           mask={Number}
           scale={2}
-          thousandsSeparator="."
+          thousandsSeparator=""
           radix=","
           mapToRadix={['.']}
+          padFractionalZeros={true}
+          normalizeZeros={false}
           placeholder="0,00"
           value={newItem.unit_price?.toString() || ''}
           onAccept={(value) => {
             const unitPrice =
-              value === ''
-                ? undefined
-                : parseFloat(value.replace('.', '').replace(',', '.')) || undefined
+              value === '' ? undefined : parseFloat(value.replace(',', '.')) || undefined
             const quantity = newItem.quantity || 0
             setNewItem({
               ...newItem,

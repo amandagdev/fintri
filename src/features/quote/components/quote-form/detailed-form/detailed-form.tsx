@@ -119,9 +119,11 @@ export function QuoteDetailedForm({
             name="total_value"
             mask={Number}
             scale={2}
-            thousandsSeparator="."
+            thousandsSeparator=""
             radix=","
             mapToRadix={['.']}
+            padFractionalZeros={true}
+            normalizeZeros={false}
             placeholder="0,00"
             className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
             defaultValue={data?.total_value?.toString()}
@@ -142,9 +144,11 @@ export function QuoteDetailedForm({
             name="discount"
             mask={Number}
             scale={2}
-            thousandsSeparator="."
+            thousandsSeparator=""
             radix=","
             mapToRadix={['.']}
+            padFractionalZeros={true}
+            normalizeZeros={false}
             placeholder="0,00"
             className="input input-bordered w-full"
             defaultValue={data?.discount?.toString()}
