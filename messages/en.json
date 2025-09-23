@@ -365,6 +365,7 @@
     "copyLinkSuccess": "Link copied successfully!",
     "copyLinkError": "Error copying link",
     "downloadPdf": "Download PDF",
+    "downloadPDF": "Download PDF",
     "sendEmail": "Email",
     "linkCopied": "Link copied to clipboard!",
     "pdfInDevelopment": "PDF functionality in development",
