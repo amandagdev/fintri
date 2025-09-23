@@ -232,7 +232,7 @@ describe('Client Service', () => {
     it('throws error when JWT is missing', async () => {
       mockCookieStore.get.mockReturnValue(undefined)
 
-      await expect(deleteClient(documentId)).rejects.toThrow('clients.errors.unauthenticated')
+      await expect(deleteClient(documentId)).rejects.toThrow('errors.unauthenticated')
 
       expect(axiosInstance.delete).not.toHaveBeenCalled()
     })

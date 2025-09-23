@@ -9,7 +9,7 @@ export async function getJWTToken(): Promise<string> {
   const jwt = cookieStore.get('jwt')?.value
 
   if (!jwt) {
-    throw new Error('clients.errors.unauthenticated')
+    throw new Error('errors.unauthenticated')
   }
 
   return jwt
@@ -26,7 +26,7 @@ export function handleClientApiError(error: unknown, _context: string): never {
   const strapiMessage = axiosError.response?.data?.error?.message
 
   if (axiosError.response?.status === 401) {
-    throw new Error('clients.errors.unauthenticated')
+    throw new Error('errors.unauthenticated')
   }
 
   const errorKey = mapClientErrorToKey(strapiMessage)
