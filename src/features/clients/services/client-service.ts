@@ -1,7 +1,6 @@
 'use client'
 
 import { axiosInstance } from '@/lib/axios'
-import { handleClientApiError } from '@/lib/service-utils'
 
 import type { Client } from '../types'
 
@@ -11,7 +10,7 @@ export async function getClientsClient(): Promise<Client[]> {
 
     return response.data.data || []
   } catch (error) {
-    handleClientApiError(error, 'getClientsClient')
+    console.error('Error fetching clients:', error)
     return []
   }
 }
