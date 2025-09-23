@@ -24,7 +24,6 @@ export function ClientList({ clients }: ClientListProps) {
   const router = useRouter()
   const pathname = usePathname()
 
-  // Extrair o locale do pathname
   const locale = pathname.split('/')[1] || 'pt'
 
   useEffect(() => {
@@ -55,20 +54,12 @@ export function ClientList({ clients }: ClientListProps) {
               {clients.map((client: Client) => (
                 <tr key={client.id} className="hover">
                   <td>
-                    <div
-                      className="font-semibold text-base-content cursor-pointer hover:text-primary"
+                    <button
+                      className="font-semibold text-base-content cursor-pointer hover:text-primary text-left bg-transparent border-none p-0"
                       onClick={() => router.push(`/${locale}/clients/edit/${client.documentId}`)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault()
-                          router.push(`/${locale}/clients/edit/${client.documentId}`)
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
                     >
                       {client.name}
-                    </div>
+                    </button>
                   </td>
                   <td>
                     <span className="font-medium">{client.email}</span>

@@ -4,14 +4,16 @@ import { IMaskInput } from 'react-imask'
 
 import { useTranslations } from 'next-intl'
 
+import { ClientSelect } from '@/features/clients/components/client-select/client-select'
+import type { Client } from '@/features/clients/types'
 import type { FieldErrors, Quote } from '@/features/quote/state'
 import { formatDateForInput, getCurrentDate } from '@/lib/utils'
 
 interface QuoteSimpleFormProps {
   readonly data?: Quote
   readonly errors?: FieldErrors
-  readonly clients: Array<{ id: number; name: string }>
-  readonly selectedClient: string
+  readonly clients: Client[]
+  readonly selectedClient: string | undefined
   readonly onClientChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
@@ -74,26 +76,16 @@ export function QuoteSimpleForm({
           )}
         </div>
 
-        <div className="form-control">
-          <label className="label" htmlFor="client">
-            <span className="label-text">{t('client')}</span>
-          </label>
-          <select
-            id="client"
-            name="clientId"
-            value={selectedClient || ''}
-            onChange={onClientChange}
-            className="select select-bordered w-full"
-          >
-            <option value="">{t('selectClient')}</option>
-            {clients.map((client) => (
-              <option key={client.id} value={client.id.toString()}>
-                {client.name}
-              </option>
-            ))}
-          </select>
-          {errors?.client && <p className="text-red-500 text-sm mt-1">{errors.client}</p>}
-        </div>
+        <ClientSelect
+          clients={clients}
+          selectedClient={selectedClient}
+          onClientChange={onClientChange}
+          errors={
+            errors?.client
+              ? { client: Array.isArray(errors.client) ? errors.client[0] : errors.client }
+              : undefined
+          }
+        />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

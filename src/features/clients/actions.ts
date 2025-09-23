@@ -12,6 +12,7 @@ export type State = {
   errors?: Partial<Record<keyof ClientFormData, string>>
   message?: string
   success?: boolean
+  client?: { id: string; name: string }
 }
 
 function parseClientFormData(formData: FormData) {
@@ -52,9 +53,13 @@ export async function addClientAction(prevState: State, formData: FormData): Pro
     if (!parsed.data) {
       return { message: 'failedToProcessClientData' }
     }
-    await createClient({ data: parsed.data })
+    const result = await createClient({ data: parsed.data })
     revalidatePath('/clients')
-    return { success: true, message: 'clientCreatedSuccessfully' }
+    return {
+      success: true,
+      message: 'clientCreatedSuccessfully',
+      client: { id: result.data.id.toString(), name: parsed.data.name },
+    }
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'default'
     return { message: errorMessage }

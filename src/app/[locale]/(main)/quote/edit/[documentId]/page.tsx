@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 
 import { getTranslations } from 'next-intl/server'
 
+import { getClients } from '@/features/clients/services/service'
 import { updateQuoteAction } from '@/features/quote/actions/actions'
 import { QuoteForm } from '@/features/quote/components/quote-form/quote-form'
 import { getQuoteByDocumentId } from '@/features/quote/services/service'
@@ -14,7 +15,7 @@ export default async function EditQuotePage({ params }: EditQuotePageProps) {
   const { documentId } = await params
 
   const t = await getTranslations('quote')
-  const quote = await getQuoteByDocumentId(documentId)
+  const [quote, clients] = await Promise.all([getQuoteByDocumentId(documentId), getClients()])
 
   if (!quote || !quote.documentId) {
     notFound()
@@ -29,7 +30,11 @@ export default async function EditQuotePage({ params }: EditQuotePageProps) {
         </p>
       </header>
 
-      <QuoteForm action={updateQuoteAction.bind(null, quote.documentId)} data={quote} />
+      <QuoteForm
+        action={updateQuoteAction.bind(null, quote.documentId)}
+        data={quote}
+        clients={clients}
+      />
     </main>
   )
 }

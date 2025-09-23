@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const getStrapiUrl = () => {
-  return process.env.NEXT_PUBLIC_STRAPI_URL
+  return process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'
 }
 
 export const createAuthHeaders = (jwt: string): Record<string, string> => {
