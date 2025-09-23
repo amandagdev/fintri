@@ -437,6 +437,17 @@
       "totalValueDesc": "Total of all accepted quotes",
       "conversionRateDesc": "Accepted / Sent"
     },
+    "tracking": {
+      "totalViews": "Views",
+      "totalDownloads": "Downloads",
+      "uniqueSessions": "Unique Sessions",
+      "activeQuotes": "Active Quotes",
+      "totalViewsDesc": "Total views",
+      "totalDownloadsDesc": "Total PDF downloads",
+      "uniqueSessionsDesc": "Unique customer sessions",
+      "activeQuotesDesc": "Quotes with activity",
+      "recentActivity": "Recent Activity"
+    },
     "tabs": {
       "submitted": "Submitted",
       "active": "Active",

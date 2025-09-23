@@ -56,7 +56,7 @@
     },
     "quoteTypes": {
       "question": "Quais tipos de orçamento posso criar?",
-      "answer": "O Fintri oferece dois tipos de orçamento: Orçamento Simples, ideal para propostas básicas com valor total e descrição geral, e Orçamento Detalhado, perfeito para projetos complexos com itens específicos, quantidades, valores unitários e cálculos automáticos. O sistema detecta automaticamente o tipo baseado no conteúdo."
+      "answer": "O Fintri oferece dois tipos de orçamento: Orçamento Simples, ideal para propostas básicas com valor total e descrição geral, e Orçamento Detalhado, perfeito para projetos complexos com itens específicos, quantidades, valores unitários e cálculos automáticos."
     },
     "pdfGeneration": {
       "question": "Como funciona a geração de PDF?",
@@ -453,6 +453,17 @@
       "conversionRate": "Taxa de Conversão",
       "totalValueDesc": "Total de todos os orçamentos aceitos",
       "conversionRateDesc": "Aceitos / Enviados"
+    },
+    "tracking": {
+      "totalViews": "Visualizações",
+      "totalDownloads": "Downloads",
+      "uniqueSessions": "Sessões Únicas",
+      "activeQuotes": "Orçamentos Ativos",
+      "totalViewsDesc": "Total de visualizações",
+      "totalDownloadsDesc": "Total de downloads de PDF",
+      "uniqueSessionsDesc": "Sessões únicas de clientes",
+      "activeQuotesDesc": "Orçamentos com atividade",
+      "recentActivity": "Atividade Recente"
     },
     "tabs": {
       "submitted": "Enviado",

@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 import { Copy, Download, Share2 } from 'lucide-react'
 import { toast } from 'sonner'
@@ -8,6 +8,7 @@ import { toast } from 'sonner'
 import { useTranslations } from 'next-intl'
 
 import type { Company } from '@/features/account/types'
+import { useQuoteTracking } from '@/hooks/use-quote-tracking'
 import { formatCurrency, formatDate, formatPhone } from '@/lib/utils'
 
 import type { Quote } from '../../state'
@@ -26,6 +27,16 @@ interface Props {
 export default function QuoteTemplate({ quote, company }: Props) {
   const t = useTranslations('quote')
   const templateRef = useRef<HTMLDivElement>(null)
+  const { trackEvent } = useQuoteTracking()
+
+  useEffect(() => {
+    if (quote.documentId) {
+      trackEvent({
+        documentId: quote.documentId,
+        eventType: 'viewed',
+      })
+    }
+  }, [quote.documentId, trackEvent])
 
   const getStatusText = (status: string) => {
     switch (status) {
@@ -75,6 +86,12 @@ export default function QuoteTemplate({ quote, company }: Props) {
       },
       onSuccess: () => {
         handleButtonState(button, false)
+        if (quote.documentId) {
+          trackEvent({
+            documentId: quote.documentId,
+            eventType: 'downloaded',
+          })
+        }
       },
     })
   }
@@ -277,7 +294,6 @@ export default function QuoteTemplate({ quote, company }: Props) {
             )}
           </div>
 
-          {/* Descrição */}
           <div className="mb-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-3">
               {t('template.description')}
@@ -287,7 +303,6 @@ export default function QuoteTemplate({ quote, company }: Props) {
             </div>
           </div>
 
-          {/* Observações */}
           <div className="mb-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-3">
               {t('template.observations')}
@@ -297,7 +312,6 @@ export default function QuoteTemplate({ quote, company }: Props) {
             </div>
           </div>
 
-          {/* Resumo financeiro */}
           <div className="border-t border-gray-200 pt-6">
             <div className="max-w-md ml-auto">
               <div className="space-y-2">
