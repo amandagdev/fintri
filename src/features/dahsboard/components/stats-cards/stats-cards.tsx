@@ -10,7 +10,7 @@ import { formatCurrency } from '@/lib/utils'
 import { useDashboardStats } from '../../hooks/use-dashboard-stats'
 
 interface StatsCardsProps {
-  quotes: Quote[]
+  readonly quotes: Quote[]
 }
 
 export function StatsCards({ quotes }: StatsCardsProps) {
@@ -20,37 +20,37 @@ export function StatsCards({ quotes }: StatsCardsProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
       <div className="stat bg-white rounded-lg shadow-sm border border-base-200">
-        <div className="stat-figure text-warning">
+        <div className="stat-figure text-gray-800">
           <FileText className="w-8 h-8" />
         </div>
-        <div className="stat-title">{t('totalQuotes')}</div>
-        <div className="stat-value text-warning">{stats.totalQuotes}</div>
+        <div className="stat-title text-gray-600">{t('totalQuotes')}</div>
+        <div className="stat-value text-gray-800">{stats.totalQuotes}</div>
       </div>
 
       <div className="stat bg-white rounded-lg shadow-sm border border-base-200">
-        <div className="stat-figure text-info">
+        <div className="stat-figure text-gray-800">
           <Calendar className="w-8 h-8" />
         </div>
-        <div className="stat-title">{t('currentMonthQuotes')}</div>
-        <div className="stat-value text-info">{stats.currentMonthQuotes}</div>
-        <div className="stat-desc">
+        <div className="stat-title text-gray-600">{t('currentMonthQuotes')}</div>
+        <div className="stat-value text-gray-800">{stats.currentMonthQuotes}</div>
+        <div className="stat-desc text-gray-500">
           {new Date().toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })}
         </div>
       </div>
 
       <div className="stat bg-white rounded-lg shadow-sm border border-base-200">
-        <div className="stat-title">{t('totalValue')}</div>
-        <div className="stat-value text-primary">{formatCurrency(stats.totalAcceptedValue)}</div>
-        <div className="stat-desc">{t('totalValueDesc')}</div>
+        <div className="stat-title text-gray-600">{t('totalValue')}</div>
+        <div className="stat-value text-gray-800">{formatCurrency(stats.totalAcceptedValue)}</div>
+        <div className="stat-desc text-gray-500">{t('totalValueDesc')}</div>
       </div>
 
       <div className="stat bg-white rounded-lg shadow-sm border border-base-200">
-        <div className="stat-figure text-purple-800">
+        <div className="stat-figure text-gray-800">
           <BarChart3 className="w-8 h-8" />
         </div>
-        <div className="stat-title">{t('conversionRate')}</div>
-        <div className="stat-value text-purple-800">{stats.conversionRate.toFixed(1)}%</div>
-        <div className="stat-desc">{t('conversionRateDesc')}</div>
+        <div className="stat-title text-gray-600">{t('conversionRate')}</div>
+        <div className="stat-value text-gray-800">{stats.conversionRate.toFixed(1)}%</div>
+        <div className="stat-desc text-gray-500">{t('conversionRateDesc')}</div>
       </div>
     </div>
   )
