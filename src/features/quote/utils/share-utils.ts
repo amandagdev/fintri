@@ -38,8 +38,7 @@ export const handleButtonState = (
 ) => {
   if (isLoading) {
     button.disabled = true
-    const messageText = message ? ` ${message}` : ''
-    button.innerHTML = `<span class="loading loading-spinner loading-sm"></span>${messageText}`
+    button.innerHTML = `<span class="loading loading-spinner loading-sm"></span>`
   } else {
     button.disabled = false
     button.innerHTML = button.getAttribute('data-original-content') || ''

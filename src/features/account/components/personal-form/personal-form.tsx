@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl'
 
 import { updatePersonalDataAction } from '../../actions'
 import Wrapper from '../../utils/wrapper'
+import { SubmitButton } from '../submit-button/submit-button'
 
 interface PersonalFormProps {
   readonly user?: {
@@ -123,9 +124,7 @@ export default function PersonalForm({ user }: PersonalFormProps) {
         </div>
 
         <div className="flex justify-end pt-4">
-          <button type="submit" className="btn bg-primary text-white hover:bg-primary/90">
-            {t('common.saveChanges')}
-          </button>
+          <SubmitButton textKey="common.saveChanges" />
         </div>
       </form>
     </Wrapper>

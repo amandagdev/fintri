@@ -1,9 +1,21 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
-import { launch } from 'puppeteer'
+import chromium from '@sparticuz/chromium'
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let puppeteer: any
+
+if (process.env.NODE_ENV === 'development') {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  puppeteer = require('puppeteer')
+} else {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  puppeteer = require('puppeteer-core')
+}
 
 export async function POST(request: NextRequest) {
+  let browser
   try {
     const { url, fileName } = await request.json()
 
@@ -11,13 +23,22 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'URL is required' }, { status: 400 })
     }
 
-    const browser = await launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    })
+    if (process.env.NODE_ENV === 'development') {
+      browser = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      })
+    } else {
+      browser = await puppeteer.launch({
+        args: [...chromium.args, '--hide-scrollbars', '--disable-web-security'],
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath(),
+        headless: chromium.headless,
+        ignoreHTTPSErrors: true,
+      })
+    }
 
     const page = await browser.newPage()
-
     await page.goto(url, {
       waitUntil: 'networkidle0',
       timeout: 30000,
@@ -45,6 +66,7 @@ export async function POST(request: NextRequest) {
       },
     })
   } catch (error) {
+    if (browser) await browser.close()
     console.error('Error generating PDF:', error)
     return NextResponse.json({ error: 'Failed to generate PDF' }, { status: 500 })
   }
