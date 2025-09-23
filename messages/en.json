@@ -425,6 +425,7 @@
     "description": "View important metrics and manage all your quotes.",
     "pageTitle": "Dashboard",
     "createQuote": "Create Quote",
+    "errorLoadingQuotes": "Unable to load quotes. Please check your permissions.",
     "stats": {
       "totalQuotes": "Total Quotes",
       "currentMonthQuotes": "Created This Month",

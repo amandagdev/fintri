@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
+
 import { useTranslations } from 'next-intl'
 
 import CompanyForm from './company-form'

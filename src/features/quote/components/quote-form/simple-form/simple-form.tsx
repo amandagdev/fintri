@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { IMaskInput } from 'react-imask'
+
 import { useTranslations } from 'next-intl'
 
 import type { FieldErrors, Quote } from '@/features/quote/state'
@@ -99,14 +101,17 @@ export function QuoteSimpleForm({
           <label className="label" htmlFor="total_value">
             <span className="label-text">{t('total_value')}</span>
           </label>
-          <input
+          <IMaskInput
             id="total_value"
             name="total_value"
-            type="number"
-            step="0.01"
+            mask={Number}
+            scale={2}
+            thousandsSeparator="."
+            radix=","
+            mapToRadix={['.']}
             placeholder="0,00"
             className="input input-bordered w-full"
-            defaultValue={data?.total_value}
+            defaultValue={data?.total_value?.toString()}
           />
           {errors?.total_value && <p className="text-red-500 text-sm mt-1">{errors.total_value}</p>}
         </div>
@@ -115,14 +120,17 @@ export function QuoteSimpleForm({
           <label className="label" htmlFor="discount">
             <span className="label-text">{t('discount')}</span>
           </label>
-          <input
+          <IMaskInput
             id="discount"
             name="discount"
-            type="number"
-            step="0.01"
+            mask={Number}
+            scale={2}
+            thousandsSeparator="."
+            radix=","
+            mapToRadix={['.']}
             placeholder="0,00"
             className="input input-bordered w-full"
-            defaultValue={data?.discount}
+            defaultValue={data?.discount?.toString()}
           />
           {errors?.discount && <p className="text-red-500 text-sm mt-1">{errors.discount}</p>}
         </div>

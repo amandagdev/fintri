@@ -34,7 +34,7 @@ export const downloadFile = (blob: Blob, fileName: string) => {
 export const handleButtonState = (
   button: HTMLButtonElement,
   isLoading: boolean,
-  message?: string,
+  _message?: string,
 ) => {
   if (isLoading) {
     button.disabled = true

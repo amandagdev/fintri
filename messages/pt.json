@@ -442,6 +442,7 @@
     "description": "Visualize métricas importantes e gerencie todos os seus orçamentos.",
     "pageTitle": "Dashboard",
     "createQuote": "Criar Orçamento",
+    "errorLoadingQuotes": "Não foi possível carregar os orçamentos. Verifique suas permissões.",
     "stats": {
       "totalQuotes": "Total de Orçamentos",
       "currentMonthQuotes": "Criados Este Mês",

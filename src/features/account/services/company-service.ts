@@ -15,6 +15,7 @@ export async function getCompanyData(): Promise<Company> {
 
     return mappedCompany
   } catch {
+    console.log('Company data not found, returning empty company')
     return getEmptyCompany()
   }
 }
@@ -26,19 +27,27 @@ export async function updateCompanyData(
   try {
     const jwt = await getJWTToken()
 
-    const currentCompanyResponse = await axiosInstance.get('/api/company?populate=logo', {
-      headers: createAuthHeaders(jwt),
-    })
-    const companyData = currentCompanyResponse.data.data
-    const companyId = companyData?.id as number | undefined
-    const currentLogoId = companyData?.logo?.id as number | undefined
+    let companyData: Record<string, unknown> | null = null
+    let companyId: number | undefined = undefined
+    let currentLogoId: number | undefined = undefined
+
+    try {
+      const currentCompanyResponse = await axiosInstance.get('/api/company?populate=logo', {
+        headers: createAuthHeaders(jwt),
+      })
+      companyData = currentCompanyResponse.data.data
+      companyId = companyData?.id as number | undefined
+      currentLogoId = (companyData?.logo as Record<string, unknown>)?.id as number | undefined
+    } catch {
+      console.log('Company not found, will create new one')
+    }
 
     const dataPayload: Record<string, unknown> = { ...payload.company }
     if (!logoFile && currentLogoId) {
       dataPayload.logo = currentLogoId
     }
 
-    await axiosInstance.put(
+    const updateResponse = await axiosInstance.put(
       '/api/company',
       { data: dataPayload },
       {
@@ -46,11 +55,14 @@ export async function updateCompanyData(
       },
     )
 
-    if (logoFile && logoFile.size > 0 && companyId) {
+    if (logoFile && logoFile.size > 0) {
+      const updatedCompanyData = updateResponse.data.data
+      const finalCompanyId = updatedCompanyData?.id || companyId || 1
+
       const uploadFormData = new FormData()
       uploadFormData.append('files', logoFile)
       uploadFormData.append('ref', 'api::company.company')
-      uploadFormData.append('refId', companyId.toString())
+      uploadFormData.append('refId', finalCompanyId.toString())
       uploadFormData.append('field', 'logo')
 
       const uploadResponse = await axiosUploadInstance.post('/api/upload', uploadFormData, {

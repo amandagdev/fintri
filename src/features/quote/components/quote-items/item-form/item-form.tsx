@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import { Plus } from 'lucide-react'
+import { IMaskInput } from 'react-imask'
 
 import { useTranslations } from 'next-intl'
 
@@ -104,14 +105,19 @@ export function QuoteItemForm({ onAddItem }: QuoteItemFormProps) {
         <label className="label">
           <span className="label-text text-sm">{t('form.unitPrice')}</span>
         </label>
-        <input
-          type="number"
-          min="0"
-          step="0.01"
-          value={newItem.unit_price || ''}
-          onChange={(e) => {
-            const value = e.target.value
-            const unitPrice = value === '' ? undefined : parseFloat(value) || undefined
+        <IMaskInput
+          mask={Number}
+          scale={2}
+          thousandsSeparator="."
+          radix=","
+          mapToRadix={['.']}
+          placeholder="0,00"
+          value={newItem.unit_price?.toString() || ''}
+          onAccept={(value) => {
+            const unitPrice =
+              value === ''
+                ? undefined
+                : parseFloat(value.replace('.', '').replace(',', '.')) || undefined
             const quantity = newItem.quantity || 0
             setNewItem({
               ...newItem,
