@@ -230,7 +230,10 @@
       "passwordConfirmationRequired": "Password confirmation is required.",
       "passwordsDoNotMatch": "Passwords do not match.",
       "unauthenticated": "User not authenticated. Please log in again.",
-      "notFound": "Resource not found."
+      "notFound": "Resource not found.",
+      "logoUploadFailed": "Failed to upload logo. Check file size and try again.",
+      "fileTooLarge": "File too large. Maximum size is 1MB.",
+      "invalidFileType": "Invalid file type. Use only JPG, PNG or WebP."
     }
   },
   "clients": {

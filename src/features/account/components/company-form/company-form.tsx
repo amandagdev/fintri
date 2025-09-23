@@ -46,6 +46,20 @@ export default function CompanyForm({ company }: CompanyFormProps) {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
+      const maxSize = 1 * 1024 * 1024
+      if (file.size > maxSize) {
+        toast.error(t('errors.fileTooLarge'))
+        event.target.value = ''
+        return
+      }
+
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
+      if (!allowedTypes.includes(file.type)) {
+        toast.error(t('errors.invalidFileType'))
+        event.target.value = ''
+        return
+      }
+
       const reader = new FileReader()
       reader.onload = (e) => {
         setPreviewLogo(e.target?.result as string)
@@ -187,11 +201,14 @@ export default function CompanyForm({ company }: CompanyFormProps) {
               id="logo"
               name="logo"
               type="file"
-              accept="image/*"
+              accept="image/jpeg,image/jpg,image/png,image/webp"
               className="file-input file-input-bordered w-full"
               placeholder={company?.logo ? company.logo.split('/').pop() : 'Escolher arquivo'}
               onChange={handleFileChange}
             />
+            <p className="text-xs text-gray-500 mt-1">
+              Formatos aceitos: JPG, PNG, WebP. Tamanho máximo: 1MB
+            </p>
             {state.errors?.company?.logo && (
               <label className="label">
                 <span className="label-text-alt text-error">{t(state.errors.company.logo[0])}</span>

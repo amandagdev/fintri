@@ -29,10 +29,13 @@ axiosInstance.interceptors.response.use(
       data: error.response?.data,
       url: error.config?.url,
     })
-    return Promise.reject(error)
+    return Promise.reject(error as Error)
   },
 )
 
 export const axiosUploadInstance = axios.create({
   baseURL: getStrapiUrl(),
+  timeout: 30000,
+  maxContentLength: 2 * 1024 * 1024,
+  maxBodyLength: 2 * 1024 * 1024,
 })

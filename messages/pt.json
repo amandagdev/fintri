@@ -231,6 +231,9 @@
       "passwordsDoNotMatch": "As senhas não coincidem.",
       "unauthenticated": "Usuário não autenticado. Faça o login novamente.",
       "notFound": "Recurso não encontrado.",
+      "logoUploadFailed": "Falha ao fazer upload do logo. Verifique o tamanho do arquivo e tente novamente.",
+      "fileTooLarge": "Arquivo muito grande. O tamanho máximo é 1MB.",
+      "invalidFileType": "Tipo de arquivo inválido. Use apenas JPG, PNG ou WebP.",
       "badRequest": "Requisição inválida. Verifique os dados informados."
     }
   },
