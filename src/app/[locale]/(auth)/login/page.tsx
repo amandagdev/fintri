@@ -90,14 +90,14 @@ export default function LoginPage() {
                 className="input input-bordered w-full"
                 required
               />
-              <div className="label">
+              {/* <div className="label">
                 <span></span>
                 <span className="label-text-alt">
                   <Link href="/forgot-password" className="link link-hover text-primary text-right">
                     {t('forgotPassword')}
                   </Link>
                 </span>
-              </div>
+              </div> */}
             </div>
 
             {state?.message && (
